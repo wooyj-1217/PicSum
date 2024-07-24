@@ -51,4 +51,4 @@
 # 11-1. 개발 시 설계가 우선된다고 하는데 너무 모호해서 시작 지점을 못잡겠어요.
 # 종류가..? https://online.visual-paradigm.com/drive/#diagramlist:proj=0&dashboard
 # 11-2. compose screen은 function인데 어떻게 그려야 할까요..?
-# https://www.figma.com/board/kOxEvkbsPJL8YiKaXwkj78/Untitled?node-id=0-1&t=Fl9QWmeAqzOJTgVz-1
+# https://www.figma.com/board/kOxEvkbsPJL8YiKaXwkj78/Untitled?node-id=0-1&t=Re2uNV1NsqtJI0vo-1
