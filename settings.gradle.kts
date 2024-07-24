@@ -21,4 +21,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "PicSum"
 include(":app")
- 
+// include(":data")
+// include(":data:local")
+// include(":data:remote")
+// include(":domain")
+// include(":feature")

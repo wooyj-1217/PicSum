@@ -45,10 +45,17 @@
 # 9-1. PagingData에서 list 데이터를 왜 못꺼내는걸까요???????????? 별 수를 다써봐도 안되네요.
 # 9-2. 구조상 UseCase에서 paging flow랑 local flow를 합쳐서 보내줘야 하는건가요?
 
+> 무응답 UseCase 부터 하고 다시 옵니다
+
 # 10. 비슷한 객체(인자가 한두개정도 차이나는..그정도?)가 Remote에도 있고 Local에도 있고 심지어 UI에도 있으면 통합해서 써야되나요?
+
+> X 각각 모델링 한다
 
 # 11. UML 찾아보니까 너무 다양한 다이어그램이 있는데... 이 중에 어떤걸 해야되는걸까요..?
 # 11-1. 개발 시 설계가 우선된다고 하는데 너무 모호해서 시작 지점을 못잡겠어요.
 # 종류가..? https://online.visual-paradigm.com/drive/#diagramlist:proj=0&dashboard
+
+> System, UseCase, Class, Sequ
+
 # 11-2. compose screen은 function인데 어떻게 그려야 할까요..?
 # https://www.figma.com/board/kOxEvkbsPJL8YiKaXwkj78/Untitled?node-id=0-1&t=Re2uNV1NsqtJI0vo-1

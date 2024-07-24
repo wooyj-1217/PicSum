@@ -40,7 +40,7 @@ object NetworkModule {
     ): Retrofit =
         Retrofit
             .Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(baseUrl) // 삭제 예정
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
             .addCallAdapterFactory(ResultCallAdapter.Factory())
