@@ -12,7 +12,6 @@ sealed class ListUIState {
     data object Loading : ListUIState()
 
     data class Success(
-        // TODO("이게 아닌거같은데...")
         val list: Flow<PagingData<ListTypeUI>>,
 //        val list: Flow<PagingData<PicSumItemDTO>>,
 //        val favoriteList: Flow<PicSumEntity>,

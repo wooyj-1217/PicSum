@@ -29,8 +29,6 @@ class ListDetailViewModel
         override val effect = _effect.asSharedFlow()
 
         private fun toggleLike() {
-            // TODO("DB, update 로직 추가")
-
             if (uiState.value is DetailUIState.Success) {
                 val currentState = uiState.value as DetailUIState.Success
                 val newItem =

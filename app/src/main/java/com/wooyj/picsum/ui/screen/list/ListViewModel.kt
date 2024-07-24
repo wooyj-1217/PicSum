@@ -43,7 +43,6 @@ class ListViewModel
             viewModelScope.launch {
                 val favoriteFlow = repository.getFavoriteList() // DB (Room)  Flow<List<PicSumEntity>>
                 val pagingFlow = useCase(limit = 30).cachedIn(viewModelScope) // API Flow<PagingData<PicSumItemDTO>>
-                // TODO("이렇게 하면 당연하게도 전체 다시 그림")
 //                combine(favoriteFlow, pagingFlow) { favoriteList, pagingData ->
 //                    pagingData.map { picSumItem ->
 //                        val isFavorite = favoriteList.any { it.id == picSumItem.id }
