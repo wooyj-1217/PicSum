@@ -1,7 +1,5 @@
 package com.wooyj.picsum.data.remote
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.wooyj.picsum.data.remote.call.ResultCallAdapter
 import dagger.Module
 import dagger.Provides
@@ -10,7 +8,6 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -35,22 +32,12 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        moshi: Moshi,
         @BaseUrl baseUrl: String,
     ): Retrofit =
         Retrofit
             .Builder()
             .baseUrl(baseUrl) // 삭제 예정
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
             .addCallAdapterFactory(ResultCallAdapter.Factory())
-            .build()
-
-    @Singleton
-    @Provides
-    fun provideMoshi(): Moshi =
-        Moshi
-            .Builder()
-            .add(KotlinJsonAdapterFactory())
             .build()
 }

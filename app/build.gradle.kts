@@ -1,27 +1,39 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-parcelize")
-    id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp")
-    kotlin("kapt")
-    kotlin("plugin.serialization")
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.serialization)
 }
 
 android {
     namespace = "com.wooyj.picsum"
-    compileSdk = 34
+    compileSdk =
+        libs.versions.compileSdk
+            .get()
+            .toInt()
 
     defaultConfig {
         applicationId = "com.wooyj.picsum"
-        minSdk = 24
-        targetSdk = 34
+        minSdk =
+            libs.versions.minSdk
+                .get()
+                .toInt()
+        targetSdk =
+            libs.versions.targetSdk
+                .get()
+                .toInt()
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
 
@@ -45,9 +57,6 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -56,46 +65,18 @@ android {
 }
 
 dependencies {
-    implementation(libs.kotlinx.serialization.json)
-
-    implementation(libs.coil.compose)
-
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
 
-    // Material
-    implementation(libs.androidx.material)
-
-    // OkHttp3
-    // - define a BOM and its version
-    implementation(platform(libs.okhttp.bom))
-    // - define any required OkHttp artifacts without version
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-    implementation(libs.androidx.lifecycle.runtime.compose.android)
-
-    // Retrofit2
-    implementation(libs.retrofit)
-
-    // Timber
-    implementation(libs.timber)
+    // Compose
+    implementation(libs.bundles.androidx.compose)
 
     // Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.bundles.hilt)
+    kapt(libs.hilt.android.compiler)
 
     // DataStore
-    // - Preferences DataStore (SharedPreferences like APIs)
-    implementation(libs.androidx.datastore.preferences)
-    // - Typed DataStore (Typed API surface, such as Proto)
-    implementation(libs.androidx.datastore)
+    implementation(libs.bundles.datastore)
 
     // Room
     implementation(libs.androidx.room.runtime)
@@ -106,17 +87,27 @@ dependencies {
     implementation(libs.androidx.room)
 
     // Paging
-    implementation(libs.androidx.paging.runtime)
-    implementation(libs.androidx.paging.compose)
+    implementation(libs.bundles.paging)
 
     // StartUp
     implementation(libs.androidx.startup.runtime)
 
     // Firebase
     implementation(platform(libs.firebase))
-    implementation(libs.firebase.crashlytics)
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.perf)
+    implementation(libs.bundles.firebase)
+
+    // Network(OkHttp, Retrofit)
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.bundles.network)
+
+    // Kotlin Serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    // Timber
+    implementation(libs.timber)
+
+    // Coil
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
