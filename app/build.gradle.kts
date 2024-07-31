@@ -92,6 +92,9 @@ dependencies {
     // StartUp
     implementation(libs.androidx.startup.runtime)
 
+    // Coroutine
+    implementation(libs.kotlinx.coroutines.android)
+
     // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
