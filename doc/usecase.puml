@@ -1,0 +1,34 @@
+@startuml
+
+left to right direction
+
+actor User as u
+
+(리스트) as U1
+(좋아요) as U2
+(설정) as U3
+
+(하트 아이콘을 선택한다) as U5
+(U5) .> (좋아요) : <<include>>
+(U5) .> (좋아요 취소) : <<include>>
+
+(페이지를 이동한다) as U6
+U6 .> (이전) : <<include>>
+U6 .> (다음) : <<include>>
+
+(리스트 item을 선택한다) as U4
+
+u -- U1
+u -- U2
+u -- U3
+
+U1 -- U4
+U1 -- U5
+
+U4 -- U5
+U4 -- U6
+
+U2 -- U5
+U2 -- U6
+
+@enduml
