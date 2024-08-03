@@ -166,6 +166,7 @@ androidx-paging-runtime = { module = "androidx.paging:paging-runtime-ktx", versi
 androidx-room = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 androidx-room-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidx-room" }
 
 #StartUp
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "androidx-startup" }
