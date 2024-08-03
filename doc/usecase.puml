@@ -4,9 +4,9 @@ left to right direction
 
 actor User as u
 
-(리스트) as U1
-(좋아요) as U2
-(설정) as U3
+(리스트를 선택한다) as U1
+(좋아요를 선택한다) as U2
+(설정을 선택한다) as U3
 
 (하트 아이콘을 선택한다) as U5
 (U5) .> (좋아요) : <<include>>
