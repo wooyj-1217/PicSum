@@ -1,0 +1,56 @@
+name: Firebase App Distribution에 Debug App 배포
+on:
+  push:
+    branches:
+      - 'develop/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ✅ 코드 체크아웃 해오기
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: ☕ JDK 17 설정
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'
+          cache: gradle
+
+        # [Document] https://github.com/webfactory/ssh-agent
+      - name: 🔐 SSH Key 설정
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: ✍️ Release Note 작성하기
+        id: get_commit_messages
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            git log --pretty=format:"%s" --no-merges > commit_messages.txt
+          else
+            git log $LAST_TAG..HEAD --pretty=format:"%s" --no-merges > commit_messages.txt
+          fi
+        shell: bash
+
+      - name: 🖨️ Release Note 출력
+        run: cat commit_messages.txt
+
+      - name: 🏗️ Debug Apk Gradle 빌드
+        run: ./gradlew clean assembleDevDebug -x ktlintCheck
+        env:
+          GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+      # [Document] https://github.com/wzieba/Firebase-Distribution-Github-Action
+      - name: 🚀 Firebase에 배포
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.7.0
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID_DEBUG }}
+          groups: ${{ secrets.FIREBASE_TESTER_GROUPS}}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+          file: app/build/outputs/apk/dev/debug/app-dev-debug.apk
+          releaseNotesFile: commit_messages.txt

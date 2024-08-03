@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +30,10 @@ fun ListUI(
         modifier = modifier.fillMaxSize(),
     ) {
         LazyVerticalGrid(columns = GridCells.Fixed(2)) {
-            items(list.itemCount) { index ->
+            items(
+                count = list.itemCount,
+                key = { index -> list[index]?.photoId ?: index },
+            ) { index ->
                 val item = list[index] ?: return@items
                 ListItemUI(
                     listTypeUI = item,

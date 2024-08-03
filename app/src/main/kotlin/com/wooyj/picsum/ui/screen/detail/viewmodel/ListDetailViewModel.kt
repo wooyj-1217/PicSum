@@ -28,7 +28,7 @@ class ListDetailViewModel
         private val _effect = MutableSharedFlow<DetailEffect>()
         override val effect = _effect.asSharedFlow()
 
-        private fun toggleLike() {
+        private fun toggleFavorite() {
             if (uiState.value is DetailUIState.Success) {
                 val currentState = uiState.value as DetailUIState.Success
                 val newItem =
@@ -57,7 +57,7 @@ class ListDetailViewModel
 
                 is DetailEvent.OnFavoriteClick -> {
                     viewModelScope.launch {
-                        toggleLike()
+                        toggleFavorite()
                     }
                 }
             }

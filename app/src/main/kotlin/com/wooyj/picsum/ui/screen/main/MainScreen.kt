@@ -54,7 +54,7 @@ fun MainScreen(
                                 }
 
                                 Screen.Favorite.route -> {
-                                    viewModel.onEvent(MainEvent.OnLikeClickEvent)
+                                    viewModel.onEvent(MainEvent.OnFavClickEvent)
                                 }
 
                                 Screen.Setting.route -> {

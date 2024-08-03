@@ -1,6 +1,6 @@
 package com.wooyj.picsum.domain.usecase
 
-import com.wooyj.picsum.domain.repository.PicSumRepository
+import com.wooyj.picsum.domain.repository.RemotePicSumRepository
 import dagger.Reusable
 import javax.inject.Inject
 
@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetPicSumItemUseCase
     @Inject
     constructor(
-        private val repository: PicSumRepository,
+        private val repository: RemotePicSumRepository,
     ) {
         suspend operator fun invoke(id: String) = repository.getPicSumItem(id)
     }

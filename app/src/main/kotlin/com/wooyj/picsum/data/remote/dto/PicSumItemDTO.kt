@@ -1,5 +1,8 @@
 package com.wooyj.picsum.data.remote.dto
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PicSumItemDTO(
     val id: String = "",
     val author: String = "",

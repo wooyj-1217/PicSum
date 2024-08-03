@@ -1,10 +1,13 @@
 package com.wooyj.picsum.data.remote
 
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.wooyj.picsum.data.remote.call.ResultCallAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -38,6 +41,7 @@ object NetworkModule {
             .Builder()
             .baseUrl(baseUrl) // 삭제 예정
             .client(okHttpClient)
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .addCallAdapterFactory(ResultCallAdapter.Factory())
             .build()
 }

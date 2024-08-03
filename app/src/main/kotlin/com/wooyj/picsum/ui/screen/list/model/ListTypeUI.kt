@@ -2,11 +2,9 @@ package com.wooyj.picsum.ui.screen.list.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.Composable
 import com.wooyj.picsum.data.local.room.entity.PicSumEntity
-import com.wooyj.picsum.data.remote.dto.PicSumItemDTO
 
 data class ListTypeUI(
     val photoId: Int,
@@ -30,18 +28,18 @@ fun ListTypeUI.getIcon() =
         }
     }
 
-fun PicSumItemDTO.toListTypeUI(favorite: Boolean): ListTypeUI =
+fun PicSumEntity.toListTypeUI() =
     ListTypeUI(
         photoId = id.toInt(),
-        url = url,
-        favorite = favorite,
         author = author,
         width = width,
         height = height,
-        downloadUrl = download_url,
+        url = url,
+        downloadUrl = downloadUrl,
+        favorite = favorite,
     )
 
-fun ListTypeUI.toPicSumEntity(): PicSumEntity =
+fun ListTypeUI.toPicSumEntity() =
     PicSumEntity(
         id = photoId.toString(),
         author = author,

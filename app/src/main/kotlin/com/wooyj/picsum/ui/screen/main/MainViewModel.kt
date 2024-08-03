@@ -83,7 +83,7 @@ class MainViewModel
                     }
                 }
 
-                is MainEvent.OnLikeClickEvent -> {
+                is MainEvent.OnFavClickEvent -> {
                     selectBottomNavigationItem(Screen.Favorite.route)
                     viewModelScope.launch {
                         _effect.emit(MainEffect.NavigateToFavorite)

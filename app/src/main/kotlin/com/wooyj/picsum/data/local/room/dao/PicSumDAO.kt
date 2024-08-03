@@ -25,6 +25,12 @@ interface PicSumDAO {
     @Update
     suspend fun update(list: List<PicSumEntity>)
 
+    @Query("UPDATE pic_sum SET favorite = :favorite WHERE id = :id ")
+    suspend fun updateFavoriteById(
+        id: String,
+        favorite: Boolean,
+    )
+
     @Delete
     suspend fun delete(data: PicSumEntity)
 

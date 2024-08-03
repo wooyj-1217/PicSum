@@ -11,8 +11,6 @@ sealed class ListUIState {
 
     data class Success(
         val list: Flow<PagingData<ListTypeUI>>,
-//        val list: Flow<PagingData<PicSumItemDTO>>,
-//        val favoriteList: Flow<PicSumEntity>,
     ) : ListUIState()
 
     data object Error : ListUIState()

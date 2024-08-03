@@ -3,7 +3,7 @@ package com.wooyj.picsum.domain.repository
 import androidx.paging.PagingSource
 import com.wooyj.picsum.data.remote.dto.PicSumItemDTO
 
-interface PicSumRepository {
+interface RemotePicSumRepository {
     suspend fun getPicSumList(
         page: Int,
         limit: Int,

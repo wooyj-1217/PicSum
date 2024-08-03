@@ -7,8 +7,7 @@ sealed class ListEvent {
         val photoId: Int,
     ) : ListEvent()
 
-    data class OnLikeClickEvent(
-//        val photoId: Int,
+    data class OnFavClickEvent(
         val ui: ListTypeUI,
     ) : ListEvent()
 }

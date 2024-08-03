@@ -32,4 +32,12 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun providePicSumDaoFlow(database: AppDatabase) = database.picSumDaoFlow()
+
+    @Provides
+    @Singleton
+    fun provideFavoriteDao(database: AppDatabase) = database.favoriteDao()
+
+    @Provides
+    @Singleton
+    fun provideFavoriteDaoFlow(database: AppDatabase) = database.favoriteDAOFlow()
 }

@@ -2,16 +2,19 @@ package com.wooyj.picsum.ui.screen.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
-import com.wooyj.picsum.domain.repository.FavoriteRepository
-import com.wooyj.picsum.domain.usecase.GetPicSumListUseCase
+import androidx.paging.map
+import com.wooyj.picsum.domain.usecase.PicSumListMediatorUseCase
+import com.wooyj.picsum.domain.usecase.ToggleFavoriteUseCase
 import com.wooyj.picsum.ui.screen.list.model.ListTypeUI
+import com.wooyj.picsum.ui.screen.list.model.toListTypeUI
 import com.wooyj.picsum.ui.screen.list.model.toPicSumEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,8 +23,8 @@ import javax.inject.Inject
 class ListViewModel
     @Inject
     constructor(
-        private val useCase: GetPicSumListUseCase,
-        private val repository: FavoriteRepository,
+        private val picSumListMediatorUseCase: PicSumListMediatorUseCase,
+        private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     ) : ViewModel() {
         // UI State
         private val _uiState = MutableStateFlow<ListUIState>(ListUIState.None)
@@ -37,34 +40,29 @@ class ListViewModel
 
         private fun fetchList() {
             viewModelScope.launch {
-                val favoriteFlow = repository.getFavoriteList() // DB (Room)  Flow<List<PicSumEntity>>
-                val pagingFlow = useCase(limit = 30).cachedIn(viewModelScope) // API Flow<PagingData<PicSumItemDTO>>
-//                combine(favoriteFlow, pagingFlow) { favoriteList, pagingData ->
-//                    pagingData.map { picSumItem ->
-//                        val isFavorite = favoriteList.any { it.id == picSumItem.id }
-//                        picSumItem.toListTypeUI(isFavorite)
-//                    }
-//                }.collectLatest {
-//                    if (uiState.value is ListUIState.None) {
-//                        _uiState.value = ListUIState.Success(flowOf(latest))
-//                    } else {
-//                        _uiState.update {
-//                            (_uiState.value as ListUIState.Success).copy(favoriteList = )
-//                        }
-//                    }
-//                }
+                val flow =
+                    picSumListMediatorUseCase
+                        .invoke(
+                            limit = 30,
+                            scope = viewModelScope,
+                        ).map { pagingData ->
+                            pagingData.map { item ->
+                                Timber.d("PicSumItem: $item")
+                                item.toListTypeUI()
+                            }
+                        }.catch {
+                            Timber.e(it, "Error in fetchList")
+                            _uiState.value = ListUIState.Error
+                        }
+
+                _uiState.value = ListUIState.Success(flow)
             }
         }
 
-        private fun toggleLike(ui: ListTypeUI) {
+        private fun toggleFavorite(ui: ListTypeUI) {
             viewModelScope.launch {
-                Timber.d("toggleLike: ViewModelScope")
                 val entity = ui.toPicSumEntity()
-                if (!repository.added(entity)) {
-                    repository.addFavorite(entity)
-                } else {
-                    repository.removeFavorite(entity)
-                }
+                toggleFavoriteUseCase.invoke(entity)
             }
         }
 
@@ -76,8 +74,8 @@ class ListViewModel
                     }
                 }
 
-                is ListEvent.OnLikeClickEvent -> {
-                    toggleLike(event.ui)
+                is ListEvent.OnFavClickEvent -> {
+                    toggleFavorite(event.ui)
                 }
             }
         }

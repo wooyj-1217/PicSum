@@ -10,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.wooyj.picsum.ui.screen.list.state.ListUI
+import timber.log.Timber
 
 @Composable
 fun ListScreen(
@@ -34,6 +35,7 @@ fun ListScreen(
             when (uiState) {
                 is ListUIState.Success -> {
                     val list = (uiState as ListUIState.Success).list.collectAsLazyPagingItems()
+                    Timber.d("list: ${list.itemCount}")
                     ListUI(
                         modifier = Modifier.padding(padding),
                         list = list,
@@ -41,7 +43,7 @@ fun ListScreen(
                             viewModel.onEvent(ListEvent.OnItemClickEvent(photoId))
                         },
                         clickFavorite = { photoId ->
-                            viewModel.onEvent(ListEvent.OnLikeClickEvent(photoId))
+                            viewModel.onEvent(ListEvent.OnFavClickEvent(photoId))
                         },
                     )
                 }
