@@ -15,7 +15,7 @@ class LocalPicSumRepositoryImpl
     ) : LocalPicSumRepository {
         override fun getFavoriteList(): PagingSource<Int, PicSumEntity> = flowDao.getFavoriteList()
 
-        override suspend fun updateFavoriteById(entity: PicSumEntity) = dao.updateFavoriteById(entity.id, entity.favorite)
+        override suspend fun updateFavoriteById(entity: PicSumEntity) = dao.updateFavoriteById(entity.id, !entity.favorite)
 
         override suspend fun insert(list: List<PicSumEntity>) = dao.insert(list)
 
