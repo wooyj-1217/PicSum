@@ -1,9 +1,28 @@
 package com.wooyj.picsum.ui.screen.main
 
-interface MainEffect {
-    data object NavigateToList : MainEffect
+import com.wooyj.picsum.ui.navigation.Screen
 
-    data object NavigateToFavorite : MainEffect
+sealed interface MainEffect {
+    val screen: Screen
 
-    data object NavigateToSetting : MainEffect
+    data object NavigateToList : MainEffect {
+        override val screen: Screen
+            get() = Screen.List
+    }
+
+    data object NavigateToFavorite : MainEffect {
+        override val screen: Screen
+            get() = Screen.Favorite
+    }
+
+    data object NavigateToSetting : MainEffect {
+        override val screen: Screen
+            get() = Screen.Setting
+    }
 }
+
+// sealed interface MainEffect2 {
+//    data class Navigate(
+//        val screen: Screen,
+//    ) : MainEffect2
+// }

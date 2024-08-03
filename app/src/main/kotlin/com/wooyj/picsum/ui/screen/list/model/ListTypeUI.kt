@@ -18,14 +18,10 @@ data class ListTypeUI(
 
 @Composable
 fun ListTypeUI.getIcon() =
-    when (favorite) {
-        true -> {
-            Icons.Filled.Favorite
-        }
-
-        false -> {
-            Icons.Outlined.FavoriteBorder
-        }
+    if (favorite) {
+        Icons.Filled.Favorite
+    } else {
+        Icons.Outlined.FavoriteBorder
     }
 
 fun PicSumEntity.toListTypeUI() =

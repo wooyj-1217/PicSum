@@ -1,10 +1,5 @@
 package com.wooyj.picsum.ui.screen.main
 
-import android.app.Application
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wooyj.picsum.ui.navigation.Screen
@@ -22,9 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel
     @Inject
-    constructor(
-        application: Application,
-    ) : ViewModel() {
+    constructor() : ViewModel() {
         // UI State
         private val _uiState = MutableStateFlow<MainUIState>(MainUIState.None)
         val uiState: StateFlow<MainUIState> = _uiState.asStateFlow()
@@ -36,27 +29,7 @@ class MainViewModel
         init {
             _uiState.value =
                 MainUIState.Success(
-                    bottomNavigationItems =
-                        listOf(
-                            BottomNavigationItem(
-                                title = "리스트",
-                                icon = Icons.AutoMirrored.Filled.List,
-                                route = Screen.List.route,
-                                selected = true,
-                            ),
-                            BottomNavigationItem(
-                                title = "좋아요",
-                                icon = Icons.Default.Favorite,
-                                route = Screen.Favorite.route,
-                                selected = false,
-                            ),
-                            BottomNavigationItem(
-                                title = "설정",
-                                icon = Icons.Default.Settings,
-                                route = Screen.Setting.route,
-                                selected = false,
-                            ),
-                        ),
+                    bottomNavigationItems = BottomNavigationItem.entries,
                 )
         }
 

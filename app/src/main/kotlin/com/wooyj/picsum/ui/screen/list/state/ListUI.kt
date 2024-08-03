@@ -47,6 +47,7 @@ fun ListUI(
 
 @Composable
 fun ListItemUI(
+    modifier: Modifier = Modifier,
     listTypeUI: ListTypeUI,
     clickItem: (Int) -> Unit,
     clickFavorite: (ListTypeUI) -> Unit,

@@ -66,15 +66,20 @@
 # 전에는 한 5분에서 7분정도면 됐었는데 거의 15분정도 걸리더라구요.
 # 이게 원래 정상적인 상황인건가요?
 # github action으로 app distribution에 자동빌드되게 어제 yml도 작성해서 테스트했는데 거기도 마찬가지로 느렸습니다.ㅠㅠ
+> 늦어 지는건 맞다
 
 # 13. doc에 firebase_app_distribution_deploy.yml 에 올려놨는데 혹시 제가 잘못 작성한건지 봐주세요.
+> Lint, DevRelease deploy
 
 # 14. remote랑 local 데이터를 합쳐서 가공하는 방법 찾으니까 Remote Mediator가 나왔거든요.
 # 캐싱용으로 쓰는 DB를 따로 만들어서 저장해서 쓰던데 
 # DB에 꼭 저장해놓아야 하는 걸까요?
 # 캐싱을 쓰지않고 구현하려고 애써봤는데 잘 안되더라구요.
 # https://developer.android.com/topic/libraries/architecture/paging/v3-network-db?hl=ko
+> ㄴㄴ > 오늘 알려 준 걸로 하세요 편하게......
 
 # 15. UseCase 정리하다가 같은 뷰를 쓰는데 보여주는 내용만 다르면 이거는 다른 UseCase인가요..?
 # usecase.puml로 그리긴 했는데^_ㅠ... 이게 맞는건지 모르겠어요.
 # 이번 케이스의 경우에도 상세페이지를 보여주는 데이터가 2가지로 나뉜다고 생각했는데 따로 케이스를 나눠야됐는지 너무 헷갈렸어요.
+> 다이어그램은 각자 페이지 입장에서 각자 그리면 편합니다
+> 

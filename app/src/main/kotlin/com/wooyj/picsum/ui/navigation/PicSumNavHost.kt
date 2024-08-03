@@ -15,6 +15,7 @@ import com.wooyj.picsum.ui.screen.setting.SettingScreen
 fun PicSumNavHost(
     modifier: Modifier,
     navController: NavHostController,
+    onError: (String) -> Unit,
 ) {
     NavHost(
         modifier = modifier,

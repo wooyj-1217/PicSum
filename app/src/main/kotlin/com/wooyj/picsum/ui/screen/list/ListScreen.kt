@@ -14,6 +14,7 @@ import timber.log.Timber
 
 @Composable
 fun ListScreen(
+    modifier: Modifier = Modifier,
     viewModel: ListViewModel = hiltViewModel(),
     onNextNavigation: (Int) -> Unit,
 ) {

@@ -8,7 +8,9 @@ import androidx.compose.material.Text
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.wooyj.picsum.ui.navigation.PicSumNavHost
 import com.wooyj.picsum.ui.navigation.Screen
@@ -31,13 +34,20 @@ fun MainScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val effect by viewModel.effect.collectAsStateWithLifecycle(null)
 
-    LaunchedEffect(key1 = effect) {
-        when (effect) {
-            is MainEffect.NavigateToList -> navController.navigate(Screen.List.route)
-            is MainEffect.NavigateToFavorite -> navController.navigate(Screen.Favorite.route)
-            is MainEffect.NavigateToSetting -> navController.navigate(Screen.Setting.route)
-            else -> Unit
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentBottomNavigationItem by remember(navBackStackEntry) {
+        derivedStateOf {
+            navBackStackEntry?.destination?.route?.let { route ->
+                BottomNavigationItem.entries.find { it.route == route }
+            } ?: run {
+                BottomNavigationItem.List
+            }
         }
+    }
+
+    LaunchedEffect(key1 = effect) {
+        val navigate = effect?.screen?.route ?: return@LaunchedEffect
+        navController.navigate(navigate)
     }
 
     Scaffold(
@@ -47,6 +57,7 @@ fun MainScreen(
                 is MainUIState.Success -> {
                     BottomNavigationView(
                         list = (uiState as MainUIState.Success).bottomNavigationItems,
+                        currentBottomNavigationItem = currentBottomNavigationItem,
                         onClick = { item ->
                             when (item.route) {
                                 Screen.List.route -> {
@@ -75,6 +86,11 @@ fun MainScreen(
             PicSumNavHost(
                 modifier = Modifier.padding(innerPadding),
                 navController = navController,
+                onError = { error ->
+                    viewModel.onEvent(
+                        MainEvent.OnReviceErrorEvent(error),
+                    )
+                },
             )
         },
     )
@@ -82,29 +98,32 @@ fun MainScreen(
 
 @Composable
 fun BottomNavigationView(
+    modifier: Modifier = Modifier,
     list: List<BottomNavigationItem>,
+    currentBottomNavigationItem: BottomNavigationItem,
     onClick: (BottomNavigationItem) -> Unit,
 ) {
     BottomNavigation(
+        modifier = Modifier,
         elevation = 0.dp,
         backgroundColor = Color.White,
     ) {
         list.forEach { item ->
             BottomNavigationItem(
+                selected = item == currentBottomNavigationItem,
                 label = {
                     Text(
                         text = item.title,
                         fontSize = 11.sp,
                     )
                 },
-                selected = item.selected,
                 onClick = {
                     onClick(item)
                 },
                 icon = {
                     Icon(
                         imageVector = item.icon,
-                        contentDescription = "",
+                        contentDescription = item.route,
                     )
                 },
             )
