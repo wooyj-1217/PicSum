@@ -88,13 +88,20 @@
 
 # Usecase 다시 그리긴 했습니당^_ㅠ..
 https://drive.google.com/file/d/1zxJV-yLTskYP7efE-lgbpXaZeRv4Itra/view?usp=sharing
+> OK
 
 # 16. Cache data를 쓰기에 유리한 환경은 어떤걸까요?
+> 질문을 바꿔서 불리한 환경을 고민해보면 됩니다 / 대부분은 캐시 쓰는게 좋다
 
 # 17. 예전에 debug 빌드때는 문제없었는데 release build 때 난독화때문에 문제가 생긴 적 있었는데요.
 # 혹시 테스트코드도 release build후에 난독화와 같은 영향을 미치나요?
+> D8 / R8 
 
 # 18. 회사코드 리팩토링 할 때 안정성을 생각한다면 지켜야 할 순서같은게 있나요?
+> 1. TestCode 작성
+> 2. 옮기기
+> 3. 설계 -> 코딩
+> 4. 삭제 -> 변경
 
 # 19. Room DB에 캐시데이터를 활용하려고 했거든요.. 
 # 홈 메인 데이터가 서버에서도 하루에 1번 업데이트 된다고 들어서 
@@ -102,3 +109,4 @@ https://drive.google.com/file/d/1zxJV-yLTskYP7efE-lgbpXaZeRv4Itra/view?usp=shari
 # 저희 개발팀장에게 여쭤봤더니 앱 용량이 늘어나서 사람들이 삭제한다고 안된다고 하더라구요.
 # 19-1. 캐시데이터를 쓰는게 맞는 상황일까요?
 # 19-2. 개발팀장의 말은 맞는 말인가요?
+> Youtube 사례 -> Cache 정책, 관리
