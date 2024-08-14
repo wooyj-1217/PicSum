@@ -5,9 +5,10 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.Composable
 import com.wooyj.picsum.data.local.room.entity.PicSumEntity
+import com.wooyj.picsum.domain.model.PicSumItemFavModel
 
 data class ListTypeUI(
-    val photoId: Int,
+    val photoId: String,
     val author: String,
     val width: Int,
     val height: Int,
@@ -24,15 +25,25 @@ fun ListTypeUI.getIcon() =
         Icons.Outlined.FavoriteBorder
     }
 
-fun PicSumEntity.toListTypeUI() =
+fun PicSumItemFavModel.toListTypeUI() =
     ListTypeUI(
-        photoId = id.toInt(),
+        photoId = id,
         author = author,
         width = width,
         height = height,
         url = url,
         downloadUrl = downloadUrl,
         favorite = favorite,
+    )
+
+fun PicSumEntity.toListTypeUI() =
+    ListTypeUI(
+        photoId = id,
+        author = author,
+        width = width,
+        height = height,
+        url = url,
+        downloadUrl = downloadUrl,
     )
 
 fun ListTypeUI.toPicSumEntity() =
@@ -43,5 +54,4 @@ fun ListTypeUI.toPicSumEntity() =
         height = height,
         url = url,
         downloadUrl = downloadUrl,
-        favorite = favorite,
     )

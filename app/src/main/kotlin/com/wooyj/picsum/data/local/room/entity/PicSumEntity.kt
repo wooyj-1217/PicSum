@@ -13,7 +13,6 @@ data class PicSumEntity(
     val height: Int,
     val url: String,
     val downloadUrl: String,
-    val favorite: Boolean,
 )
 
 fun List<PicSumItemDTO>.toListPicSumEntity() =
@@ -25,6 +24,5 @@ fun List<PicSumItemDTO>.toListPicSumEntity() =
             height = it.height,
             url = it.url,
             downloadUrl = it.download_url,
-            favorite = false,
         )
     }

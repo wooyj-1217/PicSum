@@ -2,12 +2,10 @@ package com.wooyj.picsum.ui.screen.list
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.map
-import com.wooyj.picsum.domain.usecase.GetPicSumListMediatorUseCase
-import com.wooyj.picsum.domain.usecase.ToggleFavoriteUseCase
+import com.wooyj.picsum.domain.usecase.PicSumFavListUseCase
+import com.wooyj.picsum.domain.usecase.favorite.ToggleFavoriteUseCase
 import com.wooyj.picsum.ui.base.BaseViewModel
-import com.wooyj.picsum.ui.screen.list.model.ListTypeUI
 import com.wooyj.picsum.ui.screen.list.model.toListTypeUI
-import com.wooyj.picsum.ui.screen.list.model.toPicSumEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,7 +21,7 @@ import javax.inject.Inject
 class ListViewModel
     @Inject
     constructor(
-        private val getPicSumListMediatorUseCase: GetPicSumListMediatorUseCase,
+        private val picSumFavListUseCase: PicSumFavListUseCase,
         private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     ) : BaseViewModel<ListEvent, ListEffect>() {
         // UI State
@@ -37,27 +35,23 @@ class ListViewModel
         private fun fetchList() {
             viewModelScope.launch {
                 val flow =
-                    getPicSumListMediatorUseCase(
+                    picSumFavListUseCase(
                         limit = 30,
                         scope = viewModelScope,
                     ).map { pagingData ->
                         pagingData.map { item ->
-                            Timber.d("PicSumItem: $item")
                             item.toListTypeUI()
                         }
                     }.catch {
-                        Timber.e(it, "Error in fetchList")
                         _uiState.value = ListUIState.Error
                     }
-
                 _uiState.value = ListUIState.Success(flow)
             }
         }
 
         // Flow 활용
-        private fun toggleFavorite(ui: ListTypeUI) {
-            val entity = ui.toPicSumEntity()
-            toggleFavoriteUseCase(entity)
+        private fun toggleFavorite(id: String) {
+            toggleFavoriteUseCase(id)
                 .onEach {
                     Timber.d("toggleFavorite: $it")
                 }.launchIn(viewModelScope)
@@ -71,7 +65,7 @@ class ListViewModel
                 }
 
                 is ListEvent.OnFavClickEvent -> {
-                    toggleFavorite(event.ui)
+                    toggleFavorite(event.photoId)
                 }
             }
         }

@@ -2,15 +2,15 @@ package com.wooyj.picsum.data.remote.source
 
 import com.wooyj.picsum.data.remote.dto.PicSumItemDTO
 import com.wooyj.picsum.data.remote.service.PicSumAPIService
-import com.wooyj.picsum.data.source.PicSumDataSource
+import com.wooyj.picsum.data.source.PicSumRemoteDataSource
 import timber.log.Timber
 import javax.inject.Inject
 
-class PicSumRemoteDataSource
+class PicSumRemoteDataSourceImpl
     @Inject
     constructor(
         private val service: PicSumAPIService,
-    ) : PicSumDataSource {
+    ) : PicSumRemoteDataSource {
         override suspend fun getPicSumList(
             page: Int,
             limit: Int,

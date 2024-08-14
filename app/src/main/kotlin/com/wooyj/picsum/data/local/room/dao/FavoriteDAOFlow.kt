@@ -9,4 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface FavoriteDAOFlow {
     @Query("SELECT * FROM favorite")
     fun getFavoriteList(): Flow<List<FavoriteEntity>>
+
+    @Query("SELECT * FROM favorite WHERE visible = 1")
+    fun getVisibleFavoriteList(): Flow<List<FavoriteEntity>>
 }

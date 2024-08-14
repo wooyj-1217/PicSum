@@ -2,14 +2,17 @@ package com.wooyj.picsum.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.wooyj.picsum.ui.screen.detail.DetailScreen
-import com.wooyj.picsum.ui.screen.detail.viewmodel.FavoriteViewModel
-import com.wooyj.picsum.ui.screen.detail.viewmodel.ListDetailViewModel
 import com.wooyj.picsum.ui.screen.list.ListScreen
 import com.wooyj.picsum.ui.screen.setting.SettingScreen
+import timber.log.Timber
 
 @Composable
 fun PicSumNavHost(
@@ -22,25 +25,45 @@ fun PicSumNavHost(
         navController = navController,
         startDestination = Screen.List.route,
     ) {
-        composable(route = Screen.List.route) {
+        logComposable(route = Screen.List.route) {
             ListScreen(
-                onNextNavigation = {
-                    navController.navigate(Screen.Detail.route)
+                onNextNavigation = { id ->
+                    navController.navigate(route = Screen.Detail.setPhotoId(id))
                 },
             )
         }
-        composable(route = Screen.Detail.route) {
-            DetailScreen(
-                viewModel = ListDetailViewModel(),
-            )
+        logComposable(
+            route = Screen.Detail.route,
+            arguments =
+                listOf(
+                    navArgument("photoId") { type = NavType.StringType },
+                ),
+        ) {
+            DetailScreen()
         }
-        composable(route = Screen.Favorite.route) {
-            DetailScreen(
-                viewModel = FavoriteViewModel(),
-            )
+        logComposable(route = Screen.Favorite.route) {
+            DetailScreen()
         }
-        composable(route = Screen.Setting.route) {
+        logComposable(route = Screen.Setting.route) {
             SettingScreen()
         }
+    }
+}
+
+private fun NavGraphBuilder.logComposable(
+    route: String,
+    arguments: List<NamedNavArgument> = emptyList(),
+    content: @Composable () -> Unit,
+) {
+    composable(
+        route = route,
+        arguments = arguments,
+    ) { backStackEntry ->
+        Timber.d("Route: $route")
+        // NavBackStackEntry에서 전달된 인수 값을 가져와서 Timber로 로그 출력
+//        val myTrace = Firebase.performance.newTrace(route)
+//        myTrace.start()
+        content()
+//        myTrace.stop()
     }
 }

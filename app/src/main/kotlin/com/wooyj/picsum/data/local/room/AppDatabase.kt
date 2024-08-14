@@ -9,7 +9,7 @@ import com.wooyj.picsum.data.local.room.dao.PicSumDAOFlow
 import com.wooyj.picsum.data.local.room.entity.FavoriteEntity
 import com.wooyj.picsum.data.local.room.entity.PicSumEntity
 
-private const val DATABASE_VERSION = 1
+private const val DATABASE_VERSION = 2
 
 @Database(version = DATABASE_VERSION, entities = [PicSumEntity::class, FavoriteEntity::class])
 abstract class AppDatabase : RoomDatabase() {

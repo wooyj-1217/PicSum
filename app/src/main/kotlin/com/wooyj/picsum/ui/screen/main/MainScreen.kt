@@ -84,7 +84,7 @@ fun MainScreen(
         content = { innerPadding ->
             // 여기의 UIState는 Screen
             PicSumNavHost(
-                modifier = Modifier.padding(innerPadding),
+                modifier = modifier.padding(innerPadding),
                 navController = navController,
                 onError = { error ->
                     viewModel.onEvent(
@@ -104,7 +104,7 @@ fun BottomNavigationView(
     onClick: (BottomNavigationItem) -> Unit,
 ) {
     BottomNavigation(
-        modifier = Modifier,
+        modifier = modifier,
         elevation = 0.dp,
         backgroundColor = Color.White,
     ) {

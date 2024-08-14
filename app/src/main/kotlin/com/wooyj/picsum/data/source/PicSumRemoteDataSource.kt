@@ -2,7 +2,7 @@ package com.wooyj.picsum.data.source
 
 import com.wooyj.picsum.data.remote.dto.PicSumItemDTO
 
-interface PicSumDataSource {
+interface PicSumRemoteDataSource {
     suspend fun getPicSumList(
         page: Int,
         limit: Int,

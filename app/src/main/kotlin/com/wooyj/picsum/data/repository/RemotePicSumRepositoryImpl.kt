@@ -3,14 +3,14 @@ package com.wooyj.picsum.data.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.wooyj.picsum.data.remote.dto.PicSumItemDTO
-import com.wooyj.picsum.data.source.PicSumDataSource
+import com.wooyj.picsum.data.source.PicSumRemoteDataSource
 import com.wooyj.picsum.domain.repository.RemotePicSumRepository
 import javax.inject.Inject
 
 class RemotePicSumRepositoryImpl
     @Inject
     constructor(
-        private val dataSource: PicSumDataSource,
+        private val dataSource: PicSumRemoteDataSource,
     ) : RemotePicSumRepository {
         override suspend fun getPicSumList(
             page: Int,

@@ -11,30 +11,32 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
 @Composable
 fun ImageWithFavorite(
+    modifier: Modifier = Modifier,
     uiState: ImageWithFavoriteUIState,
-    clickFavorite: (Int) -> Unit,
+    clickFavorite: (String) -> Unit,
 ) {
     Box(
         modifier =
-            Modifier
+            modifier
                 .padding(16.dp)
                 .fillMaxWidth()
                 .aspectRatio(1f),
     ) {
         AsyncImage(
             modifier =
-                Modifier.fillMaxSize(),
+                modifier.fillMaxSize(),
             model = uiState.url,
             contentDescription = "",
         )
         Image(
             modifier =
-                Modifier
+                modifier
                     .wrapContentSize()
                     .align(
                         alignment = Alignment.TopEnd,
@@ -45,4 +47,18 @@ fun ImageWithFavorite(
             contentDescription = "",
         )
     }
+}
+
+@Preview
+@Composable
+fun PreviewImageWithFavorite() {
+    ImageWithFavorite(
+        uiState =
+            ImageWithFavoriteUIState(
+                photoId = "1",
+                url = "https://picsum.photos/200/300",
+                favorite = false,
+            ),
+        clickFavorite = {},
+    )
 }

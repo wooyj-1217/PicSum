@@ -6,13 +6,13 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PicSumAPIService {
-    @GET("list")
+    @GET("v2/list")
     suspend fun getPicSumList(
         @Query("page") page: Int,
         @Query("limit") limit: Int,
     ): Result<List<PicSumItemDTO>>
 
-    @GET("id/{id}")
+    @GET("id/{id}/info")
     suspend fun getPicSumItem(
         @Path("id") id: String,
     ): Result<PicSumItemDTO>

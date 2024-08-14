@@ -19,17 +19,17 @@ interface PicSumDAO {
     @Query("SELECT * FROM pic_sum")
     suspend fun getPicSumList(): List<PicSumEntity>
 
+    @Query("SELECT * FROM pic_sum Limit :limit OFFSET :offset")
+    suspend fun getPicSumListPaging(
+        offset: Int,
+        limit: Int,
+    ): List<PicSumEntity>
+
     @Update
     suspend fun update(data: PicSumEntity)
 
     @Update
     suspend fun update(list: List<PicSumEntity>)
-
-    @Query("UPDATE pic_sum SET favorite = :favorite WHERE id = :id ")
-    suspend fun updateFavoriteById(
-        id: String,
-        favorite: Boolean,
-    )
 
     @Delete
     suspend fun delete(data: PicSumEntity)

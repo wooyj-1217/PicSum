@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -16,7 +17,7 @@ import timber.log.Timber
 fun ListScreen(
     modifier: Modifier = Modifier,
     viewModel: ListViewModel = hiltViewModel(),
-    onNextNavigation: (Int) -> Unit,
+    onNextNavigation: (String) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val effect by viewModel.effect.collectAsStateWithLifecycle(initialValue = null)
@@ -38,7 +39,7 @@ fun ListScreen(
                     val list = (uiState as ListUIState.Success).list.collectAsLazyPagingItems()
                     Timber.d("list: ${list.itemCount}")
                     ListUI(
-                        modifier = Modifier.padding(padding),
+                        modifier = modifier.padding(padding),
                         list = list,
                         clickItem = { photoId ->
                             viewModel.onEvent(ListEvent.OnItemClickEvent(photoId))
@@ -52,5 +53,13 @@ fun ListScreen(
                 else -> Unit
             }
         },
+    )
+}
+
+@Preview
+@Composable
+fun PreviewListScreen() {
+    ListScreen(
+        onNextNavigation = {},
     )
 }

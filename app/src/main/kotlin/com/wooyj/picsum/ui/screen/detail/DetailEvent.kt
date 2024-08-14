@@ -1,9 +1,17 @@
 package com.wooyj.picsum.ui.screen.detail
 
-sealed class DetailEvent {
-    data object OnNextClick : DetailEvent()
+import com.wooyj.picsum.ui.base.BaseEvent
 
-    data object OnBeforeClick : DetailEvent()
+sealed class DetailEvent : BaseEvent {
+    data class OnNextClick(
+        val photoId: String,
+    ) : DetailEvent()
 
-    data object OnFavoriteClick : DetailEvent()
+    data class OnBeforeClick(
+        val photoId: String,
+    ) : DetailEvent()
+
+    data class OnFavoriteClick(
+        val photoId: String,
+    ) : DetailEvent()
 }

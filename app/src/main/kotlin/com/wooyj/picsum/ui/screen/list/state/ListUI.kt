@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,8 +22,8 @@ import com.wooyj.picsum.ui.screen.list.model.getIcon
 fun ListUI(
     modifier: Modifier = Modifier,
     list: LazyPagingItems<ListTypeUI>,
-    clickItem: (Int) -> Unit,
-    clickFavorite: (ListTypeUI) -> Unit,
+    clickItem: (String) -> Unit,
+    clickFavorite: (String) -> Unit,
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -32,7 +31,6 @@ fun ListUI(
         LazyVerticalGrid(columns = GridCells.Fixed(2)) {
             items(
                 count = list.itemCount,
-                key = { index -> list[index]?.photoId ?: index },
             ) { index ->
                 val item = list[index] ?: return@items
                 ListItemUI(
@@ -49,8 +47,8 @@ fun ListUI(
 fun ListItemUI(
     modifier: Modifier = Modifier,
     listTypeUI: ListTypeUI,
-    clickItem: (Int) -> Unit,
-    clickFavorite: (ListTypeUI) -> Unit,
+    clickItem: (String) -> Unit,
+    clickFavorite: (String) -> Unit,
 ) {
     Column(
         modifier =
@@ -74,7 +72,7 @@ fun ListItemUI(
                         .align(
                             alignment = Alignment.TopEnd,
                         ).clickable {
-                            clickFavorite(listTypeUI)
+                            clickFavorite(listTypeUI.photoId)
                         },
                 imageVector = listTypeUI.getIcon(),
                 contentDescription = "",
@@ -89,7 +87,7 @@ fun PreviewListItemUI() {
     ListItemUI(
         listTypeUI =
             ListTypeUI(
-                photoId = 1,
+                photoId = 1.toString(),
                 url = "https://picsum.photos/200/300",
                 favorite = false,
                 author = "",

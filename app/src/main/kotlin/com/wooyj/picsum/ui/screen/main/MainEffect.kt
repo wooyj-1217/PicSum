@@ -1,8 +1,9 @@
 package com.wooyj.picsum.ui.screen.main
 
+import com.wooyj.picsum.ui.base.BaseEffect
 import com.wooyj.picsum.ui.navigation.Screen
 
-sealed interface MainEffect {
+sealed interface MainEffect : BaseEffect {
     val screen: Screen
 
     data object NavigateToList : MainEffect {

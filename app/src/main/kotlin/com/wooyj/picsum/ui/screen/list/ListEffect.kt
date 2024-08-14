@@ -4,6 +4,6 @@ import com.wooyj.picsum.ui.base.BaseEffect
 
 interface ListEffect : BaseEffect {
     data class NavigateToDetail(
-        val photoId: Int,
+        val photoId: String,
     ) : ListEffect
 }
