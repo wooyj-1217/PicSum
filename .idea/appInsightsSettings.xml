@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.wooyj.picsum" />
+                  <option name="mobileSdkAppId" value="1:74680202145:android:e25e82d9780ca6ecac91e0" />
+                  <option name="projectId" value="picsum-df9ea" />
+                  <option name="projectNumber" value="74680202145" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

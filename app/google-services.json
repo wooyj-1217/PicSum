@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "74680202145",
+    "project_id": "picsum-df9ea",
+    "storage_bucket": "picsum-df9ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74680202145:android:e25e82d9780ca6ecac91e0",
+        "android_client_info": {
+          "package_name": "com.wooyj.picsum"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwTg-qILW_t9oRCcUCwJPO7MPrx_E9e5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -134,6 +134,10 @@ timber = "5.0.1"
 # [Github](https://github.com/google/ksp)
 ksp = "2.0.0-1.0.23"
 
+# Google-Services
+# [Document](https://developers.google.com/android/guides/google-services-plugin)
+googleServices = "4.4.2"
+
 [libraries]
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 ktlint = { module = "io.nlopez.compose.rules:ktlint", version.ref = "compose-kotlin-lint" }
@@ -213,6 +217,7 @@ kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
 firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-perf" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 
 [bundles]
 androidx-compose = [

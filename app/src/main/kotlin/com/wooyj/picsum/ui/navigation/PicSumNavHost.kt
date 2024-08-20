@@ -9,6 +9,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.perf.ktx.performance
 import com.wooyj.picsum.ui.screen.detail.DetailScreen
 import com.wooyj.picsum.ui.screen.list.ListScreen
 import com.wooyj.picsum.ui.screen.setting.SettingScreen
@@ -61,9 +63,9 @@ private fun NavGraphBuilder.logComposable(
     ) { backStackEntry ->
         Timber.d("Route: $route")
         // NavBackStackEntry에서 전달된 인수 값을 가져와서 Timber로 로그 출력
-//        val myTrace = Firebase.performance.newTrace(route)
-//        myTrace.start()
+        val myTrace = Firebase.performance.newTrace(route)
+        myTrace.start()
         content()
-//        myTrace.stop()
+        myTrace.stop()
     }
 }

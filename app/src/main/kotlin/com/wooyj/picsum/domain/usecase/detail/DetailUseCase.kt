@@ -1,13 +1,10 @@
 package com.wooyj.picsum.domain.usecase.detail
 
 import com.wooyj.picsum.domain.model.ItemWithIdModel
-import com.wooyj.picsum.domain.model.toPicSumItemFavModel
 import com.wooyj.picsum.domain.usecase.list.FavoriteListUseCase
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -34,7 +31,6 @@ class DetailUseCase
                 // 내 앞번호 뭐야?? ->
                 // 내 뒷번호 뭐야?? -> Server에서 데이터 와야 한다
                 // 그냥 찌른다 -> DB, Server
-
 
 //                val favListFlow = favoriteListUseCase() // Flow<List<FavoriteEntity>>
 //                val cacheList = picSumListUseCase() // List<PicSumEntity> ( cache List )
@@ -80,7 +76,6 @@ class DetailUseCase
 //                    ).also {
 //                        Timber.d("Emitting model: $it")
 //                    }
-                }
             }
     }
 
