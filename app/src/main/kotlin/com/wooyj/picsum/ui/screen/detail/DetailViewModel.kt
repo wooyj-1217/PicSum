@@ -3,8 +3,8 @@ package com.wooyj.picsum.ui.screen.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.wooyj.picsum.domain.usecase.detail.DetailUseCase
-import com.wooyj.picsum.domain.usecase.favorite.RemoveFavoriteNotVisibleUseCase
-import com.wooyj.picsum.domain.usecase.favorite.UpdateVisibleStateUseCase
+import com.wooyj.picsum.domain.usecase.local.favorite.RemoveFavoriteNotVisibleUseCase
+import com.wooyj.picsum.domain.usecase.local.favorite.UpdateVisibleStateUseCase
 import com.wooyj.picsum.ui.base.BaseViewModel
 import com.wooyj.picsum.ui.screen.detail.model.toDetailTypeUI
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -61,6 +61,7 @@ class DetailViewModel
                 .onEach {
                     Timber.d("toggleFavorite: $it")
                 }.launchIn(viewModelScope)
+            load(id)
         }
 
         private fun goToId(id: String) {

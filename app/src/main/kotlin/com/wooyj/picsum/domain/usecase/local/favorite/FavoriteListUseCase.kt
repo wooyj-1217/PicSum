@@ -1,4 +1,4 @@
-package com.wooyj.picsum.domain.usecase.list
+package com.wooyj.picsum.domain.usecase.local.favorite
 
 import com.wooyj.picsum.domain.repository.local.LocalFavoriteRepository
 import dagger.Reusable

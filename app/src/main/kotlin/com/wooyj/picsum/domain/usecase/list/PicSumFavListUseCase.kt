@@ -1,11 +1,10 @@
-package com.wooyj.picsum.domain.usecase
+package com.wooyj.picsum.domain.usecase.list
 
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.wooyj.picsum.domain.model.PicSumItemFavModel
-import com.wooyj.picsum.domain.usecase.list.FavoriteVisibleListUseCase
-import com.wooyj.picsum.domain.usecase.list.PicSumListPagingUseCase
+import com.wooyj.picsum.domain.usecase.local.favorite.FavoriteVisibleListUseCase
 import dagger.Reusable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow

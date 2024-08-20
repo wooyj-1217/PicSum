@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.wooyj.picsum.ui.common.ImageWithFavorite
 import com.wooyj.picsum.ui.common.ImageWithFavoriteUIState
+import com.wooyj.picsum.ui.model.ItemId
 import com.wooyj.picsum.ui.screen.detail.model.DetailTypeUI
-import com.wooyj.picsum.ui.screen.detail.model.beforeButtonVisible
 import com.wooyj.picsum.ui.screen.detail.model.nextButtonVisible
+import com.wooyj.picsum.ui.screen.detail.model.prevButtonVisible
 
 @Composable
 fun DetailUI(
@@ -34,11 +35,16 @@ fun DetailUI(
             modifier = Modifier.fillMaxWidth(),
         ) {
             // 이전 버튼
-            if (uiState.beforeButtonVisible()) {
+            if (uiState.prevButtonVisible()) {
                 Button(
                     modifier = Modifier.align(Alignment.TopStart),
                     onClick = {
-                        clickBefore(uiState.beforeId!!)
+                        clickBefore(
+                            uiState.imageWithFavoriteUIState.itemId
+                                .prev()
+                                ?.getId()
+                                .toString(),
+                        )
                     },
                 ) {
                     Text(text = "이전")
@@ -49,7 +55,12 @@ fun DetailUI(
                 Button(
                     modifier = Modifier.align(Alignment.TopEnd),
                     onClick = {
-                        clickNext(uiState.nextId!!)
+                        clickNext(
+                            uiState.imageWithFavoriteUIState.itemId
+                                .next()
+                                ?.getId()
+                                .toString(),
+                        )
                     },
                 ) {
                     Text(text = "다음")
@@ -65,12 +76,10 @@ fun PreviewDetailUI() {
     val uiState =
         DetailTypeUI(
             ImageWithFavoriteUIState(
-                photoId = 3.toString(),
+                itemId = ItemId("3".toInt()),
                 url = "https://picsum.photos/id/3/300/300",
                 favorite = false,
             ),
-            beforeId = "2",
-            nextId = "4",
         )
     DetailUI(
         uiState = uiState,

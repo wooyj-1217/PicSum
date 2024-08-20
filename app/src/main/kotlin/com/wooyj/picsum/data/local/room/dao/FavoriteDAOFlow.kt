@@ -1,5 +1,6 @@
 package com.wooyj.picsum.data.local.room.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import com.wooyj.picsum.data.local.room.entity.FavoriteEntity
@@ -12,4 +13,7 @@ interface FavoriteDAOFlow {
 
     @Query("SELECT * FROM favorite WHERE visible = 1")
     fun getVisibleFavoriteList(): Flow<List<FavoriteEntity>>
+
+    @Query("SELECT * FROM favorite WHERE visible = 1")
+    fun getVisibleFavoriteListPaging(): PagingSource<Int, FavoriteEntity>
 }

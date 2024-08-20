@@ -1,11 +1,11 @@
-package com.wooyj.picsum.domain.usecase.detail
+package com.wooyj.picsum.domain.usecase.local.picsum
 
 import com.wooyj.picsum.domain.repository.local.LocalPicSumRepository
 import dagger.Reusable
 import javax.inject.Inject
 
 @Reusable
-class PicSumListUseCase
+class LocalPicSumListUseCase
     @Inject
     constructor(
         private val repo: LocalPicSumRepository,

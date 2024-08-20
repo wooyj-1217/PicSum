@@ -1,4 +1,4 @@
-package com.wooyj.picsum.domain.usecase.favorite
+package com.wooyj.picsum.domain.usecase.local.favorite
 
 import com.wooyj.picsum.data.local.room.entity.FavoriteEntity
 import dagger.Reusable
@@ -7,20 +7,22 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @Reusable
-class ToggleFavoriteUseCase
+class UpdateVisibleStateUseCase
     @Inject
     constructor(
-        private val isFavoriteItemUseCase: IsFavoriteItemUseCase,
+        private val getFavoriteUseCase: GetFavoriteUseCase,
         private val addFavoriteUseCase: AddFavoriteUseCase,
-        private val removeFavoriteUseCase: RemoveFavoriteUseCase,
+        private val updateFavoriteUseCase: UpdateFavoriteUseCase,
     ) {
         operator fun invoke(id: String): Flow<String> =
             flow {
-                val isFavorite = isFavoriteItemUseCase(id)
-                if (!isFavorite) {
+                val item = getFavoriteUseCase(id)
+                if (item == null) {
+                    // 없을 경우
                     addFavoriteUseCase(FavoriteEntity(id = id))
                 } else {
-                    removeFavoriteUseCase(id)
+                    // 있을 경우
+                    updateFavoriteUseCase(item.copy(visible = !item.visible))
                 }
             }
     }

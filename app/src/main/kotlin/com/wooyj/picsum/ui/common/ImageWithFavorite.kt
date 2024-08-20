@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.wooyj.picsum.ui.model.ItemId
 
 @Composable
 fun ImageWithFavorite(
@@ -41,7 +42,7 @@ fun ImageWithFavorite(
                     .align(
                         alignment = Alignment.TopEnd,
                     ).clickable {
-                        clickFavorite(uiState.photoId)
+                        clickFavorite(uiState.itemId.getId().toString())
                     },
             imageVector = uiState.getIcon(),
             contentDescription = "",
@@ -55,7 +56,7 @@ fun PreviewImageWithFavorite() {
     ImageWithFavorite(
         uiState =
             ImageWithFavoriteUIState(
-                photoId = "1",
+                itemId = ItemId("1".toInt()),
                 url = "https://picsum.photos/200/300",
                 favorite = false,
             ),

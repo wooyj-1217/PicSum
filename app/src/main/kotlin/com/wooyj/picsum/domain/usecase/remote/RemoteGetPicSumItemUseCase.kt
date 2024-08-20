@@ -1,4 +1,4 @@
-package com.wooyj.picsum.domain.usecase.detail
+package com.wooyj.picsum.domain.usecase.remote
 
 import com.wooyj.picsum.domain.repository.RemotePicSumRepository
 import dagger.Reusable
@@ -8,7 +8,7 @@ import javax.inject.Inject
  *  Remote에서 Item을 가져오는 UseCase
  */
 @Reusable
-class GetPicSumItemUseCase
+class RemoteGetPicSumItemUseCase
     @Inject
     constructor(
         private val repository: RemotePicSumRepository,

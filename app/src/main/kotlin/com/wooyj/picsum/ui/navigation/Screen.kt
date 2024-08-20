@@ -9,7 +9,11 @@ sealed class Screen(
         fun setPhotoId(photoId: String): String = "detail/$photoId"
     }
 
-    data object Favorite : Screen(route = "favorite")
+    data object FavoriteList : Screen(route = "favorite/list")
+
+    data object FavoriteDetail : Screen(route = "favorite/detail/{photoId}") {
+        fun setPhotoId(photoId: String): String = "favorite/detail/$photoId"
+    }
 
     data object Setting : Screen(route = "setting")
 }

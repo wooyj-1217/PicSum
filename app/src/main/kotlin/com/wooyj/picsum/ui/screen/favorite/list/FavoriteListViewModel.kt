@@ -1,15 +1,17 @@
-package com.wooyj.picsum.ui.screen.list
+package com.wooyj.picsum.ui.screen.favorite.list
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.map
-import com.wooyj.picsum.domain.usecase.list.PicSumFavListUseCase
+import com.wooyj.picsum.domain.usecase.favorite.FavoriteListUseCase
 import com.wooyj.picsum.domain.usecase.local.favorite.ToggleFavoriteUseCase
 import com.wooyj.picsum.ui.base.BaseViewModel
+import com.wooyj.picsum.ui.screen.list.ListEffect
+import com.wooyj.picsum.ui.screen.list.ListEvent
+import com.wooyj.picsum.ui.screen.list.ListUIState
 import com.wooyj.picsum.ui.screen.list.model.toListTypeUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -18,10 +20,10 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel
+class FavoriteListViewModel
     @Inject
     constructor(
-        private val picSumFavListUseCase: PicSumFavListUseCase,
+        private val favoriteListUseCase: FavoriteListUseCase,
         private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     ) : BaseViewModel<ListEvent, ListEffect>() {
         // UI State
@@ -35,16 +37,13 @@ class ListViewModel
         private fun fetchList() {
             viewModelScope.launch {
                 val flow =
-                    picSumFavListUseCase(
-                        limit = 30,
-                        scope = viewModelScope,
-                    ).map { pagingData ->
-                        pagingData.map { item ->
-                            item.toListTypeUI()
+                    favoriteListUseCase()
+                        .map { pagingData ->
+                            pagingData.map {
+                                it.toListTypeUI()
+                            }
                         }
-                    }.catch {
-                        _uiState.value = ListUIState.Error
-                    }
+
                 _uiState.value = ListUIState.Success(flow)
             }
         }
@@ -70,22 +69,3 @@ class ListViewModel
             }
         }
     }
-
-// Flow
-
-// 1. 좋아요 기능 토글
-// param : Item
-// 1 - 1 : 좋아요 == true
-// Return : 좋아요 = false
-// UseCase -> Item.favorite -> removeFavorite(item / item.id)
-// 1 - 2 : 좋아요 == false
-// return : 좋아요 = true
-// UseCase -> Item.favorite -> addFavorite(item / item.id)
-
-// param : Item.id
-// 1 - 1 : 좋아요 == true
-// Return : 좋아요 = false
-// UseCase -> getItem(id) -> Item.favorite -> removeFavorite(item.id)
-// 1 - 2 : 좋아요 == false
-// return : 좋아요 = true
-// UseCase -> getItem(id) -> Item.favorite -> addFavorite(item)

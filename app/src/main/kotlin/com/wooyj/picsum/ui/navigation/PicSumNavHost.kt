@@ -12,6 +12,8 @@ import androidx.navigation.navArgument
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.ktx.performance
 import com.wooyj.picsum.ui.screen.detail.DetailScreen
+import com.wooyj.picsum.ui.screen.favorite.detail.FavoriteDetailScreen
+import com.wooyj.picsum.ui.screen.favorite.list.FavoriteListScreen
 import com.wooyj.picsum.ui.screen.list.ListScreen
 import com.wooyj.picsum.ui.screen.setting.SettingScreen
 import timber.log.Timber
@@ -43,8 +45,21 @@ fun PicSumNavHost(
         ) {
             DetailScreen()
         }
-        logComposable(route = Screen.Favorite.route) {
-            DetailScreen()
+        logComposable(route = Screen.FavoriteList.route) {
+            FavoriteListScreen(
+                onNextNavigation = { id ->
+                    navController.navigate(route = Screen.FavoriteDetail.setPhotoId(id))
+                },
+            )
+        }
+        logComposable(
+            route = Screen.FavoriteDetail.route,
+            arguments =
+                listOf(
+                    navArgument("photoId") { type = NavType.StringType },
+                ),
+        ) {
+            FavoriteDetailScreen()
         }
         logComposable(route = Screen.Setting.route) {
             SettingScreen()
