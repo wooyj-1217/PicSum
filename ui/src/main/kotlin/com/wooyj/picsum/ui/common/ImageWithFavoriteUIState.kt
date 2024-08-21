@@ -2,11 +2,11 @@ package com.wooyj.picsum.ui.common
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import com.wooyj.picsum.ui.model.ItemId
 
 data class ImageWithFavoriteUIState(
-    val photoId: String,
+    val itemId: ItemId,
     val url: String,
     val favorite: Boolean = false,
 )

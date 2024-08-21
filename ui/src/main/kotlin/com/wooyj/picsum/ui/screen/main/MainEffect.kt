@@ -13,7 +13,7 @@ sealed interface MainEffect : BaseEffect {
 
     data object NavigateToFavorite : MainEffect {
         override val screen: Screen
-            get() = Screen.Favorite
+            get() = Screen.FavoriteList
     }
 
     data object NavigateToSetting : MainEffect {

@@ -6,6 +6,7 @@ import com.wooyj.picsum.data.local.room.dao.FavoriteDAO
 import com.wooyj.picsum.data.local.room.dao.FavoriteDAOFlow
 import com.wooyj.picsum.data.local.room.dao.PicSumDAO
 import com.wooyj.picsum.data.local.room.dao.PicSumDAOFlow
+import com.wooyj.picsum.data.local.room.dao.PicSumWithFavDAOFlow
 import com.wooyj.picsum.data.local.room.entity.FavoriteEntity
 import com.wooyj.picsum.data.local.room.entity.PicSumEntity
 
@@ -20,4 +21,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteDAO
 
     abstract fun favoriteDAOFlow(): FavoriteDAOFlow
+
+    abstract fun picSumWithFavoriteDaoFlow(): PicSumWithFavDAOFlow
 }

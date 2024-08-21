@@ -11,7 +11,7 @@ import com.wooyj.picsum.data.local.room.entity.PicSumEntity
 @Dao
 interface PicSumDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(data: PicSumEntity)
+    suspend fun insert(data: PicSumEntity): Long?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(list: List<PicSumEntity>)
@@ -46,6 +46,12 @@ interface PicSumDAO {
     @Query("SELECT Count(*) FROM pic_sum WHERE id = :id")
     suspend fun getFavoriteCount(id: Int): Int
 
-    @Query("SELECT id FROM pic_sum WHERE Id < 50 ORDER BY Id DESC LIMIT 1")
-    suspend fun getLastId(): Int?
+    @Query("SELECT * FROM pic_sum WHERE id = :id")
+    suspend fun getPicSumItem(id: String): PicSumEntity?
+
+    @Query("SELECT id FROM pic_sum WHERE _id < (SELECT _id FROM pic_sum WHERE id = :currentId) ORDER BY _id DESC LIMIT 1")
+    suspend fun getPrevId(currentId: String): String?
+
+    @Query("SELECT id FROM pic_sum WHERE _id > (SELECT _id FROM pic_sum WHERE id = :currentId) ORDER BY _id ASC LIMIT 1")
+    suspend fun getNextId(currentId: String): String?
 }

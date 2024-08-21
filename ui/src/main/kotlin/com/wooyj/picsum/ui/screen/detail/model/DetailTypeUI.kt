@@ -2,10 +2,11 @@ package com.wooyj.picsum.ui.screen.detail.model
 
 import com.wooyj.picsum.domain.model.ItemWithIdModel
 import com.wooyj.picsum.ui.common.ImageWithFavoriteUIState
+import com.wooyj.picsum.ui.model.ItemId
 
 data class DetailTypeUI(
     val imageWithFavoriteUIState: ImageWithFavoriteUIState,
-    val beforeId: String?,
+    val prevId: String?,
     val nextId: String?,
 )
 
@@ -13,15 +14,36 @@ fun ItemWithIdModel.toDetailTypeUI() =
     DetailTypeUI(
         imageWithFavoriteUIState =
             ImageWithFavoriteUIState(
-                photoId = item!!.id,
+                itemId = ItemId(item!!.id.toInt()),
                 url = item.downloadUrl,
                 favorite = item.favorite,
             ),
-        beforeId = beforeId,
+        prevId =
+            if (ItemId(item.id.toInt()).prev()?.getId() == null) {
+                null
+            } else {
+                ItemId(item.id.toInt()).prev()?.getId().toString()
+            },
+        nextId =
+            if (ItemId(item.id.toInt()).next()?.getId() == null) {
+                null
+            } else {
+                ItemId(item.id.toInt()).next()?.getId().toString()
+            },
+    )
+
+fun ItemWithIdModel.toFavoriteDetailTypeUI() =
+    DetailTypeUI(
+        imageWithFavoriteUIState =
+            ImageWithFavoriteUIState(
+                itemId = ItemId(item!!.id.toInt()),
+                url = item.downloadUrl,
+                favorite = item.favorite,
+            ),
+        prevId = prevId,
         nextId = nextId,
     )
 
-// max : 1084, min :0
-fun DetailTypeUI.beforeButtonVisible() = beforeId != null
+fun DetailTypeUI.prevButtonVisible() = prevId != null
 
 fun DetailTypeUI.nextButtonVisible() = nextId != null

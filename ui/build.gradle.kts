@@ -1,24 +1,22 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.application)
+    id("com.android.library")
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kapt)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.serialization)
 }
 
 android {
-    namespace = "com.wooyj.picsum"
+    namespace = "com.wooyj.picsum.ui"
     compileSdk =
         libs.versions.compileSdk
             .get()
             .toInt()
 
     defaultConfig {
-        applicationId = "com.wooyj.picsum"
         minSdk =
             libs.versions.minSdk
                 .get()
@@ -27,15 +25,10 @@ android {
             libs.versions.targetSdk
                 .get()
                 .toInt()
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
-        }
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
 
@@ -63,6 +56,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = false
     }
     packaging {
         resources {
@@ -72,6 +66,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)
 
@@ -82,37 +78,11 @@ dependencies {
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.android.compiler)
 
-    // DataStore
-    implementation(libs.bundles.datastore)
-
-    // Room
-    implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.room.compiler)
-    // To use Kotlin Symbol Processing (KSP)
-    ksp(libs.androidx.room.room.compiler)
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation(libs.androidx.room)
-    implementation(libs.androidx.room.paging)
-
     // Paging
     implementation(libs.bundles.paging)
 
-    // StartUp
-    implementation(libs.androidx.startup.runtime)
-
     // Coroutine
     implementation(libs.kotlinx.coroutines.android)
-
-    // Firebase
-    implementation(platform(libs.firebase))
-    implementation(libs.bundles.firebase)
-
-    // Network(OkHttp, Retrofit)
-    implementation(platform(libs.okhttp.bom))
-    implementation(libs.bundles.network)
-
-    // Kotlin Serialization
-    implementation(libs.kotlinx.serialization.json)
 
     // Timber
     implementation(libs.timber)

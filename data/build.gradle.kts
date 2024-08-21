@@ -1,24 +1,22 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.application)
+    id("com.android.library")
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kapt)
-    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
 }
 
 android {
-    namespace = "com.wooyj.picsum"
+    namespace = "com.wooyj.picsum.data"
     compileSdk =
         libs.versions.compileSdk
             .get()
             .toInt()
 
     defaultConfig {
-        applicationId = "com.wooyj.picsum"
         minSdk =
             libs.versions.minSdk
                 .get()
@@ -27,13 +25,9 @@ android {
             libs.versions.targetSdk
                 .get()
                 .toInt()
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
@@ -52,18 +46,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    composeCompiler {
-        enableStrongSkippingMode = true
-        includeSourceInformation = true
-    }
+
     kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
     buildFeatures {
-        compose = true
+        buildConfig = false
+        resValues = false
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -72,12 +66,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.lifecycle.runtime)
-
-    // Compose
-    implementation(libs.bundles.androidx.compose)
-
+    implementation(project(":domain"))
     // Hilt
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.android.compiler)
@@ -87,7 +76,6 @@ dependencies {
 
     // Room
     implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.room.compiler)
     // To use Kotlin Symbol Processing (KSP)
     ksp(libs.androidx.room.room.compiler)
     // optional - Kotlin Extensions and Coroutines support for Room
@@ -96,9 +84,6 @@ dependencies {
 
     // Paging
     implementation(libs.bundles.paging)
-
-    // StartUp
-    implementation(libs.androidx.startup.runtime)
 
     // Coroutine
     implementation(libs.kotlinx.coroutines.android)
@@ -116,9 +101,6 @@ dependencies {
 
     // Timber
     implementation(libs.timber)
-
-    // Coil
-    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

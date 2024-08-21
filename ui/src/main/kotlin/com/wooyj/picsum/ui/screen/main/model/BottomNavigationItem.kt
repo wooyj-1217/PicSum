@@ -20,7 +20,7 @@ enum class BottomNavigationItem(
     Favorite(
         title = "좋아요",
         icon = Icons.Default.Favorite,
-        route = Screen.Favorite.route,
+        route = Screen.FavoriteList.route,
     ),
     Setting(
         title = "설정",

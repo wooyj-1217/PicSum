@@ -1,22 +1,26 @@
 package com.wooyj.picsum.domain.repository.local
 
-import com.wooyj.picsum.data.local.room.entity.FavoriteEntity
+import com.wooyj.picsum.domain.model.Favorite
 import kotlinx.coroutines.flow.Flow
 
 interface LocalFavoriteRepository {
-    suspend fun getFavoriteItem(id: String): FavoriteEntity?
+    suspend fun getFavoriteItem(id: String): Favorite?
 
     suspend fun added(id: String): Boolean
 
-    suspend fun addFavorite(entity: FavoriteEntity): Long
+    suspend fun addFavorite(entity: Favorite): Long
 
     suspend fun removeFavorite(id: String): Int
 
-    suspend fun updateFavorite(entity: FavoriteEntity): Int
+    suspend fun updateFavorite(entity: Favorite): Int
 
-    suspend fun getFavoriteList(): Flow<List<FavoriteEntity>>
+    fun getFavoriteList(): Flow<List<Favorite>>
 
-    suspend fun getVisibleFavoriteList(): Flow<List<FavoriteEntity>>
+    fun getVisibleFavoriteList(): Flow<List<Favorite>>
 
     suspend fun removeFavoriteNotVisible(): Int
+
+    suspend fun getPrevId(currentId: String): String?
+
+    suspend fun getNextId(currentId: String): String?
 }

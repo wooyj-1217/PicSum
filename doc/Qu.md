@@ -118,18 +118,25 @@ https://drive.google.com/file/d/1zxJV-yLTskYP7efE-lgbpXaZeRv4Itra/view?usp=shari
 # usecase 작성하다가 이 데이터 필요하다 해서 data 폴더로 이동하고 
 # data 작성하고 다시 usecase 연동해서 다시 개발하고 이런식으로 가는데
 # 이것도 설계를 하지 않아서 생기는 과정인가요? 이쪽도 설계를 한다면 어떤 uml을 그려야 하나요?
+> 설계 할때랑 개발 할 때는 좀 다를 수 있다.
 
 # 21. 휴대폰별 하드웨어 이슈는 보통 어떻게 대응하나요..? 테스트 휴대폰은 보통 어떻게 구비하나요?
+> 대응 불가 -> 테스트 휴대폰 구매
+> S23, S22, (Plus, Note) 플립 X, 폴드
 
 # 22. Rx, Coroutine.
 # 예전에는 Rx를 쓰는게 필수였던거같은데 어느순간 대부분 Coroutine으로 바뀌었잖아요.
 # 그럼에도 불구하고 Rx를 쓰는 회사들은 어떤 이점이 있어서 쓰는걸까요?
 # 그리고 Coroutine에 대해서 조금 더 깊이있게 설명한거 보니까
 # 비선점형 멀티태스킹에 서브루틴??? 뭐 이런게 나오긴 하는데 잘 모르겠습니다..^_ㅠ...
+> 간단해요 -> Rx는 라이브러리고, Coroutine은 언어 기능입니다.
 
 # 23. compileSdkVersion, targetSdkVersion은 보통 일치시키는걸로 아는데 실무에서 버전을 다르게 쓰는 경우도 있나요?
+> 80~90% 일치, 10~20% 다름
 
-# 24. 현재 회사 앱 navigation xml의 모든 화면에 전부 다 global action으로만 되어있거든요.
+# 24. 현재 회사 앱 navigation xml의 모든 화면에 전부 다 global action으로만 되어있거든요. -> Toss
 # global action으로 설정했었을 때 이점이 있어서 이런건지... global action으로 설정하는 이유는 뭘까요?
 # 리팩토링 해야될거같은데.. 딥링크도 무섭고... 푸시알림에 따라서 화면이동하는것도 있어서 쫄리는데...
 # 그대로 둬야될까요...?
+> Architecture
+> SDD -> Server Driven Design

@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.wooyj.picsum.ui.screen.detail.model.DetailTypeUI
 import com.wooyj.picsum.ui.screen.detail.state.DetailUI
 import timber.log.Timber
 
@@ -19,30 +20,48 @@ fun DetailScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Timber.d("DetailScreen: $uiState")
+    when (uiState) {
+        is DetailUIState.Success -> {
+            DetailScreen(
+                modifier = modifier,
+                ui = (uiState as DetailUIState.Success).ui,
+                onEvent = viewModel::onEvent,
+            )
+        }
+        else -> Unit
+    }
+}
 
+@Composable
+private fun DetailScreen(
+    modifier: Modifier = Modifier,
+    ui: DetailTypeUI,
+    onEvent: (DetailEvent) -> Unit,
+) {
     Scaffold(
         content = { paddingValues ->
-            when (uiState) {
-                is DetailUIState.Success -> {
-                    Timber.d("DetailUIState.Success")
-                    DetailUI(
-                        modifier = modifier.padding(paddingValues),
-                        uiState = (uiState as DetailUIState.Success).ui,
-                        clickBefore = { id ->
-                            viewModel.onEvent(
-                                DetailEvent.OnBeforeClick(id),
-                            )
-                        },
-                        clickNext = { id ->
-                            viewModel.onEvent(
-                                DetailEvent.OnNextClick(id),
-                            )
-                        },
-                        clickFavorite = { photoId -> viewModel.onEvent(DetailEvent.OnFavoriteClick(photoId)) },
+            Timber.d("DetailUIState.Success")
+            DetailUI(
+                modifier = modifier.padding(paddingValues),
+                uiState = ui,
+                clickBefore = { id ->
+                    onEvent(
+                        DetailEvent.OnBeforeClick(id),
                     )
-                }
-                else -> Unit
-            }
+                },
+                clickNext = { id ->
+                    onEvent(
+                        DetailEvent.OnNextClick(id),
+                    )
+                },
+                clickFavorite = { photoId ->
+                    onEvent(
+                        DetailEvent.OnFavoriteClick(
+                            photoId,
+                        ),
+                    )
+                },
+            )
         },
     )
 }

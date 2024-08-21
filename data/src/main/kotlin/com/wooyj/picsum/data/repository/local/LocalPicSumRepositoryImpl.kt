@@ -14,6 +14,8 @@ class LocalPicSumRepositoryImpl
     ) : LocalPicSumRepository {
         override suspend fun insert(list: List<PicSumEntity>) = dao.insert(list)
 
+        override suspend fun insert(entity: PicSumEntity): Long? = dao.insert(entity)
+
         override suspend fun deleteAll() = dao.deleteAll()
 
         override suspend fun getPicSumListPaging(
@@ -25,4 +27,10 @@ class LocalPicSumRepositoryImpl
         )
 
         override suspend fun getPicSumList() = dao.getPicSumList()
+
+        override suspend fun getPicSumItem(id: String): PicSumEntity? = dao.getPicSumItem(id)
+
+        override suspend fun getPrevId(currentId: String): String? = dao.getPrevId(currentId)
+
+        override suspend fun getNextId(currentId: String): String? = dao.getNextId(currentId)
     }

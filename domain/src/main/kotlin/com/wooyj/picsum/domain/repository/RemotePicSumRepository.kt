@@ -9,7 +9,7 @@ interface RemotePicSumRepository {
         limit: Int,
     ): List<PicSumItemDTO>
 
-    suspend fun getPicSumItem(id: String): PicSumItemDTO
+    suspend fun getPicSumItem(id: String): PicSumItemDTO?
 
     fun getPicSumPagingSource(): PagingSource<Int, PicSumItemDTO>
 }

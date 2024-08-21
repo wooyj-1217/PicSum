@@ -11,6 +11,9 @@ value class ItemId(
         if (temp < 0) {
             return null
         }
+        if (temp > 1084) {
+            return null
+        }
         return ItemId(temp)
     }
 
@@ -22,6 +25,7 @@ value class ItemId(
         return ItemId(temp)
     }
 }
+// max : 1084, min :0
 
 @JvmInline
 value class Time(
@@ -48,14 +52,13 @@ value class Time(
     }
 }
 
-@JvmInline
-value class Money(
-    private val value: Long,
-) {
-
-    fun krw() = value * 환율("krw")
-
-    companion object {
-        fun fromDollar(dollar: Int): Money = Money(dollar.toLong())
-    }
-}
+// @JvmInline
+// value class Money(
+//     private val value: Long,
+// ) {
+//     fun krw() = value * 환율("krw")
+//
+//     companion object {
+//         fun fromDollar(dollar: Int): Money = Money(dollar.toLong())
+//     }
+// }

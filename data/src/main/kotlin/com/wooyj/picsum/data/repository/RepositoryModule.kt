@@ -2,10 +2,12 @@ package com.wooyj.picsum.data.repository
 
 import com.wooyj.picsum.data.repository.local.LocalFavoriteRepositoryImpl
 import com.wooyj.picsum.data.repository.local.LocalPicSumRepositoryImpl
+import com.wooyj.picsum.data.repository.local.LocalPicSumWithFavRepositoryImpl
 import com.wooyj.picsum.data.repository.paging.PagingPicSumRepositoryImpl
 import com.wooyj.picsum.domain.repository.RemotePicSumRepository
 import com.wooyj.picsum.domain.repository.local.LocalFavoriteRepository
 import com.wooyj.picsum.domain.repository.local.LocalPicSumRepository
+import com.wooyj.picsum.domain.repository.local.LocalPicSumWithFavRepository
 import com.wooyj.picsum.domain.repository.paging.PagingPicSumRepository
 import dagger.Binds
 import dagger.Module
@@ -26,4 +28,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindPagingPicSumRepository(impl: PagingPicSumRepositoryImpl): PagingPicSumRepository
+
+    @Binds
+    abstract fun bindLocalPicSumWithFavRepository(impl: LocalPicSumWithFavRepositoryImpl): LocalPicSumWithFavRepository
 }
