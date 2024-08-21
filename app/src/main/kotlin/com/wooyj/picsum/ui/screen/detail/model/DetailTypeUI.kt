@@ -6,6 +6,8 @@ import com.wooyj.picsum.ui.model.ItemId
 
 data class DetailTypeUI(
     val imageWithFavoriteUIState: ImageWithFavoriteUIState,
+    val prevId: String?,
+    val nextId: String?,
 )
 
 fun ItemWithIdModel.toDetailTypeUI() =
@@ -16,8 +18,32 @@ fun ItemWithIdModel.toDetailTypeUI() =
                 url = item.downloadUrl,
                 favorite = item.favorite,
             ),
+        prevId =
+            if (ItemId(item.id.toInt()).prev()?.getId() == null) {
+                null
+            } else {
+                ItemId(item.id.toInt()).prev()?.getId().toString()
+            },
+        nextId =
+            if (ItemId(item.id.toInt()).next()?.getId() == null) {
+                null
+            } else {
+                ItemId(item.id.toInt()).next()?.getId().toString()
+            },
     )
 
-fun DetailTypeUI.prevButtonVisible() = imageWithFavoriteUIState.itemId.prev() != null
+fun ItemWithIdModel.toFavoriteDetailTypeUI() =
+    DetailTypeUI(
+        imageWithFavoriteUIState =
+            ImageWithFavoriteUIState(
+                itemId = ItemId(item!!.id.toInt()),
+                url = item.downloadUrl,
+                favorite = item.favorite,
+            ),
+        prevId = prevId,
+        nextId = nextId,
+    )
 
-fun DetailTypeUI.nextButtonVisible() = imageWithFavoriteUIState.itemId.next() != null
+fun DetailTypeUI.prevButtonVisible() = prevId != null
+
+fun DetailTypeUI.nextButtonVisible() = nextId != null

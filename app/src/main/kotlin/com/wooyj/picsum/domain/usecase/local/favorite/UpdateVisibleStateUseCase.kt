@@ -20,9 +20,11 @@ class UpdateVisibleStateUseCase
                 if (item == null) {
                     // 없을 경우
                     addFavoriteUseCase(FavoriteEntity(id = id))
+                    emit("add : $id")
                 } else {
                     // 있을 경우
                     updateFavoriteUseCase(item.copy(visible = !item.visible))
+                    emit("update : visible = ${!item.visible}")
                 }
             }
     }

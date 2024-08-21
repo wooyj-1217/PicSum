@@ -2,7 +2,7 @@ package com.wooyj.picsum.domain.usecase.detail
 
 import com.wooyj.picsum.domain.model.PicSumItemFavModel
 import com.wooyj.picsum.domain.model.toPicSumItemFavModel
-import com.wooyj.picsum.domain.usecase.local.favorite.IsFavoriteItemUseCase
+import com.wooyj.picsum.domain.usecase.local.favorite.GetFavoriteUseCase
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalGetPicSumItemUseCase
 import com.wooyj.picsum.domain.usecase.remote.RemoteGetItemAndSaveUseCase
 import dagger.Reusable
@@ -14,11 +14,17 @@ class GetCurrentItemUseCase
     constructor(
         private val localItemUseCase: LocalGetPicSumItemUseCase,
         private val remoteGetItemAndSaveUseCase: RemoteGetItemAndSaveUseCase,
-        private val isFavoriteItemUseCase: IsFavoriteItemUseCase,
+        private val getFavoriteUseCase: GetFavoriteUseCase,
     ) {
         suspend operator fun invoke(currentId: String): PicSumItemFavModel {
-            val isFavorite = isFavoriteItemUseCase(currentId)
+            val favItem = getFavoriteUseCase(currentId)
             val localModel = localItemUseCase(currentId)
+            val isFavorite =
+                if (favItem == null) {
+                    false
+                } else {
+                    favItem.visible
+                }
             if (localModel != null) {
                 return localModel.toPicSumItemFavModel(isFavorite)
             } else {

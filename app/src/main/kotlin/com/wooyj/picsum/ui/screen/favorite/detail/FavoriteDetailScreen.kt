@@ -1,4 +1,4 @@
-package com.wooyj.picsum.ui.screen.detail
+package com.wooyj.picsum.ui.screen.favorite.detail
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -8,21 +8,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.wooyj.picsum.ui.screen.detail.DetailEvent
+import com.wooyj.picsum.ui.screen.detail.DetailUIState
 import com.wooyj.picsum.ui.screen.detail.model.DetailTypeUI
 import com.wooyj.picsum.ui.screen.detail.state.DetailUI
 import timber.log.Timber
 
 @Composable
-fun DetailScreen(
+fun FavoriteDetailScreen(
     modifier: Modifier = Modifier,
-    viewModel: DetailViewModel = hiltViewModel(),
+    viewModel: FavoriteDetailViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Timber.d("DetailScreen: $uiState")
     when (uiState) {
         is DetailUIState.Success -> {
-            DetailScreen(
+            FavoriteDetailScreen(
                 modifier = modifier,
                 ui = (uiState as DetailUIState.Success).ui,
                 onEvent = viewModel::onEvent,
@@ -33,7 +35,7 @@ fun DetailScreen(
 }
 
 @Composable
-private fun DetailScreen(
+private fun FavoriteDetailScreen(
     modifier: Modifier = Modifier,
     ui: DetailTypeUI,
     onEvent: (DetailEvent) -> Unit,
@@ -68,6 +70,6 @@ private fun DetailScreen(
 
 @Preview
 @Composable
-fun PreviewDetailScreen() {
-    DetailScreen()
+fun PreviewFavoriteDetailScreen() {
+    FavoriteDetailScreen()
 }

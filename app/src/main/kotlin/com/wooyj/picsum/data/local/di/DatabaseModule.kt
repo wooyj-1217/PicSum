@@ -40,4 +40,8 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideFavoriteDaoFlow(database: AppDatabase) = database.favoriteDAOFlow()
+
+    @Provides
+    @Singleton
+    fun providePicSumWithFavoriteDaoFlow(database: AppDatabase) = database.picSumWithFavoriteDaoFlow()
 }

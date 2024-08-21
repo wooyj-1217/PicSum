@@ -2,56 +2,37 @@ package com.wooyj.picsum.domain.usecase.favorite
 
 import androidx.paging.PagingData
 import com.wooyj.picsum.domain.model.PicSumItemFavModel
-import com.wooyj.picsum.domain.usecase.local.favorite.FavoriteVisibleListUseCase
-import com.wooyj.picsum.domain.usecase.local.picsum.LocalPicSumListUseCase
+import com.wooyj.picsum.domain.usecase.local.picsumfav.LocalPicSumFavListUseCase
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collectLatest
-import timber.log.Timber
 import javax.inject.Inject
 
 @Reusable
 class FavoriteListUseCase
     @Inject
     constructor(
-        private val favoriteListUseCase: FavoriteVisibleListUseCase,
-        private val picSumListUseCase: LocalPicSumListUseCase,
+        private val picSumWithFavListUseCase: LocalPicSumFavListUseCase,
     ) {
         suspend operator fun invoke(): Flow<PagingData<PicSumItemFavModel>> =
             channelFlow {
-                val favList = favoriteListUseCase() // Flow<List<FavoriteEntity>>
-                val picSumList = picSumListUseCase() // List<PicSumEntity>
-
-                favList.collectLatest { favList ->
-                    val favIdList = favList.map { it.id }
-                    Timber.d("favIdList: $favIdList")
-
-                    val filteredPicSumList =
-                        picSumList
-                            .filter { picSumEntity ->
-                                favIdList.contains(picSumEntity.id)
-                            }.sortedBy { picSumEntity ->
-                                favIdList.indexOf(picSumEntity.id)
-                            }
-
-                    Timber.d("filteredPicSumList: $filteredPicSumList")
-
+                val picSumWithFavListFlow = picSumWithFavListUseCase()
+                picSumWithFavListFlow.collectLatest { picSumWithFavList ->
                     val pagingData =
                         PagingData.from(
-                            filteredPicSumList.map { picSumEntity ->
+                            picSumWithFavList.map { entity ->
                                 PicSumItemFavModel(
-                                    id = picSumEntity.id,
-                                    author = picSumEntity.author,
-                                    width = picSumEntity.width,
-                                    height = picSumEntity.height,
-                                    url = picSumEntity.url,
-                                    downloadUrl = picSumEntity.downloadUrl,
+                                    id = entity.picSumEntity.id,
+                                    author = entity.picSumEntity.author,
+                                    width = entity.picSumEntity.width,
+                                    height = entity.picSumEntity.height,
+                                    url = entity.picSumEntity.url,
+                                    downloadUrl = entity.picSumEntity.downloadUrl,
                                     favorite = true,
                                 )
                             },
                         )
-
                     send(pagingData)
                 }
             }

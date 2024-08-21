@@ -28,4 +28,8 @@ class LocalFavoriteRepositoryImpl
         override suspend fun getVisibleFavoriteList(): Flow<List<FavoriteEntity>> = flowDao.getVisibleFavoriteList()
 
         override suspend fun removeFavoriteNotVisible(): Int = dao.deleteNotVisible()
+
+        override suspend fun getPrevId(currentId: String): String? = dao.getPrevId(currentId)
+
+        override suspend fun getNextId(currentId: String): String? = dao.getNextId(currentId)
     }

@@ -45,4 +45,24 @@ interface FavoriteDAO {
 
     @Query("SELECT * FROM favorite WHERE id = :id")
     suspend fun getFavoriteItem(id: String): FavoriteEntity
+
+    @Query(
+        """
+        SELECT id FROM favorite 
+        WHERE _id < (SELECT _id FROM favorite WHERE id = :currentId) 
+        ORDER BY _id DESC 
+        LIMIT 1
+    """,
+    )
+    suspend fun getPrevId(currentId: String): String?
+
+    @Query(
+        """
+        SELECT id FROM favorite 
+        WHERE _id > (SELECT _id FROM favorite WHERE id = :currentId) 
+        ORDER BY _id ASC 
+        LIMIT 1
+    """,
+    )
+    suspend fun getNextId(currentId: String): String?
 }

@@ -40,10 +40,7 @@ fun DetailUI(
                     modifier = Modifier.align(Alignment.TopStart),
                     onClick = {
                         clickBefore(
-                            uiState.imageWithFavoriteUIState.itemId
-                                .prev()
-                                ?.getId()
-                                .toString(),
+                            uiState.prevId.toString(),
                         )
                     },
                 ) {
@@ -56,10 +53,7 @@ fun DetailUI(
                     modifier = Modifier.align(Alignment.TopEnd),
                     onClick = {
                         clickNext(
-                            uiState.imageWithFavoriteUIState.itemId
-                                .next()
-                                ?.getId()
-                                .toString(),
+                            uiState.nextId.toString(),
                         )
                     },
                 ) {
@@ -80,6 +74,8 @@ fun PreviewDetailUI() {
                 url = "https://picsum.photos/id/3/300/300",
                 favorite = false,
             ),
+            prevId = "2",
+            nextId = "4",
         )
     DetailUI(
         uiState = uiState,

@@ -19,4 +19,8 @@ interface LocalFavoriteRepository {
     suspend fun getVisibleFavoriteList(): Flow<List<FavoriteEntity>>
 
     suspend fun removeFavoriteNotVisible(): Int
+
+    suspend fun getPrevId(currentId: String): String?
+
+    suspend fun getNextId(currentId: String): String?
 }
