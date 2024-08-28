@@ -140,3 +140,36 @@ https://drive.google.com/file/d/1zxJV-yLTskYP7efE-lgbpXaZeRv4Itra/view?usp=shari
 # 그대로 둬야될까요...?
 > Architecture
 > SDD -> Server Driven Design
+> 
+
+-----------
+2024.08.28
+# 25. 네이버 아이디 로그인은 왜 자꾸 key 문제가 생기는건가요? 4.2.6에서 벗어날 수가 없습니다.
+# 네이버 아이디 로그인 SDK가 해결해주길 기다려야되나요..?
+# 그리고 구글 문제와도 엮여있다고 하셨는데 그게 무엇인지 궁금합니다.
+
+# 26. 지금 androidTest 코드를 github action으로 돌리는 스크립트를 작성하고 있는데
+# emulator를 실행시켜야 하잖아요.
+# https://github.com/ReactiveCircus/android-emulator-runner 이걸써서 첨에 했는데 34 버전 테스트 하려고 하니까
+# 실행도 안되고.. 보고된 이슈 항목에도 저랑 같은 이슈인 분 있어서
+# 어제 뒤지다가
+# emulator 실행 cmd로 작성하는 방법 코드 제공해주신 분 덕분에 해결했는데
+# https://medium.com/innovies-club/run-android-emulator-out-of-the-box-with-github-actions-b84cba766e62
+# 작업했던 코드는 doc/emulator에 넣어놨습니다.
+# 26-1) 유지보수성을 위해서는 github action marketplace에 있는 것을 쓰는게 좋을지 아니면 이대로 두는게 좋을지 모르겠습니다.
+# 26-2) 그리고 앱 개발할 때 cmd로 에뮬레이터를 실행시키는 경우는 어떤 경우인지도 궁금합니다.
+
+# 27. 워크플로로 공통 작업을 작성할 수 있다고 하는데
+# 이게 작업을 하다보니까
+# jobs:
+#   A 작업
+#   B 작업
+# 이렇게 되어있으면 A 작업과 B 작업은 독립적이더라구요. 코드 체크아웃도 각각 다 받아줘야되고 설정도 똑같이 또 해줘야되고 말아죠.
+# 27-1) uses를 써도 작업 순서만 정해주는 거지 A작업을 이어받아서 B를 한다던지 그런게 없는거 같은데.. 제대로 파악하고 있는건가요...?
+# 27-2) workflow_call ? workflow_dispatch? 둘다 역할이 비슷한거 같은데.. 무슨 차이인지도 궁금합니다.
+# 자동실행 수동실행이라고 하긴하던데... 다른 작업에 갖다쓰는거면 어짜피 그 작업에서 실행시켜야 실행이 될텐데 무슨 차이인지 잘 모르겠습니다.
+
+# 28. 효율적인 디버깅 방법이 있나요?
+# 저는 일단 'Debug App'로 빌드한 다음에 디버그 위치마다 툭툭 찍어가면서 하고 있슴다.
+# 근데 그냥 'Run app' 한 다음에 로그 찍어놓은거 보면서 하는 분들도 있더라구요.
+# 이 방법들 말고 다른 방법이나 조금 더 효율적으로 할 방법이 있는지 궁금합니다.
