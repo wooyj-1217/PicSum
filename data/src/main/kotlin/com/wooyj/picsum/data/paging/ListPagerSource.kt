@@ -2,8 +2,7 @@ package com.wooyj.picsum.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.wooyj.picsum.data.local.room.entity.PicSumEntity
-import com.wooyj.picsum.data.local.room.entity.toListPicSumEntity
+import com.wooyj.picsum.domain.model.PicSum
 import com.wooyj.picsum.domain.repository.RemotePicSumRepository
 import com.wooyj.picsum.domain.repository.local.LocalPicSumRepository
 import timber.log.Timber
@@ -14,14 +13,14 @@ class ListPagerSource
     constructor(
         private val localRepo: LocalPicSumRepository,
         private val remoteRepo: RemotePicSumRepository,
-    ) : PagingSource<Int, PicSumEntity>() {
-        override fun getRefreshKey(state: PagingState<Int, PicSumEntity>): Int? =
+    ) : PagingSource<Int, PicSum>() {
+        override fun getRefreshKey(state: PagingState<Int, PicSum>): Int? =
             state.anchorPosition?.let { anchorPosition ->
                 val anchorPage = state.closestPageToPosition(anchorPosition)
                 anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
             }
 
-        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PicSumEntity> {
+        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PicSum> {
             val page = params.key ?: 1
             try {
                 // page Print
@@ -49,7 +48,7 @@ class ListPagerSource
                 }
 
                 // remote에서 데이터를 가져옴
-                val response = remoteRepo.getPicSumList(page, params.loadSize).toListPicSumEntity()
+                val response = remoteRepo.getPicSumList(page, params.loadSize)
                 Timber.d("response: $response")
 
                 // local에 데이터 저장

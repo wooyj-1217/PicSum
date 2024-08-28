@@ -1,6 +1,6 @@
 package com.wooyj.picsum.domain.usecase.local.favorite
 
-import com.wooyj.picsum.data.local.room.entity.FavoriteEntity
+import com.wooyj.picsum.domain.model.Favorite
 import com.wooyj.picsum.domain.repository.local.LocalFavoriteRepository
 import dagger.Reusable
 import javax.inject.Inject
@@ -11,5 +11,5 @@ class UpdateFavoriteUseCase
     constructor(
         private val repository: LocalFavoriteRepository,
     ) {
-        suspend operator fun invoke(entity: FavoriteEntity) = repository.updateFavorite(entity)
+        suspend operator fun invoke(entity: Favorite) = repository.updateFavorite(entity)
     }

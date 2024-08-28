@@ -23,12 +23,12 @@ class FavoriteListUseCase
                         PagingData.from(
                             picSumWithFavList.map { entity ->
                                 PicSumItemFavModel(
-                                    id = entity.picSumEntity.id,
-                                    author = entity.picSumEntity.author,
-                                    width = entity.picSumEntity.width,
-                                    height = entity.picSumEntity.height,
-                                    url = entity.picSumEntity.url,
-                                    downloadUrl = entity.picSumEntity.downloadUrl,
+                                    id = entity.id,
+                                    author = entity.author,
+                                    width = entity.width,
+                                    height = entity.height,
+                                    url = entity.url,
+                                    downloadUrl = entity.downloadUrl,
                                     favorite = true,
                                 )
                             },

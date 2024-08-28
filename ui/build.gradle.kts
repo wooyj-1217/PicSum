@@ -87,6 +87,10 @@ dependencies {
     // Timber
     implementation(libs.timber)
 
+    // Firebase
+    implementation(platform(libs.firebase))
+    implementation(libs.bundles.firebase)
+
     // Coil
     implementation(libs.coil.compose)
 

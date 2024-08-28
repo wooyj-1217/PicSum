@@ -3,6 +3,7 @@ package com.wooyj.picsum.data.local.room.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.wooyj.picsum.data.remote.dto.PicSumItemDTO
+import com.wooyj.picsum.domain.model.PicSum
 
 @Entity(tableName = "pic_sum")
 data class PicSumEntity(
@@ -26,3 +27,23 @@ fun List<PicSumItemDTO>.toListPicSumEntity() =
             downloadUrl = it.download_url,
         )
     }
+
+fun PicSumEntity.toPicSum() =
+    PicSum(
+        id = id,
+        author = author,
+        width = width,
+        height = height,
+        url = url,
+        downloadUrl = downloadUrl,
+    )
+
+fun PicSum.toPicSumEntity() =
+    PicSumEntity(
+        id = id,
+        author = author,
+        width = width,
+        height = height,
+        url = url,
+        downloadUrl = downloadUrl,
+    )

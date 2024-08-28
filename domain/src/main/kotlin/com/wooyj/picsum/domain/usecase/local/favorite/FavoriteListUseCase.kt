@@ -10,5 +10,5 @@ class FavoriteListUseCase
     constructor(
         private val favRepository: LocalFavoriteRepository,
     ) {
-        suspend operator fun invoke() = favRepository.getFavoriteList()
+        operator fun invoke() = favRepository.getFavoriteList()
     }

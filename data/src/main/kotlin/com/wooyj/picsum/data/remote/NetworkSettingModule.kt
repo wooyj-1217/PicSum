@@ -1,7 +1,7 @@
 package com.wooyj.picsum.data.remote
 
 import android.content.Context
-import com.wooyj.picsum.R
+import com.wooyj.picsum.data.R
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

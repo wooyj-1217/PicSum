@@ -1,4 +1,4 @@
-package com.wooyj.picsum
+package com.wooyj.picsum.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

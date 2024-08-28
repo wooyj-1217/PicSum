@@ -1,6 +1,5 @@
 package com.wooyj.picsum.domain.usecase.detail
 
-import com.wooyj.picsum.data.remote.dto.toPicSumEntity
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalGetPrevIdUseCase
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalSavePicSumItemUseCase
 import com.wooyj.picsum.domain.usecase.remote.RemoteGetPicSumItemUseCase
@@ -26,7 +25,7 @@ class GetPrevIdUseCase
                     val prevItem = remoteGetPicSumItemUseCase(currentRemoteId.toString())
                     if (prevItem != null) {
                         // 가져온 데이터를 로컬에 저장
-                        localSavePicSumItemUseCase(prevItem.toPicSumEntity())
+                        localSavePicSumItemUseCase(prevItem)
                         // 저장된 엔티티의 ID를 갱신하여 리턴
                         return prevItem.id
                     } else {

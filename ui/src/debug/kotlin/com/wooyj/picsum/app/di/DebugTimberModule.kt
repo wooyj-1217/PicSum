@@ -1,7 +1,7 @@
 package com.wooyj.picsum.app.di
 
 import android.content.Context
-import com.wooyj.picsum.R
+import com.wooyj.picsum.ui.R
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

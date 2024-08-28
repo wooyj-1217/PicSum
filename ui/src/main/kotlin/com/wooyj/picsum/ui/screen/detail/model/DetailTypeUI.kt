@@ -15,20 +15,20 @@ fun ItemWithIdModel.toDetailTypeUI() =
         imageWithFavoriteUIState =
             ImageWithFavoriteUIState(
                 itemId = ItemId(item!!.id.toInt()),
-                url = item.downloadUrl,
-                favorite = item.favorite,
+                url = item!!.downloadUrl,
+                favorite = item!!.favorite,
             ),
         prevId =
-            if (ItemId(item.id.toInt()).prev()?.getId() == null) {
+            if (ItemId(item!!.id.toInt()).prev()?.getId() == null) {
                 null
             } else {
-                ItemId(item.id.toInt()).prev()?.getId().toString()
+                ItemId(item!!.id.toInt()).prev()?.getId().toString()
             },
         nextId =
-            if (ItemId(item.id.toInt()).next()?.getId() == null) {
+            if (ItemId(item!!.id.toInt()).next()?.getId() == null) {
                 null
             } else {
-                ItemId(item.id.toInt()).next()?.getId().toString()
+                ItemId(item!!.id.toInt()).next()?.getId().toString()
             },
     )
 
@@ -37,8 +37,8 @@ fun ItemWithIdModel.toFavoriteDetailTypeUI() =
         imageWithFavoriteUIState =
             ImageWithFavoriteUIState(
                 itemId = ItemId(item!!.id.toInt()),
-                url = item.downloadUrl,
-                favorite = item.favorite,
+                url = item!!.downloadUrl,
+                favorite = item!!.favorite,
             ),
         prevId = prevId,
         nextId = nextId,

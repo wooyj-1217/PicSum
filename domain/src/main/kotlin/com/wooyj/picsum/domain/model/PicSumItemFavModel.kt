@@ -1,11 +1,11 @@
-package com.wooyj.picsum.domain.usecase.model
+package com.wooyj.picsum.domain.model
 
-data class FavoritePicSumModel(
+data class PicSumItemFavModel(
     val id: String,
     val author: String,
     val width: Int,
     val height: Int,
     val url: String,
     val downloadUrl: String,
-    val isFavorite: Boolean,
+    val favorite: Boolean = false,
 )

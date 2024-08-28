@@ -4,7 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.Composable
-import com.wooyj.picsum.data.local.room.entity.PicSumEntity
+import com.wooyj.picsum.domain.model.PicSum
 import com.wooyj.picsum.domain.model.PicSumItemFavModel
 
 data class ListTypeUI(
@@ -36,7 +36,7 @@ fun PicSumItemFavModel.toListTypeUI() =
         favorite = favorite,
     )
 
-fun PicSumEntity.toListTypeUI() =
+fun PicSum.toListTypeUI() =
     ListTypeUI(
         photoId = id,
         author = author,
@@ -46,8 +46,8 @@ fun PicSumEntity.toListTypeUI() =
         downloadUrl = downloadUrl,
     )
 
-fun ListTypeUI.toPicSumEntity() =
-    PicSumEntity(
+fun ListTypeUI.toPicSum() =
+    PicSum(
         id = photoId.toString(),
         author = author,
         width = width,

@@ -1,6 +1,6 @@
 package com.wooyj.picsum.domain.usecase.favorite
 
-import com.wooyj.picsum.data.local.room.entity.FavoriteEntity
+import com.wooyj.picsum.domain.model.Favorite
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -19,7 +19,7 @@ class UpdateVisibleStateUseCase
                 val item = getFavoriteUseCase(id)
                 if (item == null) {
                     // 없을 경우
-                    addFavoriteUseCase(FavoriteEntity(id = id))
+                    addFavoriteUseCase(Favorite(id = id))
                 } else {
                     // 있을 경우
                     updateFavoriteUseCase(item.copy(visible = !item.visible))
