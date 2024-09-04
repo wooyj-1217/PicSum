@@ -27,12 +27,12 @@ data class FavoriteEntity(
 // }
 
 fun FavoriteEntity.toFavorite() =
-    Favorite(
+    com.wooyj.picsum.model.Favorite(
         id = id,
         visible = visible,
     )
 
-fun Favorite.toEntity() =
+fun com.wooyj.picsum.model.Favorite.toEntity() =
     FavoriteEntity(
         id = id,
         visible = visible,

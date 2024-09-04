@@ -16,25 +16,25 @@ class LocalFavoriteRepositoryImpl
         private val dao: FavoriteDAO,
         private val flowDao: FavoriteDAOFlow,
     ) : LocalFavoriteRepository {
-        override suspend fun getFavoriteItem(id: String): Favorite? =
+        override suspend fun getFavoriteItem(id: String): com.wooyj.picsum.model.Favorite =
             dao
                 .getFavoriteItem(id)
-                ?.toFavorite()
+                .let { it.toFavorite() }
 
-        override suspend fun addFavorite(entity: Favorite): Long = dao.insert(entity.toEntity())
+        override suspend fun addFavorite(entity: com.wooyj.picsum.model.Favorite): Long = dao.insert(entity.toEntity())
 
         override suspend fun removeFavorite(id: String): Int = dao.deleteById(id)
 
-        override suspend fun updateFavorite(entity: Favorite): Int = dao.update(entity.toEntity())
+        override suspend fun updateFavorite(entity: com.wooyj.picsum.model.Favorite): Int = dao.update(entity.toEntity())
 
         override suspend fun added(id: String): Boolean = dao.getFavoriteCount(id.toInt()) > 0
 
-        override fun getFavoriteList(): Flow<List<Favorite>> =
+        override fun getFavoriteList(): Flow<List<com.wooyj.picsum.model.Favorite>> =
             flowDao
                 .getFavoriteList()
                 .map { it.map { it.toFavorite() } }
 
-        override fun getVisibleFavoriteList(): Flow<List<Favorite>> =
+        override fun getVisibleFavoriteList(): Flow<List<com.wooyj.picsum.model.Favorite>> =
             flowDao
                 .getVisibleFavoriteList()
                 .map { it.map { it.toFavorite() } }
