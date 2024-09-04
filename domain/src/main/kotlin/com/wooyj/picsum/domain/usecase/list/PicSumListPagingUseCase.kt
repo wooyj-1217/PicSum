@@ -3,8 +3,7 @@ package com.wooyj.picsum.domain.usecase.list
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.wooyj.picsum.domain.repository.paging.PagingPicSumRepository
-import com.wooyj.picsum.model.PicSum
+import com.wooyj.picsum.data.repository.paging.PagingPicSumRepository
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

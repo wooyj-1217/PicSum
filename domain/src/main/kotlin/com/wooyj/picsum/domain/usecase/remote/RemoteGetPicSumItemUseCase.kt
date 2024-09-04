@@ -1,6 +1,6 @@
 package com.wooyj.picsum.domain.usecase.remote
 
-import com.wooyj.picsum.domain.repository.RemotePicSumRepository
+import com.wooyj.picsum.data.repository.remote.RemotePicSumRepository
 import dagger.Reusable
 import javax.inject.Inject
 

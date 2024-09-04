@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
     implementation(project(":model"))
     // Hilt
     implementation(libs.bundles.hilt)

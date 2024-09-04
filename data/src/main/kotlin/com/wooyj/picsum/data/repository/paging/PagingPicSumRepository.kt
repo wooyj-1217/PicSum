@@ -1,7 +1,6 @@
-package com.wooyj.picsum.domain.repository.paging
+package com.wooyj.picsum.data.repository.paging
 
 import androidx.paging.PagingSource
-import com.wooyj.picsum.model.PicSum
 
 interface PagingPicSumRepository {
     fun getPicSumPagingSource(): PagingSource<Int, com.wooyj.picsum.model.PicSum>

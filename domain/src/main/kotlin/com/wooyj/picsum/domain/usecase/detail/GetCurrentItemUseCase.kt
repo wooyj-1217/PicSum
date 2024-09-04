@@ -16,7 +16,7 @@ class GetCurrentItemUseCase
         private val remoteGetItemAndSaveUseCase: RemoteGetItemAndSaveUseCase,
         private val getFavoriteUseCase: GetFavoriteUseCase,
     ) {
-        suspend operator fun invoke(currentId: String): com.wooyj.picsum.model.PicSumItemFavModel {
+        suspend operator fun invoke(currentId: String): PicSumItemFavModel {
             val favItem = getFavoriteUseCase(currentId)
             val localModel = localItemUseCase(currentId)
             val isFavorite =

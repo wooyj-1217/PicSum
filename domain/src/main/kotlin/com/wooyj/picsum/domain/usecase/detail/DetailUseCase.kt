@@ -17,7 +17,7 @@ class DetailUseCase
         private val nextIdUseCase: GetNextIdUseCase,
         private val prevIdUseCase: GetPrevIdUseCase,
     ) {
-        operator fun invoke(currentId: String): Flow<com.wooyj.picsum.model.ItemWithIdModel> =
+        operator fun invoke(currentId: String): Flow<ItemWithIdModel> =
             flow {
                 // 1) 현재 item 조회 (cache 아이템이 있을경우 cache 아이템 조회, 없을 경우 remote 조회 및 save)
                 val currentItem = currentItemUseCase(currentId)
@@ -35,7 +35,7 @@ class DetailUseCase
                 val nextId = nextIdUseCase(currentId)
 
                 emit(
-                    com.wooyj.picsum.model.ItemWithIdModel(
+                    ItemWithIdModel(
                         prevId = prevId,
                         nextId = nextId,
                         item = currentItem,

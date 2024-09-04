@@ -1,6 +1,4 @@
-package com.wooyj.picsum.domain.repository.local
-
-import com.wooyj.picsum.model.PicSum
+package com.wooyj.picsum.data.repository.local
 
 interface LocalPicSumRepository {
     suspend fun insert(list: List<com.wooyj.picsum.model.PicSum>)
