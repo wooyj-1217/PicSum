@@ -70,6 +70,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(project(":model"))
     // Hilt
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.android.compiler)

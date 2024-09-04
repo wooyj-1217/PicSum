@@ -1,7 +1,7 @@
 package com.wooyj.picsum.domain.usecase.remote
 
-import com.wooyj.picsum.domain.model.PicSum
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalSavePicSumItemUseCase
+import com.wooyj.picsum.model.PicSum
 import dagger.Reusable
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ class RemoteGetItemAndSaveUseCase
         private val getRemotePicSumItemUseCase: RemoteGetPicSumItemUseCase,
         private val savePicSumItemUseCase: LocalSavePicSumItemUseCase,
     ) {
-        suspend operator fun invoke(id: String): PicSum? {
+        suspend operator fun invoke(id: String): com.wooyj.picsum.model.PicSum? {
             val data = getRemotePicSumItemUseCase(id)!!
             return try {
                 savePicSumItemUseCase(data)
