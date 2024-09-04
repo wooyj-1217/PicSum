@@ -69,7 +69,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
     implementation(project(":model"))
     // Hilt
     implementation(libs.bundles.hilt)

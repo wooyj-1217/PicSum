@@ -1,6 +1,5 @@
-package com.wooyj.picsum.domain.repository.local
+package com.wooyj.picsum.data.repository.local
 
-import com.wooyj.picsum.model.Favorite
 import kotlinx.coroutines.flow.Flow
 
 interface LocalFavoriteRepository {

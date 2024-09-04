@@ -1,6 +1,6 @@
 package com.wooyj.picsum.domain.usecase.local.picsumfav
 
-import com.wooyj.picsum.domain.repository.local.LocalPicSumWithFavRepository
+import com.wooyj.picsum.data.repository.local.LocalPicSumWithFavRepository
 import dagger.Reusable
 import javax.inject.Inject
 

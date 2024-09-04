@@ -1,7 +1,6 @@
-package com.wooyj.picsum.domain.repository
+package com.wooyj.picsum.data.repository.remote
 
 import androidx.paging.PagingSource
-import com.wooyj.picsum.model.PicSum
 
 interface RemotePicSumRepository {
     suspend fun getPicSumList(

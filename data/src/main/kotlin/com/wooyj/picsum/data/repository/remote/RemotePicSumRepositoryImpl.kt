@@ -1,11 +1,9 @@
-package com.wooyj.picsum.data.repository
+package com.wooyj.picsum.data.repository.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.wooyj.picsum.data.remote.dto.toPicSum
 import com.wooyj.picsum.data.source.PicSumRemoteDataSource
-import com.wooyj.picsum.domain.repository.RemotePicSumRepository
-import com.wooyj.picsum.model.PicSum
 import javax.inject.Inject
 
 class RemotePicSumRepositoryImpl

@@ -4,7 +4,8 @@ import com.wooyj.picsum.data.repository.local.LocalFavoriteRepositoryImpl
 import com.wooyj.picsum.data.repository.local.LocalPicSumRepositoryImpl
 import com.wooyj.picsum.data.repository.local.LocalPicSumWithFavRepositoryImpl
 import com.wooyj.picsum.data.repository.paging.PagingPicSumRepositoryImpl
-import com.wooyj.picsum.domain.repository.RemotePicSumRepository
+import com.wooyj.picsum.data.repository.remote.RemotePicSumRepository
+import com.wooyj.picsum.data.repository.remote.RemotePicSumRepositoryImpl
 import com.wooyj.picsum.domain.repository.local.LocalFavoriteRepository
 import com.wooyj.picsum.domain.repository.local.LocalPicSumRepository
 import com.wooyj.picsum.domain.repository.local.LocalPicSumWithFavRepository
