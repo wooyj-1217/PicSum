@@ -3,7 +3,7 @@ package com.wooyj.picsum.data.local.room.entity
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Relation
-import com.wooyj.picsum.domain.model.PicSumItemFavModel
+import com.wooyj.picsum.model.PicSumItemFavModel
 
 @Entity
 data class PicSumWithFavEntity(
@@ -16,7 +16,7 @@ data class PicSumWithFavEntity(
 )
 
 fun PicSumWithFavEntity.toPicSumItemFavModel() =
-    PicSumItemFavModel(
+    com.wooyj.picsum.model.PicSumItemFavModel(
         id = picSumEntity.id,
         author = picSumEntity.author,
         width = picSumEntity.width,

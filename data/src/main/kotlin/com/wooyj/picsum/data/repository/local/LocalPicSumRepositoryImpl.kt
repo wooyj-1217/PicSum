@@ -4,8 +4,8 @@ import com.wooyj.picsum.data.local.room.dao.PicSumDAO
 import com.wooyj.picsum.data.local.room.dao.PicSumDAOFlow
 import com.wooyj.picsum.data.local.room.entity.toPicSum
 import com.wooyj.picsum.data.local.room.entity.toPicSumEntity
-import com.wooyj.picsum.domain.model.PicSum
 import com.wooyj.picsum.domain.repository.local.LocalPicSumRepository
+import com.wooyj.picsum.model.PicSum
 import javax.inject.Inject
 
 class LocalPicSumRepositoryImpl
@@ -14,9 +14,9 @@ class LocalPicSumRepositoryImpl
         private val dao: PicSumDAO,
         private val flowDao: PicSumDAOFlow,
     ) : LocalPicSumRepository {
-        override suspend fun insert(list: List<PicSum>) = dao.insert(list.map { it.toPicSumEntity() })
+        override suspend fun insert(list: List<com.wooyj.picsum.model.PicSum>) = dao.insert(list.map { it.toPicSumEntity() })
 
-        override suspend fun insert(entity: PicSum): Long? = dao.insert(entity.toPicSumEntity())
+        override suspend fun insert(entity: com.wooyj.picsum.model.PicSum): Long? = dao.insert(entity.toPicSumEntity())
 
         override suspend fun deleteAll() = dao.deleteAll()
 
@@ -31,7 +31,7 @@ class LocalPicSumRepositoryImpl
 
         override suspend fun getPicSumList() = dao.getPicSumList().map { it.toPicSum() }
 
-        override suspend fun getPicSumItem(id: String): PicSum? = dao.getPicSumItem(id)?.toPicSum()
+        override suspend fun getPicSumItem(id: String): com.wooyj.picsum.model.PicSum? = dao.getPicSumItem(id)?.toPicSum()
 
         override suspend fun getPrevId(currentId: String): String? = dao.getPrevId(currentId)
 

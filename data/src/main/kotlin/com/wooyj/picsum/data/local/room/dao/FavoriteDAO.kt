@@ -44,7 +44,7 @@ interface FavoriteDAO {
     suspend fun getFavoriteCount(id: Int): Int
 
     @Query("SELECT * FROM favorite WHERE id = :id")
-    suspend fun getFavoriteItem(id: String): FavoriteEntity
+    suspend fun getFavoriteItem(id: String): FavoriteEntity?
 
     @Query(
         """

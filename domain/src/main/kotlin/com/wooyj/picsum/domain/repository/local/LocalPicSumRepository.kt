@@ -1,22 +1,22 @@
 package com.wooyj.picsum.domain.repository.local
 
-import com.wooyj.picsum.domain.model.PicSum
+import com.wooyj.picsum.model.PicSum
 
 interface LocalPicSumRepository {
-    suspend fun insert(list: List<PicSum>)
+    suspend fun insert(list: List<com.wooyj.picsum.model.PicSum>)
 
-    suspend fun insert(entity: PicSum): Long?
+    suspend fun insert(entity: com.wooyj.picsum.model.PicSum): Long?
 
     suspend fun deleteAll()
 
     suspend fun getPicSumListPaging(
         offset: Int,
         limit: Int,
-    ): List<PicSum>
+    ): List<com.wooyj.picsum.model.PicSum>
 
-    suspend fun getPicSumList(): List<PicSum>
+    suspend fun getPicSumList(): List<com.wooyj.picsum.model.PicSum>
 
-    suspend fun getPicSumItem(id: String): PicSum?
+    suspend fun getPicSumItem(id: String): com.wooyj.picsum.model.PicSum?
 
     suspend fun getPrevId(currentId: String): String?
 

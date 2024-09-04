@@ -1,6 +1,6 @@
 package com.wooyj.picsum.domain.usecase.detail
 
-import com.wooyj.picsum.domain.model.ItemWithIdModel
+import com.wooyj.picsum.model.ItemWithIdModel
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -17,7 +17,7 @@ class DetailUseCase
         private val nextIdUseCase: GetNextIdUseCase,
         private val prevIdUseCase: GetPrevIdUseCase,
     ) {
-        operator fun invoke(currentId: String): Flow<ItemWithIdModel> =
+        operator fun invoke(currentId: String): Flow<com.wooyj.picsum.model.ItemWithIdModel> =
             flow {
                 // 1) 현재 item 조회 (cache 아이템이 있을경우 cache 아이템 조회, 없을 경우 remote 조회 및 save)
                 val currentItem = currentItemUseCase(currentId)
@@ -35,7 +35,7 @@ class DetailUseCase
                 val nextId = nextIdUseCase(currentId)
 
                 emit(
-                    ItemWithIdModel(
+                    com.wooyj.picsum.model.ItemWithIdModel(
                         prevId = prevId,
                         nextId = nextId,
                         item = currentItem,

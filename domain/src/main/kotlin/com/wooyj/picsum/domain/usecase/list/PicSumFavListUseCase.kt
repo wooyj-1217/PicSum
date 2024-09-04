@@ -3,8 +3,8 @@ package com.wooyj.picsum.domain.usecase.list
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.wooyj.picsum.domain.model.PicSumItemFavModel
 import com.wooyj.picsum.domain.usecase.local.favorite.FavoriteVisibleListUseCase
+import com.wooyj.picsum.model.PicSumItemFavModel
 import dagger.Reusable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +21,7 @@ class PicSumFavListUseCase
         suspend operator fun invoke(
             limit: Int,
             scope: CoroutineScope,
-        ): Flow<PagingData<PicSumItemFavModel>> {
+        ): Flow<PagingData<com.wooyj.picsum.model.PicSumItemFavModel>> {
             val listFlow =
                 listUseCase(limit = limit)
                     .cachedIn(scope = scope)
@@ -30,7 +30,7 @@ class PicSumFavListUseCase
             return combine(listFlow, favFlow) { list, favList ->
                 list
                     .map { item ->
-                        PicSumItemFavModel(
+                        com.wooyj.picsum.model.PicSumItemFavModel(
                             id = item.id,
                             author = item.author,
                             width = item.width,

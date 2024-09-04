@@ -1,7 +1,7 @@
 package com.wooyj.picsum.data.remote.dto
 
 import com.wooyj.picsum.data.local.room.entity.PicSumEntity
-import com.wooyj.picsum.domain.model.PicSum
+import com.wooyj.picsum.model.PicSum
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -25,7 +25,7 @@ fun PicSumItemDTO.toPicSumEntity() =
     )
 
 fun PicSumItemDTO.toPicSum() =
-    PicSum(
+    com.wooyj.picsum.model.PicSum(
         id = id,
         author = author,
         width = width,

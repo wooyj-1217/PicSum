@@ -1,8 +1,8 @@
 package com.wooyj.picsum.domain.usecase.favorite
 
-import com.wooyj.picsum.domain.model.ItemWithIdModel
 import com.wooyj.picsum.domain.usecase.local.favorite.GetFavNextIdUseCase
 import com.wooyj.picsum.domain.usecase.local.favorite.GetFavPrevIdUseCase
+import com.wooyj.picsum.model.ItemWithIdModel
 import dagger.Reusable
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -24,7 +24,7 @@ class FavoriteDetailUseCase
                 val prevId = prevIdUseCase(currentId)
 
                 emit(
-                    ItemWithIdModel(
+                    com.wooyj.picsum.model.ItemWithIdModel(
                         prevId = prevId,
                         nextId = nextId,
                         item = currentItem,

@@ -2,7 +2,7 @@ package com.wooyj.picsum.data.local.room.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.wooyj.picsum.domain.model.Favorite
+import com.wooyj.picsum.model.Favorite
 
 @Entity(tableName = "favorite")
 data class FavoriteEntity(

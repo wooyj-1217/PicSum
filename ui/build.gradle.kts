@@ -67,6 +67,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(project(":model"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)

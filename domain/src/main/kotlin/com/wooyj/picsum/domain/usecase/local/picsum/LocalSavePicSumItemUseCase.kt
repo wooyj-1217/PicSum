@@ -1,7 +1,7 @@
 package com.wooyj.picsum.domain.usecase.local.picsum
 
-import com.wooyj.picsum.domain.model.PicSum
 import com.wooyj.picsum.domain.repository.local.LocalPicSumRepository
+import com.wooyj.picsum.model.PicSum
 import dagger.Reusable
 import javax.inject.Inject
 
@@ -11,5 +11,5 @@ class LocalSavePicSumItemUseCase
     constructor(
         private val repository: LocalPicSumRepository,
     ) {
-        suspend operator fun invoke(entity: PicSum) = repository.insert(entity)
+        suspend operator fun invoke(entity: com.wooyj.picsum.model.PicSum) = repository.insert(entity)
     }

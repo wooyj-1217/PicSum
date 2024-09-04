@@ -1,6 +1,6 @@
 package com.wooyj.picsum.ui.screen.detail.model
 
-import com.wooyj.picsum.domain.model.ItemWithIdModel
+import com.wooyj.picsum.model.ItemWithIdModel
 import com.wooyj.picsum.ui.common.ImageWithFavoriteUIState
 import com.wooyj.picsum.ui.model.ItemId
 
@@ -10,7 +10,7 @@ data class DetailTypeUI(
     val nextId: String?,
 )
 
-fun ItemWithIdModel.toDetailTypeUI() =
+fun com.wooyj.picsum.model.ItemWithIdModel.toDetailTypeUI() =
     DetailTypeUI(
         imageWithFavoriteUIState =
             ImageWithFavoriteUIState(
@@ -32,7 +32,7 @@ fun ItemWithIdModel.toDetailTypeUI() =
             },
     )
 
-fun ItemWithIdModel.toFavoriteDetailTypeUI() =
+fun com.wooyj.picsum.model.ItemWithIdModel.toFavoriteDetailTypeUI() =
     DetailTypeUI(
         imageWithFavoriteUIState =
             ImageWithFavoriteUIState(

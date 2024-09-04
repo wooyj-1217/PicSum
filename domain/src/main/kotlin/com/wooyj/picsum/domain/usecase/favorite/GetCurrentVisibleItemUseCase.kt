@@ -1,9 +1,9 @@
 package com.wooyj.picsum.domain.usecase.favorite
 
-import com.wooyj.picsum.domain.model.PicSumItemFavModel
-import com.wooyj.picsum.domain.model.toPicSumItemFavModel
 import com.wooyj.picsum.domain.usecase.local.favorite.GetFavoriteUseCase
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalGetPicSumItemUseCase
+import com.wooyj.picsum.model.PicSumItemFavModel
+import com.wooyj.picsum.model.toPicSumItemFavModel
 import dagger.Reusable
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ class GetCurrentVisibleItemUseCase
         private val localItemUseCase: LocalGetPicSumItemUseCase,
         private val getFavoriteUseCase: GetFavoriteUseCase,
     ) {
-        suspend operator fun invoke(currentId: String): PicSumItemFavModel {
+        suspend operator fun invoke(currentId: String): com.wooyj.picsum.model.PicSumItemFavModel {
             val item = localItemUseCase(currentId)!!
             val favItem = getFavoriteUseCase(currentId)
 

@@ -1,6 +1,6 @@
 package com.wooyj.picsum.domain.usecase.favorite
 
-import com.wooyj.picsum.domain.model.Favorite
+import com.wooyj.picsum.model.Favorite
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -18,7 +18,10 @@ class ToggleFavoriteUseCase
             flow {
                 val isFavorite = isFavoriteItemUseCase(id)
                 if (!isFavorite) {
-                    addFavoriteUseCase(Favorite(id = id))
+                    addFavoriteUseCase(
+                        com.wooyj.picsum.model
+                            .Favorite(id = id),
+                    )
                 } else {
                     removeFavoriteUseCase(id)
                 }

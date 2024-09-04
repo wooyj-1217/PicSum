@@ -4,8 +4,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.Composable
-import com.wooyj.picsum.domain.model.PicSum
-import com.wooyj.picsum.domain.model.PicSumItemFavModel
+import com.wooyj.picsum.model.PicSum
+import com.wooyj.picsum.model.PicSumItemFavModel
 
 data class ListTypeUI(
     val photoId: String,
@@ -25,7 +25,7 @@ fun ListTypeUI.getIcon() =
         Icons.Outlined.FavoriteBorder
     }
 
-fun PicSumItemFavModel.toListTypeUI() =
+fun com.wooyj.picsum.model.PicSumItemFavModel.toListTypeUI() =
     ListTypeUI(
         photoId = id,
         author = author,
@@ -36,7 +36,7 @@ fun PicSumItemFavModel.toListTypeUI() =
         favorite = favorite,
     )
 
-fun PicSum.toListTypeUI() =
+fun com.wooyj.picsum.model.PicSum.toListTypeUI() =
     ListTypeUI(
         photoId = id,
         author = author,
@@ -47,7 +47,7 @@ fun PicSum.toListTypeUI() =
     )
 
 fun ListTypeUI.toPicSum() =
-    PicSum(
+    com.wooyj.picsum.model.PicSum(
         id = photoId.toString(),
         author = author,
         width = width,

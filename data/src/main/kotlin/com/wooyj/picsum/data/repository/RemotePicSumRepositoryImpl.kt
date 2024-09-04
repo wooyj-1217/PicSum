@@ -4,8 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.wooyj.picsum.data.remote.dto.toPicSum
 import com.wooyj.picsum.data.source.PicSumRemoteDataSource
-import com.wooyj.picsum.domain.model.PicSum
 import com.wooyj.picsum.domain.repository.RemotePicSumRepository
+import com.wooyj.picsum.model.PicSum
 import javax.inject.Inject
 
 class RemotePicSumRepositoryImpl
@@ -16,19 +16,19 @@ class RemotePicSumRepositoryImpl
         override suspend fun getPicSumList(
             page: Int,
             limit: Int,
-        ): List<PicSum> = dataSource.getPicSumList(page, limit).map { it.toPicSum() }
+        ): List<com.wooyj.picsum.model.PicSum> = dataSource.getPicSumList(page, limit).map { it.toPicSum() }
 
-        override suspend fun getPicSumItem(id: String): PicSum = dataSource.getPicSumItem(id).toPicSum()
+        override suspend fun getPicSumItem(id: String): com.wooyj.picsum.model.PicSum = dataSource.getPicSumItem(id).toPicSum()
 
-        override fun getPicSumPagingSource(): PagingSource<Int, PicSum> =
-            object : PagingSource<Int, PicSum>() {
-                override fun getRefreshKey(state: PagingState<Int, PicSum>): Int? =
+        override fun getPicSumPagingSource(): PagingSource<Int, com.wooyj.picsum.model.PicSum> =
+            object : PagingSource<Int, com.wooyj.picsum.model.PicSum>() {
+                override fun getRefreshKey(state: PagingState<Int, com.wooyj.picsum.model.PicSum>): Int? =
                     state.anchorPosition?.let { anchorPosition ->
                         val anchorPage = state.closestPageToPosition(anchorPosition)
                         anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
                     }
 
-                override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PicSum> {
+                override suspend fun load(params: LoadParams<Int>): LoadResult<Int, com.wooyj.picsum.model.PicSum> {
                     val page = params.key ?: 1
                     return try {
                         val response = dataSource.getPicSumList(page, params.loadSize).map { it.toPicSum() }
