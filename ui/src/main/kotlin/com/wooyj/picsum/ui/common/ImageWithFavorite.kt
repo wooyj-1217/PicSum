@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.wooyj.picsum.ui.model.ItemId
+import com.wooyj.picsum.model.ItemId
 
 @Composable
 fun ImageWithFavorite(

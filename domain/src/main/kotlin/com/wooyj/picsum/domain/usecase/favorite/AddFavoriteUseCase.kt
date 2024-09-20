@@ -9,11 +9,14 @@ import javax.inject.Inject
  * FavoriteEntity 추가 (visible = true)
  *
  */
-@Reusable
-class AddFavoriteUseCase
-    @Inject
-    constructor(
-        private val repository: LocalFavoriteRepository,
-    ) {
-        suspend operator fun invoke(entity: com.wooyj.picsum.model.Favorite) = repository.addFavorite(entity)
-    }
+//@Reusable
+//class AddFavoriteUseCase
+//    @Inject
+//    constructor(
+//        private val repository: LocalFavoriteRepository,
+//    ) {
+//        suspend operator fun invoke(entity: com.wooyj.picsum.model.Favorite) = repository.addFavorite(entity)
+//    }
+fun interface AddFavoriteUseCase {
+    suspend operator fun invoke(entity: com.wooyj.picsum.model.Favorite): Long
+}

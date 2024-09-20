@@ -3,7 +3,7 @@ package com.wooyj.picsum.ui.common
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import com.wooyj.picsum.ui.model.ItemId
+import com.wooyj.picsum.model.ItemId
 
 data class ImageWithFavoriteUIState(
     val itemId: ItemId,
