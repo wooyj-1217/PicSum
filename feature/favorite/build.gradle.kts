@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("com.android.library")
+    id("com.android.application")
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
@@ -17,6 +17,7 @@ android {
             .toInt()
 
     defaultConfig {
+        applicationId = "com.wooyj.picsum.feature.favorite"
         minSdk =
             libs.versions.minSdk
                 .get()
@@ -68,7 +69,9 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":model"))
-    implementation(project(":ui"))
+    implementation(project(":ui:base"))
+    implementation(project(":ui:common"))
+    implementation(project(":ui:theme"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)

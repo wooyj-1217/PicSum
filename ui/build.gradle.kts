@@ -67,6 +67,7 @@ android {
 
 dependencies {
     implementation(project(":feature:main"))
+    implementation(project(":ui:theme"))
     implementation(project(":model"))
 
     implementation(libs.androidx.core)

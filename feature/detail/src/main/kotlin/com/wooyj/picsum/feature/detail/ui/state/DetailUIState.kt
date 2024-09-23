@@ -27,7 +27,7 @@ fun DetailUI(
     Column(
         modifier = modifier,
     ) {
-        ImageWithFavorite(
+        com.wooyj.picsum.ui.common.ImageWithFavorite(
             uiState = uiState.imageWithFavoriteUIState,
             clickFavorite = clickFavorite,
         )
@@ -69,7 +69,7 @@ fun DetailUI(
 fun PreviewDetailUI() {
     val uiState =
         DetailTypeUI(
-            ImageWithFavoriteUIState(
+            com.wooyj.picsum.ui.common.ImageWithFavoriteUIState(
                 itemId = ItemId("3".toInt()),
                 url = "https://picsum.photos/id/3/300/300",
                 favorite = false,

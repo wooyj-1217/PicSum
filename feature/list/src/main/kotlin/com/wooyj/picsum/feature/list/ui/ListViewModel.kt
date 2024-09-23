@@ -2,8 +2,8 @@ package com.wooyj.picsum.feature.list.ui
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.map
-import com.wooyj.picsum.domain.usecase.local.favorite.ToggleFavoriteUseCase
 import com.wooyj.picsum.feature.list.domain.PicSumFavListUseCase
+import com.wooyj.picsum.feature.list.domain.ToggleFavoriteUseCase
 import com.wooyj.picsum.feature.list.ui.model.toListTypeUI
 import com.wooyj.picsum.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

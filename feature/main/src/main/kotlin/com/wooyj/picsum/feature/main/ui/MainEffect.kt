@@ -1,7 +1,7 @@
 package com.wooyj.picsum.feature.main.ui
 
-import com.wooyj.picsum.ui.base.BaseEffect
 import com.wooyj.picsum.feature.main.ui.navigation.Screen
+import com.wooyj.picsum.ui.base.BaseEffect
 
 sealed interface MainEffect : BaseEffect {
     val screen: Screen

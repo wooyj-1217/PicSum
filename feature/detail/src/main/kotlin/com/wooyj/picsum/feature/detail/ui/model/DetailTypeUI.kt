@@ -10,36 +10,36 @@ data class DetailTypeUI(
     val nextId: String?,
 )
 
-fun com.wooyj.picsum.model.ItemWithIdModel.toDetailTypeUI() =
+fun ItemWithIdModel.toDetailTypeUI() =
     DetailTypeUI(
         imageWithFavoriteUIState =
-        ImageWithFavoriteUIState(
-            itemId = ItemId(item!!.id.toInt()),
-            url = item!!.downloadUrl,
-            favorite = item!!.favorite,
-        ),
+            ImageWithFavoriteUIState(
+                itemId = ItemId(item!!.id.toInt()),
+                url = item!!.downloadUrl,
+                favorite = item!!.favorite,
+            ),
         prevId =
-        if (ItemId(item!!.id.toInt()).prev()?.getId() == null) {
-            null
-        } else {
-            ItemId(item!!.id.toInt()).prev()?.getId().toString()
-        },
+            if (ItemId(item!!.id.toInt()).prev()?.getId() == null) {
+                null
+            } else {
+                ItemId(item!!.id.toInt()).prev()?.getId().toString()
+            },
         nextId =
-        if (ItemId(item!!.id.toInt()).next()?.getId() == null) {
-            null
-        } else {
-            ItemId(item!!.id.toInt()).next()?.getId().toString()
-        },
+            if (ItemId(item!!.id.toInt()).next()?.getId() == null) {
+                null
+            } else {
+                ItemId(item!!.id.toInt()).next()?.getId().toString()
+            },
     )
 
 fun ItemWithIdModel.toFavoriteDetailTypeUI() =
     DetailTypeUI(
         imageWithFavoriteUIState =
-        ImageWithFavoriteUIState(
-            itemId = ItemId(item!!.id.toInt()),
-            url = item!!.downloadUrl,
-            favorite = item!!.favorite,
-        ),
+            ImageWithFavoriteUIState(
+                itemId = ItemId(item!!.id.toInt()),
+                url = item!!.downloadUrl,
+                favorite = item!!.favorite,
+            ),
         prevId = prevId,
         nextId = nextId,
     )

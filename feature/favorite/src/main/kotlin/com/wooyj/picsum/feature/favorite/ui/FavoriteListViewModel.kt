@@ -2,8 +2,8 @@ package com.wooyj.picsum.feature.favorite.ui
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.map
-import com.wooyj.picsum.domain.usecase.local.favorite.ToggleFavoriteUseCase
 import com.wooyj.picsum.feature.favorite.domain.FavoriteListUseCase
+import com.wooyj.picsum.feature.favorite.domain.ToggleFavoriteUseCase
 import com.wooyj.picsum.feature.favorite.list.ui.ListEffect
 import com.wooyj.picsum.feature.favorite.list.ui.ListEvent
 import com.wooyj.picsum.feature.favorite.list.ui.ListUIState

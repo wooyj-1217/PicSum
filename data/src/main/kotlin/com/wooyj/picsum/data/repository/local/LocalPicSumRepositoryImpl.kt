@@ -4,8 +4,6 @@ import com.wooyj.picsum.data.local.room.dao.PicSumDAO
 import com.wooyj.picsum.data.local.room.dao.PicSumDAOFlow
 import com.wooyj.picsum.data.local.room.entity.toPicSum
 import com.wooyj.picsum.data.local.room.entity.toPicSumEntity
-import com.wooyj.picsum.domain.repository.local.LocalPicSumRepository
-import com.wooyj.picsum.model.PicSum
 import javax.inject.Inject
 
 class LocalPicSumRepositoryImpl

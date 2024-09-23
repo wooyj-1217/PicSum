@@ -1,14 +1,7 @@
 package com.wooyj.picsum.domain.usecase.local.picsum
 
-import com.wooyj.picsum.data.repository.local.LocalPicSumRepository
-import dagger.Reusable
-import javax.inject.Inject
+import com.wooyj.picsum.model.PicSum
 
-@Reusable
-class LocalPicSumListUseCase
-    @Inject
-    constructor(
-        private val repo: LocalPicSumRepository,
-    ) {
-        suspend operator fun invoke() = repo.getPicSumList()
-    }
+fun interface LocalPicSumListUseCase {
+    suspend operator fun invoke(): List<PicSum>
+}

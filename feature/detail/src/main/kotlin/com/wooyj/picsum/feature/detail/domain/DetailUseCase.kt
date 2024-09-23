@@ -1,8 +1,5 @@
 package com.wooyj.picsum.feature.detail.domain
 
-import com.wooyj.picsum.domain.usecase.detail.GetCurrentItemUseCase
-import com.wooyj.picsum.domain.usecase.detail.GetNextIdUseCase
-import com.wooyj.picsum.domain.usecase.detail.GetPrevIdUseCase
 import com.wooyj.picsum.model.ItemWithIdModel
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow

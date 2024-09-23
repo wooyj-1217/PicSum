@@ -1,17 +1,8 @@
 package com.wooyj.picsum.domain.usecase.list
 
-import com.wooyj.picsum.data.repository.local.LocalFavoriteRepository
-import dagger.Reusable
-import javax.inject.Inject
+import com.wooyj.picsum.model.Favorite
+import kotlinx.coroutines.flow.Flow
 
-//@Reusable
-//class FavoriteVisibleListUseCase
-//    @Inject
-//    constructor(
-//        private val favRepository: LocalFavoriteRepository,
-//    ) {
-//        suspend operator fun invoke() = favRepository.getVisibleFavoriteList()
-//    }
 fun interface FavoriteVisibleListUseCase {
-    suspend operator fun invoke(): List<com.wooyj.picsum.model.Favorite>
+    suspend operator fun invoke(): Flow<List<Favorite>>
 }

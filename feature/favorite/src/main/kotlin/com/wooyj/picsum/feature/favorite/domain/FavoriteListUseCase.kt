@@ -1,7 +1,7 @@
 package com.wooyj.picsum.feature.favorite.domain
 
 import androidx.paging.PagingData
-import com.wooyj.picsum.domain.usecase.local.picsumfav.LocalPicSumFavListUseCase
+import com.wooyj.picsum.domain.usecase.favorite.LocalPicSumFavListUseCase
 import com.wooyj.picsum.model.PicSumItemFavModel
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow

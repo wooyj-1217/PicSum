@@ -10,7 +10,6 @@ import com.wooyj.picsum.data.repository.paging.PagingPicSumRepository
 import com.wooyj.picsum.data.repository.paging.PagingPicSumRepositoryImpl
 import com.wooyj.picsum.data.repository.remote.RemotePicSumRepository
 import com.wooyj.picsum.data.repository.remote.RemotePicSumRepositoryImpl
-
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
