@@ -1,8 +1,11 @@
 package com.wooyj.picsum.domain.usecase
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.wooyj.picsum.data.repository.local.LocalFavoriteRepository
 import com.wooyj.picsum.data.repository.local.LocalPicSumRepository
 import com.wooyj.picsum.data.repository.local.LocalPicSumWithFavRepository
+import com.wooyj.picsum.data.repository.paging.PagingPicSumRepository
 import com.wooyj.picsum.data.repository.remote.RemotePicSumRepository
 import com.wooyj.picsum.domain.usecase.detail.GetFavNextIdUseCase
 import com.wooyj.picsum.domain.usecase.detail.GetFavPrevIdUseCase
@@ -22,6 +25,7 @@ import com.wooyj.picsum.domain.usecase.local.picsum.LocalGetPicSumItemUseCase
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalGetPrevIdUseCase
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalPicSumListUseCase
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalSavePicSumItemUseCase
+import com.wooyj.picsum.domain.usecase.local.picsum.PicSumListPagingUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -120,4 +124,19 @@ object UseCaseModule {
     @ViewModelScoped
     fun provideGetFavPrevIdUseCase(repository: LocalFavoriteRepository): GetFavPrevIdUseCase =
         GetFavPrevIdUseCase { id -> repository.getPrevId(id) }
+
+    @Provides
+    @ViewModelScoped
+    fun providePicSumListPagingUseCase(repository: PagingPicSumRepository): PicSumListPagingUseCase =
+        PicSumListPagingUseCase { limit ->
+            Pager(
+                PagingConfig(
+                    pageSize = limit,
+                    enablePlaceholders = false,
+                ),
+                pagingSourceFactory = {
+                    repository.getPicSumPagingSource()
+                },
+            ).flow
+        }
 }

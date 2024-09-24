@@ -67,11 +67,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
     implementation(project(":model"))
-    implementation(project(":ui:base"))
-    implementation(project(":ui:common"))
     implementation(project(":ui:theme"))
+    implementation(project(":feature:setting:ui"))
+    implementation(project(":feature:setting:domain"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)

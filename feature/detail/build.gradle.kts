@@ -67,10 +67,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(project(":feature:detail:domain"))
+    implementation(project(":feature:detail:ui"))
     implementation(project(":model"))
-    implementation(project(":ui:base"))
-    implementation(project(":ui:common"))
     implementation(project(":ui:theme"))
 
     implementation(libs.androidx.core)

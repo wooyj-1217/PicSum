@@ -3,8 +3,7 @@
     <application
         android:name=".ListApp"
         android:label="List Feature">
-        <activity
-            android:name=".ListActivity"
+        <activity android:name=".ListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

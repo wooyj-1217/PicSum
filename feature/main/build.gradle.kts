@@ -67,18 +67,15 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
     implementation(project(":model"))
-    implementation(project(":ui:base"))
     implementation(project(":ui:theme"))
-    implementation(project(":feature:detail"))
-    implementation(project(":feature:favdetail"))
-    implementation(project(":feature:favorite"))
-    implementation(project(":feature:list"))
-    implementation(project(":feature:setting"))
+    implementation(project(":feature:main:ui"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)
+
+    // Start-up
+    implementation(libs.androidx.startup.runtime)
 
     // Compose
     implementation(libs.bundles.androidx.compose)
