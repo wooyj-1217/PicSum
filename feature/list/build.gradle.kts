@@ -67,7 +67,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":model"))
     implementation(project(":ui:theme"))
     implementation(project(":feature:list:ui"))
     implementation(project(":feature:list:domain"))

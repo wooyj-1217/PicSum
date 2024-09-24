@@ -68,7 +68,6 @@ android {
 dependencies {
     implementation(project(":feature:main:ui"))
     implementation(project(":ui:theme"))
-    implementation(project(":model"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)

@@ -72,9 +72,6 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)
 
-    // Compose
-    implementation(libs.bundles.androidx.compose)
-
     // Hilt
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.android.compiler)
@@ -91,9 +88,6 @@ dependencies {
     // Firebase
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
-
-    // Coil
-    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
