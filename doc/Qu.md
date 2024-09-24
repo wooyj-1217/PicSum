@@ -180,3 +180,40 @@ https://drive.google.com/file/d/1zxJV-yLTskYP7efE-lgbpXaZeRv4Itra/view?usp=shari
 > 1. Lifecycle, 
 > 2. Method Call ( Parameter, Return )
 > 3. DataSource, Repository, UseCase
+
+
+-------
+2024.09.25
+# 29. 정리가 안되서 그려왔어요..
+# https://drive.google.com/file/d/1CVxXnXlpm86geDsw8HUqxTpHDnROpEmu/view?usp=sharing
+
+# 30. 멀티모듈 폴더링 관련
+# 30-1) 현재 navigation 폴더가 :feature:main 내에 있는데 navigation도 module을 따로 나눠야될까요?
+# 30-2) 각 feature 별로 debug, release, main이 다 있어야 될까요?
+# 30-3) 빈혈클래스는 :domain에 넣어놓고 정의했는데, :feature:A:ui 의 ViewModel에서 이 빈혈 클래스를 쓸 때 :domain을 implement 해야되나요?
+#       현재는 :feature:A:domain에 한번 더 정의해놓고 :feature:A:ui 에 :domain을 implementation 하지 않았습니다.
+# ex)
+# 
+# package com.wooyj.picsum.feature.favdetail.domain
+#
+# @Reusable
+# class RemoveFavoriteNotVisibleUseCase
+#   @Inject
+#   constructor(
+#      private val usecase: RemoveFavoriteNotVisibleUseCase,
+#   ) {
+#      suspend operator fun invoke() = usecase()
+#   }
+
+
+# 31. 멀티모듈 빌드 관련
+#     build varient에서 :feature:a:ui는 release 선택된 상태에서 :app을 debug로 빌드하면... :app 내에서 :feature:a:ui는 release로 빌드되나요?
+
+# 32. detail 화면 관련
+#     맨 처음 :feature:detail 화면 빌드 시 savedStateHandle 데이터가 없어서 죽는데, 이럴 때는 해당 데이터를 강제로 넣어주어야 할까요?
+
+# 33. feature 모듈 관련
+#     Screen 하나당 feature 하나씩이라고 생각하면 되는걸까요?
+
+
+
