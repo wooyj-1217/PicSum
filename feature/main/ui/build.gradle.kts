@@ -70,9 +70,8 @@ dependencies {
     implementation(project(":ui:base"))
     implementation(project(":ui:common"))
     implementation(project(":ui:theme"))
+    implementation(project(":ui:scheme"))
 
-    implementation(project(":feature:detail:ui"))
-    implementation(project(":feature:favdetail:ui"))
     implementation(project(":feature:favorite:ui"))
     implementation(project(":feature:list:ui"))
     implementation(project(":feature:setting:ui"))

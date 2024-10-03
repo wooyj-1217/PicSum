@@ -1,8 +1,8 @@
 package com.wooyj.picsum.feature.main.ui
 
 import androidx.lifecycle.viewModelScope
-import com.wooyj.picsum.feature.main.ui.model.BottomNavigationItem
 import com.wooyj.picsum.ui.base.BaseViewModel
+import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +21,7 @@ class MainViewModel
         init {
             _uiState.value =
                 MainUIState.Success(
-                    bottomNavigationItems = BottomNavigationItem.entries,
+                    bottomNavigationSchemes = BottomNavigationScheme.entries,
                 )
         }
 

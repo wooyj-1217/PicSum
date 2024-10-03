@@ -1,5 +1,7 @@
 package com.wooyj.picsum.feature.detail.ui
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.wooyj.picsum.feature.detail.domain.DetailUseCase
@@ -11,9 +13,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -42,20 +46,23 @@ class DetailViewModel
         }
 
         private fun load(currentId: String) {
-            viewModelScope.launch {
-                detailUseCase(currentId = currentId)
-                    .collectLatest { item ->
-                        if (_uiState.value !is DetailUIState.Success) {
-                            _uiState.value = DetailUIState.Success(item.toDetailTypeUI())
-                            Timber.d("insert: ${item.toDetailTypeUI()}")
-                        } else {
-                            _uiState.update {
-                                (it as DetailUIState.Success).copy(ui = item.toDetailTypeUI())
-                            }
-                            Timber.d("update: ${item.toDetailTypeUI()}")
+            detailUseCase(currentId = currentId)
+                .onStart {
+                    _uiState.value = DetailUIState.Loading
+                    Timber.d("detailUseCase : onStart")
+                }.onEach { item ->
+                    if (_uiState.value !is DetailUIState.Success) {
+                        _uiState.value = DetailUIState.Success(item.toDetailTypeUI())
+                        Timber.d("insert: ${item.toDetailTypeUI()}")
+                    } else {
+                        _uiState.update {
+                            (it as DetailUIState.Success).copy(ui = item.toDetailTypeUI())
                         }
+                        Timber.d("update: ${item.toDetailTypeUI()}")
                     }
-            }
+                }.catch {
+                    Timber.e("detailUseCase : catch", it)
+                }.launchIn(viewModelScope)
         }
 
         private fun toggleFavorite(id: String) {
@@ -92,3 +99,14 @@ class DetailViewModel
             }
         }
     }
+
+private val LocalDetailViewModelFactory =
+    compositionLocalOf<@Composable () -> DetailViewModel> {
+        error("No DetailViewModelFactory provided")
+    }
+
+fun provideDetailViewModelFactory(viewModelFactory: @Composable () -> DetailViewModel) =
+    LocalDetailViewModelFactory provides viewModelFactory
+
+@Composable
+fun detailViewModel(): DetailViewModel = LocalDetailViewModelFactory.current()

@@ -4,6 +4,7 @@ import com.wooyj.picsum.domain.usecase.detail.RemoteGetPicSumItemUseCase
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalGetNextIdUseCase
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalSavePicSumItemUseCase
 import dagger.Reusable
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @Reusable
@@ -14,7 +15,7 @@ class GetNextIdUseCase
         private val remoteGetPicSumItemUseCase: RemoteGetPicSumItemUseCase,
         private val localSavePicSumItemUseCase: LocalSavePicSumItemUseCase,
     ) {
-        suspend operator fun invoke(currentId: String): String? {
+        operator fun invoke(currentId: String): Flow<String?> {
             val localNextId = localGetNextIdUseCase(currentId)
             if (localNextId != null) {
                 return localNextId

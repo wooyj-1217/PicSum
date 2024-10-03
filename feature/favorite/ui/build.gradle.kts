@@ -71,6 +71,7 @@ dependencies {
     implementation(project(":ui:base"))
     implementation(project(":ui:common"))
     implementation(project(":ui:theme"))
+    implementation(project(":ui:scheme"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)

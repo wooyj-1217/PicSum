@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.wooyj.picsum.feature.detail.ui"
+    namespace = "com.wooyj.picsum.ui.scheme"
     compileSdk =
         libs.versions.compileSdk
             .get()
@@ -66,12 +66,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:detail:domain"))
     implementation(project(":model"))
-    implementation(project(":ui:base"))
-    implementation(project(":ui:common"))
-    implementation(project(":ui:theme"))
-    implementation(project(":ui:scheme"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)

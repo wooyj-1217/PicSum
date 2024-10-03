@@ -5,6 +5,7 @@ import com.wooyj.picsum.domain.usecase.local.picsum.LocalGetPicSumItemUseCase
 import com.wooyj.picsum.model.PicSumItemFavModel
 import com.wooyj.picsum.model.toPicSumItemFavModel
 import dagger.Reusable
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @Reusable
@@ -15,7 +16,7 @@ class GetCurrentItemUseCase
         private val remoteGetItemAndSaveUseCase: RemoteGetItemAndSaveUseCase,
         private val getFavoriteUseCase: GetFavoriteUseCase,
     ) {
-        suspend operator fun invoke(currentId: String): PicSumItemFavModel {
+        operator fun invoke(currentId: String): Flow<PicSumItemFavModel> {
             val favItem = getFavoriteUseCase(currentId)
             val localModel = localItemUseCase(currentId)
             val isFavorite =

@@ -22,9 +22,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.wooyj.picsum.feature.main.ui.model.BottomNavigationItem
 import com.wooyj.picsum.feature.main.ui.navigation.PicSumNavHost
 import com.wooyj.picsum.feature.main.ui.navigation.Screen
+import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
 
 @Composable
 fun MainScreen(
@@ -36,12 +36,12 @@ fun MainScreen(
     val effect by viewModel.effect.collectAsStateWithLifecycle(null)
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentBottomNavigationItem by remember(navBackStackEntry) {
+    val currentBottomNavigationScheme by remember(navBackStackEntry) {
         derivedStateOf {
             navBackStackEntry?.destination?.route?.let { route ->
-                BottomNavigationItem.entries.find { it.route == route }
+                BottomNavigationScheme.entries.find { it.route == route }
             } ?: run {
-                BottomNavigationItem.List
+                BottomNavigationScheme.List
             }
         }
     }
@@ -57,8 +57,8 @@ fun MainScreen(
             when (uiState) {
                 is MainUIState.Success -> {
                     BottomNavigationView(
-                        list = (uiState as MainUIState.Success).bottomNavigationItems,
-                        currentBottomNavigationItem = currentBottomNavigationItem,
+                        list = (uiState as MainUIState.Success).bottomNavigationSchemes,
+                        currentBottomNavigationScheme = currentBottomNavigationScheme,
                         onClick = { item ->
                             when (item.route) {
                                 Screen.List.route -> {
@@ -100,9 +100,9 @@ fun MainScreen(
 @Composable
 fun BottomNavigationView(
     modifier: Modifier = Modifier,
-    list: List<BottomNavigationItem>,
-    currentBottomNavigationItem: BottomNavigationItem,
-    onClick: (BottomNavigationItem) -> Unit,
+    list: List<BottomNavigationScheme>,
+    currentBottomNavigationScheme: BottomNavigationScheme,
+    onClick: (BottomNavigationScheme) -> Unit,
 ) {
     BottomNavigation(
         modifier = modifier,
@@ -111,7 +111,7 @@ fun BottomNavigationView(
     ) {
         list.forEach { item ->
             BottomNavigationItem(
-                selected = item == currentBottomNavigationItem,
+                selected = item == currentBottomNavigationScheme,
                 label = {
                     Text(
                         text = stringResource(id = item.title),

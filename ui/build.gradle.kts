@@ -67,7 +67,9 @@ android {
 
 dependencies {
     implementation(project(":feature:main:ui"))
+    implementation(project(":feature:detail:ui"))
     implementation(project(":ui:theme"))
+    implementation(project(":ui:scheme"))
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)

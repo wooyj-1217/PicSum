@@ -14,7 +14,7 @@ class FavoriteDetailUseCase
         private val nextIdUseCase: GetFavNextIdUseCase,
         private val prevIdUseCase: GetFavPrevIdUseCase,
     ) {
-        suspend operator fun invoke(currentId: String) =
+        operator fun invoke(currentId: String) =
             flow {
                 val currentItem = currentItemUseCase(currentId)
 

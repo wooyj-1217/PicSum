@@ -190,6 +190,7 @@ https://drive.google.com/file/d/1zxJV-yLTskYP7efE-lgbpXaZeRv4Itra/view?usp=shari
 # 30. 멀티모듈 폴더링 관련
 # 30-1) 현재 navigation 폴더가 :feature:main 내에 있는데 navigation도 module을 따로 나눠야될까요?
 # 30-2) 각 feature 별로 debug, release, main이 다 있어야 될까요?
+>> Case By Case
 # 30-3) 빈혈클래스는 :domain에 넣어놓고 정의했는데, :feature:A:ui 의 ViewModel에서 이 빈혈 클래스를 쓸 때 :domain을 implement 해야되나요?
 #       현재는 :feature:A:domain에 한번 더 정의해놓고 :feature:A:ui 에 :domain을 implementation 하지 않았습니다.
 # ex)

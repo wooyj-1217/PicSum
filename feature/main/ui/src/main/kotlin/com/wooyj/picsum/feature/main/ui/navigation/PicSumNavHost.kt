@@ -3,21 +3,16 @@ package com.wooyj.picsum.feature.main.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import androidx.navigation.compose.navigation
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.ktx.performance
-import com.wooyj.picsum.feature.detail.ui.DetailScreen
-import com.wooyj.picsum.feature.favdetail.ui.FavoriteDetailScreen
-import com.wooyj.picsum.feature.favorite.ui.FavoriteListScreen
-import com.wooyj.picsum.feature.list.ui.ListScreen
-import com.wooyj.picsum.feature.setting.ui.SettingScreen
 import timber.log.Timber
 
 @Composable
@@ -29,54 +24,82 @@ fun PicSumNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.List.route,
+        startDestination = Screen.List.route, // 1
     ) {
-        logComposable(route = Screen.List.route) {
-            ListScreen(
-                onNextNavigation = { id ->
-                    navController.navigate(route = Screen.Detail.setPhotoId(id))
-                },
-            )
-        }
-        logComposable(
-            route = Screen.Detail.route,
-            arguments =
-                listOf(
-                    navArgument("photoId") { type = NavType.StringType },
-                ),
+        navigation(
+            route = Screen.List.route, // 1
+            startDestination = Screen.List.route, // 2
         ) {
-            DetailScreen()
+            composable(
+                route = Screen.List.route, // 2
+            ) {
+            }
+
+            composable(
+                route = Screen.Detail.route,
+            ) {
+            }
         }
-        logComposable(route = Screen.FavoriteList.route) {
-            FavoriteListScreen(
-                onNextNavigation = { id ->
-                    navController.navigate(route = Screen.FavoriteDetail.setPhotoId(id))
-                },
-            )
-        }
-        logComposable(
-            route = Screen.FavoriteDetail.route,
-            arguments =
-                listOf(
-                    navArgument("photoId") { type = NavType.StringType },
-                ),
+
+        composable(
+            route = Screen.FavoriteList.route,
         ) {
-            FavoriteDetailScreen()
         }
-        logComposable(route = Screen.Setting.route) {
-            SettingScreen()
+
+        composable(
+            route = Screen.Setting.route,
+        ) {
         }
+
+        logComposable(
+            route = Screen.Error.route,
+        )
+//        logComposable(route = Screen.List.route) {
+//            ListScreen(
+//                onNextNavigation = { id ->
+//                    navController.navigate(route = Screen.Detail.setPhotoId(id))
+//                },
+//            )
+//        }
+//        logComposable(
+//            route = Screen.Detail.route,
+//            arguments =
+//                listOf(
+//                    navArgument("photoId") { type = NavType.StringType },
+//                ),
+//        ) {
+//            DetailScreen()
+//        }
+//        logComposable(route = Screen.FavoriteList.route) {
+//            FavoriteListScreen(
+//                onNextNavigation = { id ->
+//                    navController.navigate(route = Screen.FavoriteDetail.setPhotoId(id))
+//                },
+//            )
+//        }
+//        logComposable(
+//            route = Screen.FavoriteDetail.route,
+//            arguments =
+//                listOf(
+//                    navArgument("photoId") { type = NavType.StringType },
+//                ),
+//        ) {
+//            FavoriteDetailScreen()
+//        }
+//        logComposable(route = Screen.Setting.route) {
+//            SettingScreen()
+//        }
     }
 }
 
 private fun NavGraphBuilder.logComposable(
     route: String,
-    arguments: List<NamedNavArgument> = emptyList(),
+    deepLinks: List<NavDeepLink> = emptyList(),
     content: @Composable () -> Unit,
 ) {
     composable(
         route = route,
-        arguments = arguments,
+        deepLinks = deepLinks,
     ) { backStackEntry ->
         val context = LocalContext.current
         Timber.d("Route: $route")

@@ -2,6 +2,7 @@ package com.wooyj.picsum.feature.detail.domain
 
 import com.wooyj.picsum.domain.usecase.favorite.RemoveFavoriteNotVisibleUseCase
 import dagger.Reusable
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @Reusable
@@ -10,5 +11,7 @@ class RemoveFavoriteNotVisibleUseCase
     constructor(
         private val usecase: RemoveFavoriteNotVisibleUseCase,
     ) {
-        suspend operator fun invoke() = usecase()
+        operator fun invoke() = flow { emit(usecase()) }
     }
+
+// TODO : 빈혈클래스인 UseCase인 경우는 다음과 같이 Flow로 변환해서 바꾼다!!

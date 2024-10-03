@@ -70,6 +70,7 @@ dependencies {
     implementation(project(":ui:base"))
     implementation(project(":ui:common"))
     implementation(project(":ui:theme"))
+    implementation(project(":ui:scheme"))
     implementation(project(":feature:favdetail:domain"))
 
     implementation(libs.androidx.core)
