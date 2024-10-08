@@ -1,5 +1,7 @@
 package com.wooyj.picsum.domain.usecase.local.picsum
 
+import kotlinx.coroutines.flow.Flow
+
 fun interface LocalGetNextIdUseCase {
-    suspend operator fun invoke(id: String): String?
+    operator fun invoke(id: String): Flow<String?>
 }

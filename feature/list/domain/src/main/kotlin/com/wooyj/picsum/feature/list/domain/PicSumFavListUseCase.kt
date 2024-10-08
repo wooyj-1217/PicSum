@@ -19,7 +19,7 @@ class PicSumFavListUseCase
         private val listUseCase: PicSumListPagingUseCase,
         private val favListUseCase: FavoriteVisibleListUseCase,
     ) {
-        suspend operator fun invoke(
+        operator fun invoke(
             limit: Int,
             scope: CoroutineScope,
         ): Flow<PagingData<PicSumItemFavModel>> {

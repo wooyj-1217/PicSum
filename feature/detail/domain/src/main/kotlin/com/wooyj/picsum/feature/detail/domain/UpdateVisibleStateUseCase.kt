@@ -5,6 +5,7 @@ import com.wooyj.picsum.domain.usecase.favorite.GetFavoriteUseCase
 import com.wooyj.picsum.domain.usecase.favorite.UpdateFavoriteUseCase
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -18,7 +19,7 @@ class UpdateVisibleStateUseCase
     ) {
         operator fun invoke(id: String): Flow<String> =
             flow {
-                val item = getFavoriteUseCase(id)
+                val item = getFavoriteUseCase(id).firstOrNull()
                 if (item == null) {
                     // 없을 경우
                     addFavoriteUseCase(

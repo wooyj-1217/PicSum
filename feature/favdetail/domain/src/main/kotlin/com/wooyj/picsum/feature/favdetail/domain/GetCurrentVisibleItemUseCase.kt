@@ -2,8 +2,13 @@ package com.wooyj.picsum.feature.favdetail.domain
 
 import com.wooyj.picsum.domain.usecase.favorite.GetFavoriteUseCase
 import com.wooyj.picsum.domain.usecase.local.picsum.LocalGetPicSumItemUseCase
+import com.wooyj.picsum.model.PicSumItemFavModel
 import com.wooyj.picsum.model.toPicSumItemFavModel
 import dagger.Reusable
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @Reusable
@@ -13,10 +18,12 @@ class GetCurrentVisibleItemUseCase
         private val localItemUseCase: LocalGetPicSumItemUseCase,
         private val getFavoriteUseCase: GetFavoriteUseCase,
     ) {
-        suspend operator fun invoke(currentId: String): com.wooyj.picsum.model.PicSumItemFavModel {
-            val item = localItemUseCase(currentId)!!
-            val favItem = getFavoriteUseCase(currentId)
+        operator fun invoke(currentId: String): Flow<PicSumItemFavModel> = flow {
+            val item = localItemUseCase(currentId).firstOrNull()
+            val favItem = getFavoriteUseCase(currentId).firstOrNull()
 
-            return item.toPicSumItemFavModel(favItem!!.visible)
+            item?.let{
+                emit(it.toPicSumItemFavModel(favItem!!.visible))
+            }
         }
     }

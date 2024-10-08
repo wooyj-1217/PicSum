@@ -1,5 +1,8 @@
 package com.wooyj.picsum.domain.usecase.local.picsum
 
+import com.wooyj.picsum.model.PicSum
+import kotlinx.coroutines.flow.Flow
+
 fun interface LocalGetPicSumItemUseCase {
-    suspend operator fun invoke(id: String): com.wooyj.picsum.model.PicSum?
+    operator fun invoke(id: String): Flow<PicSum?>
 }

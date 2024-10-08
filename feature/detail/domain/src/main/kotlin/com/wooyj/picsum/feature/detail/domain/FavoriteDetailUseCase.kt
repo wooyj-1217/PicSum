@@ -3,6 +3,7 @@ package com.wooyj.picsum.feature.detail.domain
 import com.wooyj.picsum.domain.usecase.detail.GetFavNextIdUseCase
 import com.wooyj.picsum.domain.usecase.detail.GetFavPrevIdUseCase
 import dagger.Reusable
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -13,21 +14,14 @@ class FavoriteDetailUseCase
         private val currentItemUseCase: GetCurrentVisibleItemUseCase,
         private val nextIdUseCase: GetFavNextIdUseCase,
         private val prevIdUseCase: GetFavPrevIdUseCase,
-    ) {
+    )  {
         operator fun invoke(currentId: String) =
-            flow {
-                val currentItem = currentItemUseCase(currentId)
-
-                // nextId와 prevId 가져오기
-                val nextId = nextIdUseCase(currentId)
-                val prevId = prevIdUseCase(currentId)
-
-                emit(
-                    com.wooyj.picsum.model.ItemWithIdModel(
-                        prevId = prevId,
-                        nextId = nextId,
-                        item = currentItem,
-                    ),
+            combine(currentItemUseCase(currentId), nextIdUseCase(currentId), prevIdUseCase(currentId))
+            { currentItem, nextId, prevId ->
+                com.wooyj.picsum.model.ItemWithIdModel(
+                    prevId = prevId,
+                    nextId = nextId,
+                    item = currentItem,
                 )
             }
-    }
+        }

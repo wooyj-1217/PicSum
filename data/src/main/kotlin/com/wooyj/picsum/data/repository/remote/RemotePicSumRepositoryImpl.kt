@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.wooyj.picsum.data.remote.dto.toPicSum
 import com.wooyj.picsum.data.source.PicSumRemoteDataSource
+import com.wooyj.picsum.model.PicSum
 import javax.inject.Inject
 
 class RemotePicSumRepositoryImpl
@@ -16,7 +17,7 @@ class RemotePicSumRepositoryImpl
             limit: Int,
         ): List<com.wooyj.picsum.model.PicSum> = dataSource.getPicSumList(page, limit).map { it.toPicSum() }
 
-        override suspend fun getPicSumItem(id: String): com.wooyj.picsum.model.PicSum = dataSource.getPicSumItem(id).toPicSum()
+        override suspend fun getPicSumItem(id: String): PicSum? = dataSource.getPicSumItem(id).toPicSum()
 
         override fun getPicSumPagingSource(): PagingSource<Int, com.wooyj.picsum.model.PicSum> =
             object : PagingSource<Int, com.wooyj.picsum.model.PicSum>() {

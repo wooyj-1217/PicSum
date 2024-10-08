@@ -10,5 +10,5 @@ class RemoveFavoriteNotVisibleUseCase
     constructor(
         private val usecase: RemoveFavoriteNotVisibleUseCase,
     ) {
-        suspend operator fun invoke() = usecase()
+        operator fun invoke() = usecase()
     }

@@ -31,6 +31,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.flow.flow
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -38,37 +39,37 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideGetPicSumItemUseCase(repository: RemotePicSumRepository): GetPicSumItemUseCase =
-        GetPicSumItemUseCase { id -> repository.getPicSumItem(id) }
+        GetPicSumItemUseCase { id -> flow { emit(repository.getPicSumItem(id)) } }
 
     @Provides
     @ViewModelScoped
     fun provideRemoveFavoriteNotVisibleUseCase(repository: LocalFavoriteRepository): RemoveFavoriteNotVisibleUseCase =
-        RemoveFavoriteNotVisibleUseCase { repository.removeFavoriteNotVisible() }
+        RemoveFavoriteNotVisibleUseCase { flow { emit(repository.removeFavoriteNotVisible()) } }
 
     @Provides
     @ViewModelScoped
     fun provideAddFavoriteUseCase(repository: LocalFavoriteRepository): AddFavoriteUseCase =
-        AddFavoriteUseCase { entity -> repository.addFavorite(entity) }
+        AddFavoriteUseCase { entity -> flow { emit(repository.addFavorite(entity)) } }
 
     @Provides
     @ViewModelScoped
     fun provideGetFavoriteUseCase(repository: LocalFavoriteRepository): GetFavoriteUseCase =
-        GetFavoriteUseCase { id -> repository.getFavoriteItem(id) }
+        GetFavoriteUseCase { id -> flow { emit(repository.getFavoriteItem(id)) } }
 
     @Provides
     @ViewModelScoped
     fun provideIsFavoriteItemUseCase(repository: LocalFavoriteRepository): IsFavoriteItemUseCase =
-        IsFavoriteItemUseCase { id -> repository.added(id) }
+        IsFavoriteItemUseCase { id -> flow { emit(repository.added(id)) } }
 
     @Provides
     @ViewModelScoped
     fun provideRemoveFavoriteUseCase(repository: LocalFavoriteRepository): RemoveFavoriteUseCase =
-        RemoveFavoriteUseCase { id -> repository.removeFavorite(id) }
+        RemoveFavoriteUseCase { id -> flow { emit(repository.removeFavorite(id)) } }
 
     @Provides
     @ViewModelScoped
     fun provideUpdateFavoriteUseCase(repository: LocalFavoriteRepository): UpdateFavoriteUseCase =
-        UpdateFavoriteUseCase { entity -> repository.updateFavorite(entity) }
+        UpdateFavoriteUseCase { entity -> flow { emit(repository.updateFavorite(entity)) } }
 
     @Provides
     @ViewModelScoped
@@ -83,7 +84,7 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideRemoteGetPicSumItemUseCase(repository: RemotePicSumRepository): RemoteGetPicSumItemUseCase =
-        RemoteGetPicSumItemUseCase { id -> repository.getPicSumItem(id) }
+        RemoteGetPicSumItemUseCase { id -> flow { emit(repository.getPicSumItem(id)) } }
 
     @Provides
     @ViewModelScoped
@@ -93,37 +94,37 @@ object UseCaseModule {
     @Provides
     @ViewModelScoped
     fun provideGetFavNextIdUseCase(repository: LocalFavoriteRepository): GetFavNextIdUseCase =
-        GetFavNextIdUseCase { id -> repository.getNextId(id) }
+        GetFavNextIdUseCase { id -> flow { emit(repository.getNextId(id)) } }
 
     @Provides
     @ViewModelScoped
     fun provideLocalGetNextIdUseCase(repository: LocalPicSumRepository): LocalGetNextIdUseCase =
-        LocalGetNextIdUseCase { id -> repository.getNextId(id) }
+        LocalGetNextIdUseCase { id -> flow { emit(repository.getNextId(id)) } }
 
     @Provides
     @ViewModelScoped
     fun provideLocalGetPicSumItemUseCase(repository: LocalPicSumRepository): LocalGetPicSumItemUseCase =
-        LocalGetPicSumItemUseCase { id -> repository.getPicSumItem(id) }
+        LocalGetPicSumItemUseCase { id -> flow { emit(repository.getPicSumItem(id)) } }
 
     @Provides
     @ViewModelScoped
     fun provideLocalGetPrevIdUseCase(repository: LocalPicSumRepository): LocalGetPrevIdUseCase =
-        LocalGetPrevIdUseCase { id -> repository.getPrevId(id) }
+        LocalGetPrevIdUseCase { id -> flow { emit(repository.getPrevId(id)) } }
 
     @Provides
     @ViewModelScoped
     fun provideLocalPicSumListUseCase(repository: LocalPicSumRepository): LocalPicSumListUseCase =
-        LocalPicSumListUseCase { repository.getPicSumList() }
+        LocalPicSumListUseCase { flow { emit(repository.getPicSumList()) } }
 
     @Provides
     @ViewModelScoped
     fun provideLocalPicSumRepository(repository: LocalPicSumRepository): LocalSavePicSumItemUseCase =
-        LocalSavePicSumItemUseCase { entity -> repository.insert(entity) }
+        LocalSavePicSumItemUseCase { entity -> flow { emit(repository.insert(entity)) } }
 
     @Provides
     @ViewModelScoped
     fun provideGetFavPrevIdUseCase(repository: LocalFavoriteRepository): GetFavPrevIdUseCase =
-        GetFavPrevIdUseCase { id -> repository.getPrevId(id) }
+        GetFavPrevIdUseCase { id -> flow { emit(repository.getPrevId(id)) } }
 
     @Provides
     @ViewModelScoped

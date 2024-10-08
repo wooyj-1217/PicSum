@@ -11,7 +11,7 @@ class RemoveFavoriteNotVisibleUseCase
     constructor(
         private val usecase: RemoveFavoriteNotVisibleUseCase,
     ) {
-        operator fun invoke() = flow { emit(usecase()) }
+        operator fun invoke() = usecase()
     }
 
 // TODO : 빈혈클래스인 UseCase인 경우는 다음과 같이 Flow로 변환해서 바꾼다!!

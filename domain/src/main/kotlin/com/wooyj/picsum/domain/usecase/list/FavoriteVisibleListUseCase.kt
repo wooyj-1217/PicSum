@@ -4,5 +4,5 @@ import com.wooyj.picsum.model.Favorite
 import kotlinx.coroutines.flow.Flow
 
 fun interface FavoriteVisibleListUseCase {
-    suspend operator fun invoke(): Flow<List<Favorite>>
+    operator fun invoke(): Flow<List<Favorite>>
 }

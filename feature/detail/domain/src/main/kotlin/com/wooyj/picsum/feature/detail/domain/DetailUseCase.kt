@@ -108,52 +108,8 @@ constructor(
                 item = current,
             )
         }
-//                val favListFlow = favoriteListUseCase() // Flow<List<FavoriteEntity>>
-//                val cacheList = picSumListUseCase() // List<PicSumEntity> ( cache List )
-//
-//                combine(favListFlow, currentId) { favList, id ->
-//                    Timber.d("Favorite List: $favList")
-//
-//                    val selectedId =
-//                        if (id == "") {
-//                            favList.first().id
-//                        } else {
-//                            id
-//                        }
-//
-//                    val list =
-//                        if (fromDetail) {
-//                            cacheList.map { it.id }
-//                        } else {
-//                            favList.map { it.id }
-//                        }
-//
-//                    Timber.d("currentId: $id")
-//                    Timber.d("selectedId: $selectedId")
-//
-//                    val model =
-//                        if (cacheList.isEmpty()) {
-//                            picSumItemUseCase(selectedId).toPicSumItemFavModel(
-//                                isFavorite = favList.any { it.id == selectedId && it.visible },
-//                            )
-//                        } else {
-//                            cacheList.first { it.id == selectedId }.toPicSumItemFavModel(
-//                                isFavorite = favList.any { it.id == selectedId && it.visible },
-//                            )
-//                        }
-//
-//                    val beforeId = list.getOrNull(list.indexOf(selectedId) - 1)
-//                    val nextId = list.getOrNull(list.indexOf(selectedId) + 1)
-//
-//                    ItemWithIdModel(
-//                        beforeId = beforeId,
-//                        nextId = nextId,
-//                        item = model,
-//                    ).also {
-//                        Timber.d("Emitting model: $it")
-//                    }
     }
-}
+
 
 // 1) Detail
 // 1-1) cache list 값이 없으면 return empty

@@ -3,6 +3,7 @@ package com.wooyj.picsum.feature.favdetail.domain
 import com.wooyj.picsum.model.ItemWithIdModel
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -18,10 +19,14 @@ class DetailUseCase
         private val prevIdUseCase: GetPrevIdUseCase,
     ) {
         operator fun invoke(currentId: String): Flow<ItemWithIdModel> =
-            flow {
+            combine(currentItemUseCase(currentId), prevIdUseCase(currentId), nextIdUseCase(currentId))
+            { currentItem, prevId, nextId ->
+                ItemWithIdModel(
+                    prevId = prevId,
+                    nextId = nextId,
+                    item = currentItem,
+                )
                 // 1) 현재 item 조회 (cache 아이템이 있을경우 cache 아이템 조회, 없을 경우 remote 조회 및 save)
-                val currentItem = currentItemUseCase(currentId)
-
                 // 2) 현재 아이템의 이전, 다음 id값 찾기
                 // 아이디 조회 -> 현재 X
                 // 앞 뒤 -> DB -> remote -> retry : 3, limit
@@ -31,16 +36,6 @@ class DetailUseCase
                 // 내 뒷번호 뭐야?? -> Server에서 데이터 와야 한다
                 // 그냥 찌른다 -> DB, Server
 
-                val prevId = prevIdUseCase(currentId)
-                val nextId = nextIdUseCase(currentId)
-
-                emit(
-                    ItemWithIdModel(
-                        prevId = prevId,
-                        nextId = nextId,
-                        item = currentItem,
-                    ),
-                )
 //                val favListFlow = favoriteListUseCase() // Flow<List<FavoriteEntity>>
 //                val cacheList = picSumListUseCase() // List<PicSumEntity> ( cache List )
 //
