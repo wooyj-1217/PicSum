@@ -72,10 +72,6 @@ dependencies {
     implementation(project(":ui:theme"))
     implementation(project(":ui:scheme"))
 
-    implementation(project(":feature:favorite:ui"))
-    implementation(project(":feature:list:ui"))
-    implementation(project(":feature:setting:ui"))
-
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime)
 
