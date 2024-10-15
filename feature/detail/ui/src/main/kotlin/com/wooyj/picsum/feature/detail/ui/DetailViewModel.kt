@@ -100,13 +100,13 @@ class DetailViewModel
         }
     }
 
-private val LocalDetailViewModelFactory =
-    compositionLocalOf<@Composable () -> DetailViewModel> {
-        error("No DetailViewModelFactory provided")
-    }
-
-fun provideDetailViewModelFactory(viewModelFactory: @Composable () -> DetailViewModel) =
-    LocalDetailViewModelFactory provides viewModelFactory
-
-@Composable
-fun detailViewModel(): DetailViewModel = LocalDetailViewModelFactory.current()
+//private val LocalDetailViewModelFactory =
+//    compositionLocalOf<@Composable () -> DetailViewModel> {
+//        error("No DetailViewModelFactory provided")
+//    }
+//
+//fun provideDetailViewModelFactory(viewModelFactory: @Composable () -> DetailViewModel) =
+//    LocalDetailViewModelFactory provides viewModelFactory
+//
+//@Composable
+//fun detailViewModel(): DetailViewModel = LocalDetailViewModelFactory.current()

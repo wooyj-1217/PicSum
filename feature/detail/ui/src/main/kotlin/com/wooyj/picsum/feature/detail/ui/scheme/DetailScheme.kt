@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
 import com.wooyj.picsum.ui.scheme.NavigationScheme
 
-val detailScheme = NavigationScheme("detail")
+val detailScheme = NavigationScheme(
+    route = "detail/{itemId}"
+)
 
 val detailBottomNavigationScheme
     @Composable
@@ -12,5 +14,5 @@ val detailBottomNavigationScheme
         BottomNavigationScheme(
             title = "Detail",
             icon = null,
-            route = detailScheme,
+            scheme = detailScheme,
         )

@@ -12,5 +12,5 @@ val settingBottomNavigationScheme
         BottomNavigationScheme(
             title = "Setting",
             icon = null,
-            route = settingScheme,
+            scheme = settingScheme,
         )

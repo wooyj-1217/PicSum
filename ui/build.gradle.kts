@@ -66,8 +66,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:main:ui"))
+    implementation(project(":feature:list:ui"))
+    implementation(project(":feature:setting:ui"))
     implementation(project(":feature:detail:ui"))
+    implementation(project(":feature:favorite:ui"))
+    implementation(project(":feature:favdetail:ui"))
     implementation(project(":ui:theme"))
     implementation(project(":ui:scheme"))
 
@@ -79,6 +82,7 @@ dependencies {
 
     // Hilt
     implementation(libs.bundles.hilt)
+    implementation(project(":ui:base"))
     kapt(libs.hilt.android.compiler)
 
     // Paging

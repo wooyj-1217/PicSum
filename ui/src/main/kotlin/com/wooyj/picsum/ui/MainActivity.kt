@@ -5,40 +5,36 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
-import androidx.navigation.compose.rememberNavController
-import com.wooyj.picsum.feature.detail.ui.DetailScreen
-import com.wooyj.picsum.feature.detail.ui.DetailViewModel
-import com.wooyj.picsum.feature.detail.ui.provideDetailViewModelFactory
-import com.wooyj.picsum.feature.detail.ui.scheme.detailBottomNavigationScheme
-import com.wooyj.picsum.feature.detail.ui.scheme.detailScheme
-import com.wooyj.picsum.feature.main.ui.mainRoute
+import com.wooyj.picsum.feature.favorite.ui.scheme.favoriteBottomNavigationScheme
+import com.wooyj.picsum.feature.list.ui.scheme.listBottomNavigationScheme
+import com.wooyj.picsum.feature.setting.ui.scheme.settingBottomNavigationScheme
 import com.wooyj.picsum.ui.theme.PicSumTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    val detailViewModel by viewModels<DetailViewModel>()
+    val mainViewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val bottomUiScheme =
                 listOf(
-                    detailBottomNavigationScheme,
+                    listBottomNavigationScheme,
+                    favoriteBottomNavigationScheme,
+                    settingBottomNavigationScheme,
                 )
 
             PicSumTheme {
                 CompositionLocalProvider(
-                    provideDetailViewModelFactory { detailViewModel },
+                    provideMainViewModelFactory { mainViewModel() }, //(전역에서 쓰는 viewModel)
                 ) {
-                    val navController = rememberNavController()
-                    NavHost(
-                        navController = navController,
-                        startDestination = detailScheme.route,
-                    ) {
+                    MainScreen()
+
+//                    NavHost(
+//                        navController = navController,
+//                        startDestination = listScheme.route,
+//                    ) {
                         // 1
                         // favorite, favoriteDetail
                         // list, detail
@@ -49,19 +45,53 @@ class MainActivity : ComponentActivity() {
                         // favoriteDetail
                         // detail
 
-                        mainRoute()
+//                        navigation(
+//                            route = listScheme.route,
+//                            startDestination = listScheme.route,
+//                        ) {
+//                            composable(
+//                                route = listScheme.route
+//                            ) {
+//                                ListScreen(
+//                                    onNextNavigation = { id ->
+//                                        navController.navigate(route = detailScheme.route)
+//                                    }
+//                                )
+//                            }
+//                            composable(
+//                                route = detailScheme.route
+//                            ) {
+//                                DetailScreen()
+//                            }
+//                        }
+//                        navigation(
+//                            route = favoriteScheme.route,
+//                            startDestination = favoriteScheme.route,
+//                        ) {
+//                            composable(
+//                                route = favDetailScheme.route
+//                            ) {
+//                                FavoriteDetailScreen()
+//                            }
+//                        }
+//                        navigation(
+//                            route = settingScheme.route,
+//                            startDestination = settingScheme.route,
+//                        ) {
+//                        }
 
-                        navigation(
-                            route = detailScheme.main,
-                            startDestination = detailScheme.route,
-                        ) {
-                            composable(
-                                route = detailScheme.route,
-                            ) {
-                                DetailScreen()
-                            }
-                        }
-                    }
+//                        mainRoute()
+//                        navigation(
+//                            route = detailScheme.main,
+//                            startDestination = detailScheme.route,
+//                        ) {
+//                            composable(
+//                                route = detailScheme.route,
+//                            ) {
+//                                DetailScreen()
+//                            }
+//                        }
+
                 }
             }
         }

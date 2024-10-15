@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
 import com.wooyj.picsum.ui.scheme.NavigationScheme
 
-val favoriteScheme = NavigationScheme("favorite")
+val favoriteScheme = NavigationScheme(
+    route = "favorite",
+)
 
 val favoriteBottomNavigationScheme
     @Composable
@@ -12,5 +14,5 @@ val favoriteBottomNavigationScheme
         BottomNavigationScheme(
             title = "Favorite",
             icon = null,
-            route = favoriteScheme,
+            scheme = favoriteScheme,
         )

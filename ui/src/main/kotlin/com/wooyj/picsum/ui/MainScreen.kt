@@ -1,4 +1,4 @@
-package com.wooyj.picsum.feature.main.ui
+package com.wooyj.picsum.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
@@ -13,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,8 +21,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.wooyj.picsum.feature.main.ui.navigation.PicSumNavHost
-import com.wooyj.picsum.feature.main.ui.navigation.Screen
+import com.wooyj.picsum.feature.favorite.ui.scheme.favoriteScheme
+import com.wooyj.picsum.feature.list.ui.scheme.listScheme
+import com.wooyj.picsum.feature.setting.ui.scheme.settingScheme
+import com.wooyj.picsum.ui.navigation.PicSumNavHost
 import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
 
 @Composable
@@ -35,19 +36,22 @@ fun MainScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val effect by viewModel.effect.collectAsStateWithLifecycle(null)
 
-//    val navBackStackEntry by navController.currentBackStackEntryAsState()
-//    val currentBottomNavigationScheme by remember(navBackStackEntry) {
-//        derivedStateOf {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentBottomNavigationScheme by remember(navBackStackEntry) {
+        derivedStateOf {
 //            navBackStackEntry?.destination?.route?.let { route ->
 //                BottomNavigationScheme.entries.find { it.route == route }
 //            } ?: run {
 //                BottomNavigationScheme.List
 //            }
-//        }
-//    }
+            navBackStackEntry?.destination?.route?.let { route ->
+                // TODO("find scheme.")
+            }
+        }
+    }
 
     LaunchedEffect(key1 = effect) {
-        val navigate = effect?.screen?.route ?: return@LaunchedEffect
+        val navigate = effect?.scheme?.route ?: return@LaunchedEffect
         navController.navigate(navigate)
     }
 
@@ -60,16 +64,16 @@ fun MainScreen(
                         list = (uiState as MainUIState.Success).bottomNavigationSchemes,
                         currentBottomNavigationScheme = currentBottomNavigationScheme,
                         onClick = { item ->
-                            when (item.route) {
-                                Screen.List.route -> {
+                            when (item.scheme.route) {
+                                listScheme.route -> {
                                     viewModel.onEvent(MainEvent.OnListClickEvent)
                                 }
 
-                                Screen.FavoriteList.route -> {
+                                favoriteScheme.route -> {
                                     viewModel.onEvent(MainEvent.OnFavClickEvent)
                                 }
 
-                                Screen.Setting.route -> {
+                                settingScheme.route -> {
                                     viewModel.onEvent(MainEvent.OnSettingClickEvent)
                                 }
 
@@ -89,7 +93,7 @@ fun MainScreen(
                 navController = navController,
                 onError = { error ->
                     viewModel.onEvent(
-                        MainEvent.OnReviceErrorEvent(error),
+                        MainEvent.OnReceiveErrorEvent(error),
                     )
                 },
             )

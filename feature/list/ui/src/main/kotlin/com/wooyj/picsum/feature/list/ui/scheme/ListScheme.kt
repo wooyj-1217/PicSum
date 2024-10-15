@@ -12,5 +12,5 @@ val listBottomNavigationScheme
         BottomNavigationScheme(
             title = "List",
             icon = null,
-            route = listScheme,
+            scheme = listScheme,
         )

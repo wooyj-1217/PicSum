@@ -5,5 +5,5 @@ import androidx.compose.runtime.Composable
 data class BottomNavigationScheme(
     val title: String,
     val icon: (@Composable () -> Unit)? = null,
-    val route: NavigationScheme,
+    val scheme: NavigationScheme,
 )
