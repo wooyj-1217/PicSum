@@ -4,9 +4,10 @@ import androidx.compose.runtime.Composable
 import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
 import com.wooyj.picsum.ui.scheme.NavigationScheme
 
-val favDetailScheme = NavigationScheme(
-    route = "favDetail/{itemId}",
-)
+val favDetailScheme =
+    NavigationScheme(
+        route = "favDetail",
+    )
 
 val favDetailBottomNavigationScheme
     @Composable

@@ -2,7 +2,6 @@ package com.wooyj.picsum.feature.detail.domain
 
 import com.wooyj.picsum.domain.usecase.favorite.RemoveFavoriteNotVisibleUseCase
 import dagger.Reusable
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @Reusable

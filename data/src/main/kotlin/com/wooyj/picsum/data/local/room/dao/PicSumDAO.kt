@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.wooyj.picsum.data.local.room.entity.PicSumEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PicSumDAO {
@@ -51,8 +50,8 @@ interface PicSumDAO {
     suspend fun getPicSumItem(id: String): PicSumEntity?
 
     @Query("SELECT id FROM pic_sum WHERE _id < (SELECT _id FROM pic_sum WHERE id = :currentId) ORDER BY _id DESC LIMIT 1")
-    fun getPrevId(currentId: String): Flow<String?>
+    suspend fun getPrevId(currentId: String): String?
 
     @Query("SELECT id FROM pic_sum WHERE _id > (SELECT _id FROM pic_sum WHERE id = :currentId) ORDER BY _id ASC LIMIT 1")
-    fun getNextId(currentId: String): Flow<String?>
+    suspend fun getNextId(currentId: String): String?
 }

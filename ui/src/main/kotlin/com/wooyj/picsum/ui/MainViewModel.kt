@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.lifecycle.viewModelScope
 import com.wooyj.picsum.ui.base.BaseViewModel
-import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,9 +21,7 @@ class MainViewModel
 
         init {
             _uiState.value =
-                MainUIState.Success(
-                    bottomNavigationSchemes = BottomNavigationScheme.entries,
-                )
+                MainUIState.Success
         }
 
         override fun onEvent(event: MainEvent) {
@@ -57,8 +54,7 @@ private val LocalMainViewModelFactory =
         error("No MainViewModelFactory provided")
     }
 
-fun provideMainViewModelFactory(viewModelFactory: @Composable () -> MainViewModel) =
-    LocalMainViewModelFactory provides viewModelFactory
+fun provideMainViewModelFactory(viewModelFactory: @Composable () -> MainViewModel) = LocalMainViewModelFactory provides viewModelFactory
 
 @Composable
 fun mainViewModel(): MainViewModel = LocalMainViewModelFactory.current()

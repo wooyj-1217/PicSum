@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    val mainViewModel by viewModels<MainViewModel>()
+    private val mainViewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,71 +27,12 @@ class MainActivity : ComponentActivity() {
 
             PicSumTheme {
                 CompositionLocalProvider(
-                    provideMainViewModelFactory { mainViewModel() }, //(전역에서 쓰는 viewModel)
+                    provideMainViewModelFactory { mainViewModel() }, // (전역에서 쓰는 viewModel)
                 ) {
-                    MainScreen()
-
-//                    NavHost(
-//                        navController = navController,
-//                        startDestination = listScheme.route,
-//                    ) {
-                        // 1
-                        // favorite, favoriteDetail
-                        // list, detail
-                        // setting
-
-                        // 2
-                        // list, favorite, setting
-                        // favoriteDetail
-                        // detail
-
-//                        navigation(
-//                            route = listScheme.route,
-//                            startDestination = listScheme.route,
-//                        ) {
-//                            composable(
-//                                route = listScheme.route
-//                            ) {
-//                                ListScreen(
-//                                    onNextNavigation = { id ->
-//                                        navController.navigate(route = detailScheme.route)
-//                                    }
-//                                )
-//                            }
-//                            composable(
-//                                route = detailScheme.route
-//                            ) {
-//                                DetailScreen()
-//                            }
-//                        }
-//                        navigation(
-//                            route = favoriteScheme.route,
-//                            startDestination = favoriteScheme.route,
-//                        ) {
-//                            composable(
-//                                route = favDetailScheme.route
-//                            ) {
-//                                FavoriteDetailScreen()
-//                            }
-//                        }
-//                        navigation(
-//                            route = settingScheme.route,
-//                            startDestination = settingScheme.route,
-//                        ) {
-//                        }
-
-//                        mainRoute()
-//                        navigation(
-//                            route = detailScheme.main,
-//                            startDestination = detailScheme.route,
-//                        ) {
-//                            composable(
-//                                route = detailScheme.route,
-//                            ) {
-//                                DetailScreen()
-//                            }
-//                        }
-
+                    MainScreen(
+                        viewModel = mainViewModel,
+                        bottomUiScheme = bottomUiScheme,
+                    )
                 }
             }
         }
@@ -106,28 +47,26 @@ class MainActivity : ComponentActivity() {
 
 // 1. usecase는 flow!!!
 // 2. flow는 다음과 같이 사용한다!!!!!!
-/*
-private fun load(currentId: String) {
-            detailUseCase(currentId = currentId)
-                .onStart {
-                    _uiState.value = DetailUIState.Loading
-                    Timber.d("detailUseCase : onStart")
-                }.onEach { item ->
-                    if (_uiState.value !is DetailUIState.Success) {
-                        _uiState.value = DetailUIState.Success(item.toDetailTypeUI())
-                        Timber.d("insert: ${item.toDetailTypeUI()}")
-                    } else {
-                        _uiState.update {
-                            (it as DetailUIState.Success).copy(ui = item.toDetailTypeUI())
-                        }
-                        Timber.d("update: ${item.toDetailTypeUI()}")
-                    }
-                }.catch {
-                    Timber.e("detailUseCase : catch", it)
-                }.launchIn(viewModelScope)
-        }
- */
 
+// private fun load(currentId: String) {
+//            detailUseCase(currentId = currentId)
+//                .onStart {
+//                    _uiState.value = DetailUIState.Loading
+//                    Timber.d("detailUseCase : onStart")
+//                }.onEach { item ->
+//                    if (_uiState.value !is DetailUIState.Success) {
+//                        _uiState.value = DetailUIState.Success(item.toDetailTypeUI())
+//                        Timber.d("insert: ${item.toDetailTypeUI()}")
+//                    } else {
+//                        _uiState.update {
+//                            (it as DetailUIState.Success).copy(ui = item.toDetailTypeUI())
+//                        }
+//                        Timber.d("update: ${item.toDetailTypeUI()}")
+//                    }
+//                }.catch {
+//                    Timber.e("detailUseCase : catch", it)
+//                }.launchIn(viewModelScope)
+//        }
 // 3. Use Case 빈혈클래스인 UseCase인 경우는 다음과 같이 Flow로 변환해서 바꾼다!!
 // @Reusable
 // class RemoveFavoriteNotVisibleUseCase

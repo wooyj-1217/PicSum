@@ -1,7 +1,5 @@
 package com.wooyj.picsum.feature.detail.ui
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.compositionLocalOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.wooyj.picsum.feature.detail.domain.DetailUseCase
@@ -13,7 +11,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -51,6 +48,7 @@ class DetailViewModel
                     _uiState.value = DetailUIState.Loading
                     Timber.d("detailUseCase : onStart")
                 }.onEach { item ->
+                    Timber.d("onEach / item: $item")
                     if (_uiState.value !is DetailUIState.Success) {
                         _uiState.value = DetailUIState.Success(item.toDetailTypeUI())
                         Timber.d("insert: ${item.toDetailTypeUI()}")
@@ -60,9 +58,10 @@ class DetailViewModel
                         }
                         Timber.d("update: ${item.toDetailTypeUI()}")
                     }
-                }.catch {
-                    Timber.e("detailUseCase : catch", it)
                 }.launchIn(viewModelScope)
+//                }.catch {
+//                    Timber.e("detailUseCase : catch", it)
+//                }.launchIn(viewModelScope)
         }
 
         private fun toggleFavorite(id: String) {
@@ -100,13 +99,13 @@ class DetailViewModel
         }
     }
 
-//private val LocalDetailViewModelFactory =
+// private val LocalDetailViewModelFactory =
 //    compositionLocalOf<@Composable () -> DetailViewModel> {
 //        error("No DetailViewModelFactory provided")
 //    }
 //
-//fun provideDetailViewModelFactory(viewModelFactory: @Composable () -> DetailViewModel) =
+// fun provideDetailViewModelFactory(viewModelFactory: @Composable () -> DetailViewModel) =
 //    LocalDetailViewModelFactory provides viewModelFactory
 //
-//@Composable
-//fun detailViewModel(): DetailViewModel = LocalDetailViewModelFactory.current()
+// @Composable
+// fun detailViewModel(): DetailViewModel = LocalDetailViewModelFactory.current()

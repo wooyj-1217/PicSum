@@ -4,7 +4,6 @@ import com.wooyj.picsum.data.local.room.dao.PicSumDAO
 import com.wooyj.picsum.data.local.room.dao.PicSumDAOFlow
 import com.wooyj.picsum.data.local.room.entity.toPicSum
 import com.wooyj.picsum.data.local.room.entity.toPicSumEntity
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalPicSumRepositoryImpl
@@ -32,7 +31,7 @@ class LocalPicSumRepositoryImpl
 
         override suspend fun getPicSumItem(id: String): com.wooyj.picsum.model.PicSum? = dao.getPicSumItem(id)?.toPicSum()
 
-        override fun getPrevId(currentId: String): Flow<String?> = dao.getPrevId(currentId)
+        override suspend fun getPrevId(currentId: String): String? = dao.getPrevId(currentId)
 
-        override fun getNextId(currentId: String): Flow<String?> = dao.getNextId(currentId)
+        override suspend fun getNextId(currentId: String): String? = dao.getNextId(currentId)
     }

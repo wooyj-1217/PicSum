@@ -18,24 +18,25 @@ class GetCurrentItemUseCase
         private val remoteGetItemAndSaveUseCase: RemoteGetItemAndSaveUseCase,
         private val getFavoriteUseCase: GetFavoriteUseCase,
     ) {
-        operator fun invoke(currentId: String): Flow<PicSumItemFavModel> = flow {
-            val favItem = getFavoriteUseCase(currentId).firstOrNull()
-            val localModel = localItemUseCase(currentId).firstOrNull()
-            val isFavorite =
-                favItem?.visible ?: false
-            if (localModel != null) {
-                emit(localModel.toPicSumItemFavModel(isFavorite))
-            } else {
-                try {
-                    val entity = remoteGetItemAndSaveUseCase(currentId).firstOrNull()
-                    entity?.let {
-                        val model = entity.toPicSumItemFavModel(isFavorite)
-                        emit(model)
+        operator fun invoke(currentId: String): Flow<PicSumItemFavModel> =
+            flow {
+                val favItem = getFavoriteUseCase(currentId).firstOrNull()
+                val localModel = localItemUseCase(currentId).firstOrNull()
+                val isFavorite =
+                    favItem?.visible ?: false
+                if (localModel != null) {
+                    emit(localModel.toPicSumItemFavModel(isFavorite))
+                } else {
+                    try {
+                        val entity = remoteGetItemAndSaveUseCase(currentId).firstOrNull()
+                        entity?.let {
+                            val model = entity.toPicSumItemFavModel(isFavorite)
+                            emit(model)
+                        }
+                    } catch (e: Exception) {
+                        // 실패 처리 (예외를 던짐)
+                        throw Exception("Failed to fetch or save item with id $currentId", e)
                     }
-                } catch (e: Exception) {
-                    // 실패 처리 (예외를 던짐)
-                    throw Exception("Failed to fetch or save item with id $currentId", e)
                 }
             }
-        }
     }

@@ -3,13 +3,16 @@ package com.wooyj.picsum.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.navArgument
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.ktx.performance
@@ -33,7 +36,7 @@ fun PicSumNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = listScheme.route,
+        startDestination = "listGraph",
     ) {
         // 1
         // favorite, favoriteDetail
@@ -46,45 +49,53 @@ fun PicSumNavHost(
         // detail
 
         navigation(
-            route = listScheme.route,
+            route = "listGraph",
             startDestination = listScheme.route,
         ) {
             logComposable(
-                route = listScheme.route
+                route = listScheme.route,
             ) {
                 ListScreen(
                     onNextNavigation = { id ->
-//                        navController.navigate(route = detailScheme.route)
-                    }
+                        navController.navigate(route = "${detailScheme.route}/$id")
+                    },
                 )
             }
             logComposable(
-                route = detailScheme.route
+                route = "${detailScheme.route}/{photoId}",
+                arguments =
+                    listOf(
+                        navArgument("photoId") { type = NavType.StringType },
+                    ),
             ) {
                 DetailScreen()
             }
         }
         navigation(
-            route = favoriteScheme.route,
+            route = "favoriteGraph",
             startDestination = favoriteScheme.route,
         ) {
             logComposable(
-                route = favoriteScheme.route
+                route = favoriteScheme.route,
             ) {
                 FavoriteListScreen(
                     onNextNavigation = { id ->
-//                        navController.navigate(route = favDetailScheme.route)
+                        navController.navigate(route = "${favDetailScheme.route}/$id")
                     },
                 )
             }
             logComposable(
-                route = favDetailScheme.route
+                route = "${favDetailScheme.route}/{photoId}",
+                arguments =
+                    listOf(
+                        navArgument("photoId") { type = NavType.StringType },
+                    ),
             ) {
                 FavoriteDetailScreen()
             }
         }
         navigation(
-            route = settingScheme.route,
+            route = "settingGraph",
             startDestination = settingScheme.route,
         ) {
             logComposable(
@@ -137,11 +148,13 @@ fun PicSumNavHost(
 
 private fun NavGraphBuilder.logComposable(
     route: String,
+    arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),
-    content: @Composable () -> Unit,
+    content: @Composable (NavBackStackEntry) -> Unit,
 ) {
     composable(
         route = route,
+        arguments = arguments,
         deepLinks = deepLinks,
     ) { backStackEntry ->
         val context = LocalContext.current
@@ -155,7 +168,7 @@ private fun NavGraphBuilder.logComposable(
                 null
             }
 
-        content()
+        content(backStackEntry)
 
         // Firebase Performance Trace 종료
         myTrace?.stop()

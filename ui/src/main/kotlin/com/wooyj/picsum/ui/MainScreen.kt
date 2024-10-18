@@ -3,7 +3,6 @@ package com.wooyj.picsum.ui
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -21,8 +20,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.wooyj.picsum.feature.favorite.ui.scheme.favoriteBottomNavigationScheme
 import com.wooyj.picsum.feature.favorite.ui.scheme.favoriteScheme
+import com.wooyj.picsum.feature.list.ui.scheme.listBottomNavigationScheme
 import com.wooyj.picsum.feature.list.ui.scheme.listScheme
+import com.wooyj.picsum.feature.setting.ui.scheme.settingBottomNavigationScheme
 import com.wooyj.picsum.feature.setting.ui.scheme.settingScheme
 import com.wooyj.picsum.ui.navigation.PicSumNavHost
 import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
@@ -32,6 +34,7 @@ fun MainScreen(
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = hiltViewModel(),
     navController: NavHostController = rememberNavController(),
+    bottomUiScheme: List<BottomNavigationScheme>,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val effect by viewModel.effect.collectAsStateWithLifecycle(null)
@@ -45,8 +48,8 @@ fun MainScreen(
 //                BottomNavigationScheme.List
 //            }
             navBackStackEntry?.destination?.route?.let { route ->
-                // TODO("find scheme.")
-            }
+                bottomUiScheme.find { it.scheme.route == route }
+            } ?: bottomUiScheme.first()
         }
     }
 
@@ -61,7 +64,7 @@ fun MainScreen(
             when (uiState) {
                 is MainUIState.Success -> {
                     BottomNavigationView(
-                        list = (uiState as MainUIState.Success).bottomNavigationSchemes,
+                        list = bottomUiScheme,
                         currentBottomNavigationScheme = currentBottomNavigationScheme,
                         onClick = { item ->
                             when (item.scheme.route) {
@@ -136,5 +139,11 @@ fun BottomNavigationView(
 @Preview
 @Composable
 fun PreviewMainScreen() {
-    MainScreen()
+    val bottomUiScheme =
+        listOf(
+            listBottomNavigationScheme,
+            favoriteBottomNavigationScheme,
+            settingBottomNavigationScheme,
+        )
+    MainScreen(bottomUiScheme = bottomUiScheme)
 }

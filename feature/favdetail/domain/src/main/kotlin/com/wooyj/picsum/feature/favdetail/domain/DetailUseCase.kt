@@ -4,7 +4,6 @@ import com.wooyj.picsum.model.ItemWithIdModel
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 /**
@@ -19,8 +18,7 @@ class DetailUseCase
         private val prevIdUseCase: GetPrevIdUseCase,
     ) {
         operator fun invoke(currentId: String): Flow<ItemWithIdModel> =
-            combine(currentItemUseCase(currentId), prevIdUseCase(currentId), nextIdUseCase(currentId))
-            { currentItem, prevId, nextId ->
+            combine(currentItemUseCase(currentId), prevIdUseCase(currentId), nextIdUseCase(currentId)) { currentItem, prevId, nextId ->
                 ItemWithIdModel(
                     prevId = prevId,
                     nextId = nextId,

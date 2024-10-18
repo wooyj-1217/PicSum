@@ -4,9 +4,10 @@ import androidx.compose.runtime.Composable
 import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
 import com.wooyj.picsum.ui.scheme.NavigationScheme
 
-val detailScheme = NavigationScheme(
-    route = "detail/{itemId}"
-)
+val detailScheme =
+    NavigationScheme(
+        route = "detail",
+    )
 
 val detailBottomNavigationScheme
     @Composable

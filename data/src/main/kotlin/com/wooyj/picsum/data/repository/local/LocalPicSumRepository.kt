@@ -1,7 +1,5 @@
 package com.wooyj.picsum.data.repository.local
 
-import kotlinx.coroutines.flow.Flow
-
 interface LocalPicSumRepository {
     suspend fun insert(list: List<com.wooyj.picsum.model.PicSum>)
 

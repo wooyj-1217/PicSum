@@ -7,8 +7,6 @@ import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -20,15 +18,16 @@ class RemoteGetItemAndSaveUseCase
         private val getRemotePicSumItemUseCase: RemoteGetPicSumItemUseCase,
         private val savePicSumItemUseCase: LocalSavePicSumItemUseCase,
     ) {
-        operator fun invoke(id: String): Flow<PicSum?> = flow {
-            getRemotePicSumItemUseCase(id)
-                .onEach { picSum ->
-                    picSum?.let {
-                        savePicSumItemUseCase(it)
-                        emit(it)
-                    }
-                }.catch {
-                    emit(null)
-                }.collect()
-        }
+        operator fun invoke(id: String): Flow<PicSum?> =
+            flow {
+                getRemotePicSumItemUseCase(id)
+                    .onEach { picSum ->
+                        picSum?.let {
+                            savePicSumItemUseCase(it)
+                            emit(it)
+                        }
+                    }.catch {
+                        emit(null)
+                    }.collect()
+            }
     }

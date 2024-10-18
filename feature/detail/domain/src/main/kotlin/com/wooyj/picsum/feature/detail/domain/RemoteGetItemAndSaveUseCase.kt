@@ -18,15 +18,16 @@ class RemoteGetItemAndSaveUseCase
         private val getRemotePicSumItemUseCase: RemoteGetPicSumItemUseCase,
         private val savePicSumItemUseCase: LocalSavePicSumItemUseCase,
     ) {
-        operator fun invoke(id: String): Flow<PicSum?> = flow {
-            getRemotePicSumItemUseCase(id)
-                .onEach { picSum ->
-                    picSum?.let {
-                        savePicSumItemUseCase(it)
-                        emit(it)
-                    }
-                }.catch {
-                    emit(null)
-                }.collect()
-        }
+        operator fun invoke(id: String): Flow<PicSum?> =
+            flow {
+                getRemotePicSumItemUseCase(id)
+                    .onEach { picSum ->
+                        picSum?.let {
+                            savePicSumItemUseCase(it)
+                            emit(it)
+                        }
+                    }.catch {
+                        emit(null)
+                    }.collect()
+            }
     }
