@@ -9,6 +9,8 @@ import com.wooyj.picsum.ui.scheme.NavigationScheme
 
 val settingScheme = NavigationScheme("setting")
 
+val testSettingScheme = NavigationScheme("settingGraph")
+
 val settingBottomNavigationScheme
     @Composable
     get() =

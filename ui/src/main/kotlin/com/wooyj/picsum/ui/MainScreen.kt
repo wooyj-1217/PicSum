@@ -28,6 +28,7 @@ import com.wooyj.picsum.feature.setting.ui.scheme.settingBottomNavigationScheme
 import com.wooyj.picsum.feature.setting.ui.scheme.settingScheme
 import com.wooyj.picsum.ui.navigation.PicSumNavHost
 import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
+import timber.log.Timber
 
 @Composable
 fun MainScreen(
@@ -49,13 +50,20 @@ fun MainScreen(
 //            }
             navBackStackEntry?.destination?.route?.let { route ->
                 bottomUiScheme.find { it.scheme.route == route }
-            } ?: bottomUiScheme.first()
+            } ?: bottomUiScheme.firstOrNull() ?: run {
+                Timber.d("currentBottomNavigationScheme is null value")
+                throw IllegalStateException("currentBottomNavigationScheme is null value")
+            }
         }
     }
 
     LaunchedEffect(key1 = effect) {
-        val navigate = effect?.scheme?.route ?: return@LaunchedEffect
-        navController.navigate(navigate)
+        effect?.scheme?.route?.let { route ->
+            Timber.d("effect route : $route")
+            navController.navigate(route)
+        } ?: run {
+            Timber.d("effect is null value : $effect")
+        }
     }
 
     Scaffold(

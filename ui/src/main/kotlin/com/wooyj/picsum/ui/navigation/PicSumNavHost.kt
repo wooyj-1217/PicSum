@@ -26,7 +26,6 @@ import com.wooyj.picsum.feature.list.ui.ListScreen
 import com.wooyj.picsum.feature.list.ui.scheme.listScheme
 import com.wooyj.picsum.feature.setting.ui.SettingScreen
 import com.wooyj.picsum.feature.setting.ui.scheme.settingScheme
-import timber.log.Timber
 
 @Composable
 fun PicSumNavHost(
@@ -36,7 +35,7 @@ fun PicSumNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "listGraph",
+        startDestination = listScheme.route,
     ) {
         // 1
         // favorite, favoriteDetail
@@ -48,29 +47,12 @@ fun PicSumNavHost(
         // favoriteDetail
         // detail
 
-        navigation(
-            route = "listGraph",
-            startDestination = listScheme.route,
-        ) {
-            logComposable(
-                route = listScheme.route,
-            ) {
-                ListScreen(
-                    onNextNavigation = { id ->
-                        navController.navigate(route = "${detailScheme.route}/$id")
-                    },
-                )
-            }
-            logComposable(
-                route = "${detailScheme.route}/{photoId}",
-                arguments =
-                    listOf(
-                        navArgument("photoId") { type = NavType.StringType },
-                    ),
-            ) {
-                DetailScreen()
-            }
-        }
+        featureListRoute(
+            route = listScheme.route,
+            navController = navController,
+            onError = onError,
+        )
+
         navigation(
             route = "favoriteGraph",
             startDestination = favoriteScheme.route,
@@ -94,6 +76,7 @@ fun PicSumNavHost(
                 FavoriteDetailScreen()
             }
         }
+
         navigation(
             route = "settingGraph",
             startDestination = settingScheme.route,
@@ -146,6 +129,61 @@ fun PicSumNavHost(
     }
 }
 
+/***
+ * NavHost
+ * * StartDestination : 처음 지점, 시작점 ??? NavHost의 시작점
+ * * route : NavHost의 이름
+ */
+
+fun NavGraphBuilder.featureListRoute(
+    route: String,
+    navController: NavHostController,
+    onError: (String) -> Unit,
+) {
+    // Tab 구조 형태로 구성
+//    composable(
+//        route = route,
+//        deepLinks =
+//            listOf(
+//                NavDeepLink(uri = Uri.parse("${detailScheme.route}/home").toString()),
+//                NavDeepLink(uri = Uri.parse("${listScheme.route}/${detailScheme.route}/{photoId}").toString()),
+//            ),
+//    ) {
+//        ListScreen(
+//            onNextNavigation = { id ->
+//                navController.navigate(route = "${detailScheme.route}/$id")
+//            },
+//        )
+//    }
+
+    // 정석적으로 한다면 -> 그래프 상에서 잇는 애들은 별도의 navController를 가지고 있어야 한다.
+    // 현실은 그렇지 않다. 이렇게 하면 뒤지게 힘들다
+
+    navigation(
+        route = route,
+        startDestination = "${listScheme.route}/home",
+    ) {
+        logComposable(
+            route = "${listScheme.route}/home",
+        ) {
+            ListScreen(
+                onNextNavigation = { id ->
+                    navController.navigate(route = "${listScheme.route}/${detailScheme.route}/$id")
+                },
+            )
+        }
+        logComposable(
+            route = "${listScheme.route}/${detailScheme.route}/{photoId}",
+            arguments =
+                listOf(
+                    navArgument("photoId") { type = NavType.StringType },
+                ),
+        ) {
+            DetailScreen()
+        }
+    }
+}
+
 private fun NavGraphBuilder.logComposable(
     route: String,
     arguments: List<NamedNavArgument> = emptyList(),
@@ -158,7 +196,6 @@ private fun NavGraphBuilder.logComposable(
         deepLinks = deepLinks,
     ) { backStackEntry ->
         val context = LocalContext.current
-        Timber.d("Route: $route")
 
         // Firebase 초기화 확인
         val myTrace =

@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/glowdayz/AndroidStudioProjects/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest795947414208735597.xml:2:13-83
-INJECTED from /Users/glowdayz/AndroidStudioProjects/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest795947414208735597.xml:2:13-83
+ADDED from /Users/sanghyunpark/Documents/SideJob/wooyj-1217/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9080768451424862875.xml:2:13-83
+INJECTED from /Users/sanghyunpark/Documents/SideJob/wooyj-1217/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9080768451424862875.xml:2:13-83
 	package
-		INJECTED from /Users/glowdayz/AndroidStudioProjects/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest795947414208735597.xml
+		INJECTED from /Users/sanghyunpark/Documents/SideJob/wooyj-1217/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9080768451424862875.xml
 	xmlns:android
-		ADDED from /Users/glowdayz/AndroidStudioProjects/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest795947414208735597.xml:2:23-81
+		ADDED from /Users/sanghyunpark/Documents/SideJob/wooyj-1217/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9080768451424862875.xml:2:23-81
 uses-sdk
-INJECTED from /Users/glowdayz/AndroidStudioProjects/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest795947414208735597.xml reason: use-sdk injection requested
-INJECTED from /Users/glowdayz/AndroidStudioProjects/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest795947414208735597.xml
-INJECTED from /Users/glowdayz/AndroidStudioProjects/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest795947414208735597.xml
+INJECTED from /Users/sanghyunpark/Documents/SideJob/wooyj-1217/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9080768451424862875.xml reason: use-sdk injection requested
+INJECTED from /Users/sanghyunpark/Documents/SideJob/wooyj-1217/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9080768451424862875.xml
+INJECTED from /Users/sanghyunpark/Documents/SideJob/wooyj-1217/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9080768451424862875.xml
 	android:targetSdkVersion
-		INJECTED from /Users/glowdayz/AndroidStudioProjects/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest795947414208735597.xml
+		INJECTED from /Users/sanghyunpark/Documents/SideJob/wooyj-1217/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9080768451424862875.xml
 	android:minSdkVersion
-		INJECTED from /Users/glowdayz/AndroidStudioProjects/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest795947414208735597.xml
+		INJECTED from /Users/sanghyunpark/Documents/SideJob/wooyj-1217/PicSum/ui/theme/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9080768451424862875.xml

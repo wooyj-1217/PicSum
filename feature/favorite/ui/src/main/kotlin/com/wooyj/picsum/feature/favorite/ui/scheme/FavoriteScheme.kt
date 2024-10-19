@@ -6,10 +6,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import com.wooyj.picsum.ui.scheme.BottomNavigationScheme
 import com.wooyj.picsum.ui.scheme.NavigationScheme
+import com.wooyj.picsum.ui.scheme.RouteContract
 
 val favoriteScheme =
     NavigationScheme(
-        route = "favorite",
+        route = RouteContract.Favorite.route,
     )
 
 val favoriteBottomNavigationScheme
